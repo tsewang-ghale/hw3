@@ -2,7 +2,7 @@
 $pageTitle = "Home";
 include "view_header.php";
 ?>
-    <h1>Welcome to the Home Page</h1>
+    <h1> Homework 3</h1>
     <ul>
         <li><a href="post.php">Go to Post Page</a></li>
         <li><a href="get.php">Go to Get Page</a></li>
