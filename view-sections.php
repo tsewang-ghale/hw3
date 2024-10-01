@@ -1,4 +1,4 @@
-<h1> Sectionss </h1>
+<h1> Sections </h1>
 <div class="table-responsive">
   <table class="table">
     <thead>
@@ -13,7 +13,7 @@
     </thead>
     <tbody> 
 <?php
-while ($section= $sections -> fetch_assoc()){
+while ($section = $sections -> fetch_assoc()){
 ?>
   <tr>
     <td><?php echo $section['section_id']; ?> </td>
