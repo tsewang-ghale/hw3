@@ -1,4 +1,4 @@
-<h1> Instructors </h1>
+<h1> Sectionss </h1>
 <div class="table-responsive">
   <table class="table">
     <thead>
