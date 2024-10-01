@@ -4,7 +4,7 @@
     <thead>
       <tr>
       <th> ID </th>
-      <th> Insturctor_ID </th>
+      <th> Instructor_ID </th> <!-- Corrected typo here -->
       <th>Course_ID </th> 
       <th>Semester </th> 
       <th> Room </th> 
