@@ -1,6 +1,6 @@
 <?php
 $pageTitle = "Home";
-include "view_header.php";
+include "view-header.php";
 ?>
     <h1> Homework 3</h1>
     <ul>
@@ -8,5 +8,5 @@ include "view_header.php";
         <li><a href="get.php">Go to Get Page</a></li>
     </ul>
 <?php
-include "view_footer.php";
+include "view-footer.php";
 ?>
