@@ -1,8 +1,8 @@
 <?php
-function selectStudents() {
+function selectProducts() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT student_id, student_firstname, student_lastname FROM `student`");
+        $stmt = $conn->prepare("SELECT product_id, product_name, product_description, listprice, color, category FROM `product`");
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
