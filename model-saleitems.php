@@ -1,8 +1,8 @@
 <?php
-function selectSections() {
+function selectSaleItems() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT section_id, instructor_id, course_id, semester,room, day_time FROM `section`");
+        $stmt = $conn->prepare("SELECT saleitem_id, product_id, sale_id, quantity, saleprice FROM `saleitem`");
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
