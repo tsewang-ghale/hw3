@@ -1,11 +1,11 @@
-<h1> Instructors with Courses </h1>
+<h1>Sales Made by Customer </h1>
 <div class="card-group">
 <?php
-while ($instructor = $instructors->fetch_assoc()) {
+while ($customer = $customers->fetch_assoc()) {
 ?>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><?php echo $instructor['instructor_name']; ?></h5>
+      <h5 class="card-title"><?php echo $customer['cust_firstname']; ?></h5>
       <p class="card-text">
       <ul class="list-group">
 <?php
