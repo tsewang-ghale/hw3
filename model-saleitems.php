@@ -2,7 +2,7 @@
 function selectSaleItems() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT saleitem_id, product_id, sale_id, quantity, saleprice FROM `saleitem`");
+        $stmt = $conn->prepare("SELECT saleitem_id, product_id, sale_id, quantity, saleprice FROM `Saleitem`");
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
