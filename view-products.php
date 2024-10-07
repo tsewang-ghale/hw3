@@ -22,13 +22,6 @@ while ($product= $products -> fetch_assoc()){
     <td><?php echo $product['listprice']; ?></td> 
     <td><?php echo $product['color']; ?></td> 
     <td><?php echo $product['category']; ?></td> 
-  
-    <td>
-      <form method= "post" action= "saleitems-by-sale.php">
-        <input type= "hidden" name = "sid" value= "<?php echo $sale['sale_id']; ?>">
-        <button type="submit" class="btn btn-primary">Sale Items</button>
-      </form>
-    </td>
   </tr>
 <?php
 }
