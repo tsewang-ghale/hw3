@@ -2,9 +2,9 @@
 require_once("util-db.php");
 require_once("model-instructors-with-courses.php");
   
-$pageTitle = "Instructors with Courses";
+$pageTitle = "Sales made by Customers";
 include "view-header.php";
-$instructors = selectInstructors();
-include "view-instructors-with-courses.php";
+$customers = selectCustomers();
+include "view-sales-made-by-customers.php";
 include "view-footer.php";
 ?>
