@@ -3,8 +3,8 @@
   <table class="table">
     <thead>
       <tr>
-        <th> ID </th>
-        <th> Cust_ID  </th>
+        <th> Sale ID </th>
+        <th> Customer ID </th>
         <th> Sale Date </th> 
         <th> Tax </th>
         <th> Shipping </th>
