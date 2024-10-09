@@ -1,6 +1,6 @@
 <?php
 require_once("util-db.php");
-require_once("model-Customers.php");
+require_once("model-customers.php");
   
 $pageTitle = "Customers";
 include "view-header.php";
