@@ -1,5 +1,5 @@
 <?php
-function selectSaleitemsBySale($sid) {
+function selectSaleitemsBySale($cid) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("
@@ -19,7 +19,7 @@ function selectSaleitemsBySale($sid) {
             JOIN SaleItem si ON s.sale_id = si.sale_id
             JOIN Product p ON si.product_id = p.product_id
             WHERE s.sale_id = ?");
-        $stmt->bind_param("i", $sid);
+        $stmt->bind_param("i", $cid);
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
