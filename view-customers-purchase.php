@@ -5,7 +5,7 @@
       <tr>
         <th>Sale ID</th>
         <th>Customer First Name</th>
-        th>Customer Last Name</th>
+        <th>Customer Last Name</th>
         <th>Product Name</th>
         <th>Sale Date</th> 
         <th>Tax</th>
