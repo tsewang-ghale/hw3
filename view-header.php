@@ -19,19 +19,19 @@
               <a class="nav-link" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Customers.php">Customers</a>
+              <a class="nav-link" href="customers.php">Customers</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Sales.php"> Sales</a>
+              <a class="nav-link" href="sales.php"> Sales</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Customers-purchases.php"> Customers Purchases</a>
+              <a class="nav-link" href="customers-purchases.php"> Customers Purchases</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Saleitems.php"> Saleitems </a>
+              <a class="nav-link" href="saleitems.php"> Saleitems </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Products.php"> Products </a>
+              <a class="nav-link" href="products.php"> Products </a>
             </li>
             
           </ul>
