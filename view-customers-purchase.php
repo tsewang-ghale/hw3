@@ -1,4 +1,4 @@
-<h1> Sales </h1>
+<h1> Customers Purchases </h1>
 <div class="table-responsive">
   <table class="table">
     <thead>
@@ -8,6 +8,8 @@
       <th> Sale Date </th> 
       <th> Tax </th>
       <th> Shipping </th>
+      <th> Quantity </th>
+      <th> Sale Price </th>
       </tr> 
     </thead>
     <tbody> 
@@ -20,13 +22,8 @@ while ($sale= $sales -> fetch_assoc()){
     <td><?php echo $sale['sale_date']; ?></td> 
     <td><?php echo $sale['tax']; ?></td> 
     <td><?php echo $sale['shipping']; ?></td> 
-  
-    <td>
-      <form method= "post" action= "saleitems-by-sale.php">
-        <input type= "hidden" name = "cid" value= "<?php echo $sale['sale_id']; ?>">
-        <button type="submit" class="btn btn-primary">Sale Items</button>
-      </form>
-    </td>
+    <td><?php echo $sale['quantity']; ?></td>
+    <td><?php echo $sale['saleprice']; ?></td>
   </tr>
 <?php
 }
