@@ -9,6 +9,7 @@
       <th> Address  </th> 
       <th> Phone  </th> 
       <th> Email  </th> 
+      <th> </th>
       </tr> 
     </thead>
     <tbody> 
@@ -22,7 +23,7 @@ while ($customer= $customers -> fetch_assoc()){
     <td><?php echo $customer['cust_address']; ?></td> 
     <td><?php echo $customer['cust_phone']; ?></td> 
     <td><?php echo $customer['cust_email']; ?></td> 
-    <td> <a href = "sales-made-by-customer.php?id=<?php echo $customer['cust_id']; ?>" > Sales</a></td>
+    <td> <a href = "purchases-made-by-customer.php?id=<?php echo $customer['cust_id']; ?>" > Sales</a></td>
   </tr>
 <?php
 }
