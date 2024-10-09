@@ -25,7 +25,7 @@
               <a class="nav-link" href="sales.php"> Sales</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="customers-purchase.php"> Customers Purchases</a>
+              <a class="nav-link" href="customers-with-purchase.php"> Customers With Purchases</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="saleitems.php"> Saleitems </a>
