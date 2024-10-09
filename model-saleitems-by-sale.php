@@ -1,5 +1,5 @@
 <?php
-function selectCustomersPurchase($custId) {
+function selectSaleitemsBySale($sid) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("
@@ -18,8 +18,8 @@ function selectCustomersPurchase($custId) {
             JOIN Customer c ON s.cust_id = c.cust_id
             JOIN SaleItem si ON s.sale_id = si.sale_id
             JOIN Product p ON si.product_id = p.product_id
-            WHERE c.cust_id = ?");
-        $stmt->bind_param("i", $custId);
+            WHERE s.sale_id = ?");
+        $stmt->bind_param("i", $sid);
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
