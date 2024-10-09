@@ -2,13 +2,13 @@
 function selectCustomersPurchase($custId) {
     try {
         $conn = get_db_connection();
-        // SQL query to join customer, sale, saleitem, and product tables
         $stmt = $conn->prepare("
             SELECT 
                 s.sale_id, 
                 c.cust_id, 
-                c.name AS customer_name, 
-                p.productname, 
+                c.cust_firstname,
+                c.cust_lastname,
+                p.product_name, 
                 s.sale_date, 
                 s.tax, 
                 s.shipping, 
