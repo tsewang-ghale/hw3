@@ -2,7 +2,7 @@
 function selectSales() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT cust_id, cust_firstname, cust_lastname, cust_address, cust_phone, cust_email FROM `Customer`");
+        $stmt = $conn->prepare("SELECT si.sale_id, s.cust_id, s.sale_date, s.tax, s.shipping, si.quantity, si.saleprice FROM Sale s JOIN SaleItem si ON s.sale_id = si.sale_id WHERE si.sale_id = ?");
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
