@@ -9,7 +9,7 @@ while ($customer= $customers -> fetch_assoc()){
       <p class="card-text">
   <?php
    $sales = SelectCustomersWithPurchase($customer['cust_id']); 
-  while ($sale= $saless -> fetch_assoc()){
+  while ($sale= $sales -> fetch_assoc()){
   ?> 
     
   <?php 
