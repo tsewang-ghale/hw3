@@ -7,14 +7,16 @@ while ($customer= $customers -> fetch_assoc()){
     <div class="card-body">
       <h5 class="card-title"><?php echo $customer['cust_firstname']; ?>,<?php echo $customer['cust_lastname']; ?> </h5>
       <p class="card-text">
+     <ul class="list-group">
   <?php
    $sales = SelectCustomersWithPurchase($customer['cust_id']); 
   while ($sale= $sales -> fetch_assoc()){
   ?> 
-    
+        <li class="list-group-item"><?php echo($sale['cust_firstname']); ?>- ?php echo($sale['product_name']); ?>- <?php echo($sale['sale_date']); ?>- <?php echo($sale['saleprice']); ?></li>
   <?php 
   }
   ?>
+      </ul>
       </p>
       <p class="card-text"><small class="text-body-secondary"> Phonenumber: <?php echo $customer['cust_phone']; ?>,Email:<?php echo $customer['cust_email']; ?> </small></p>
     </div>
