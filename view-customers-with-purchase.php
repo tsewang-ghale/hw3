@@ -9,7 +9,7 @@ while ($customer= $customers -> fetch_assoc()){
       <p class="card-text">
      <ul class="list-group">
   <?php
-   $sales = SelectCustomersWithPurchase($customer['cust_id']); 
+   $sales = selectCustomersPurchase($customer['cust_id']); 
   while ($sale= $sales -> fetch_assoc()){
   ?> 
         <li class="list-group-item"><?php echo($sale['cust_firstname']); ?>- ?php echo($sale['product_name']); ?>- <?php echo($sale['sale_date']); ?>- <?php echo($sale['saleprice']); ?></li>
