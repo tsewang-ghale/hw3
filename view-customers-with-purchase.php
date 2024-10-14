@@ -18,7 +18,7 @@ while ($customer= $customers -> fetch_assoc()){
   ?>
       </ul>
       </p>
-      <p class="card-text"><small class="text-body-secondary"> Phonenumber: <?php echo $customer['cust_phone']; ?>,Email:<?php echo $customer['cust_email']; ?> </small></p>
+      <p class="card-text"><small class="text-body-secondary"> Phonenumber: <?php echo $customer['cust_phone']; ?>-Email:<?php echo $customer['cust_email']; ?> </small></p>
     </div>
   </div>
 <?php
