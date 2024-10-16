@@ -3,8 +3,8 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Customer ID</th>
-        <th>Product Name</th>
+        <th> Sale ID</th>
+        <th>Customer ID </th>
         <th>Sale Date</th> 
         <th>Tax</th>
         <th>Shipping</th>
@@ -15,16 +15,16 @@
     <tbody> 
 <?php
 
-while ($customer = $customers->fetch_assoc()) {
+while ($sale = $sales->fetch_assoc()) {
 ?>
       <tr>
-        <td><?php echo($customer['cust_id']); ?></td>
-        <td><?php echo($customer['product_name']); ?></td>
-        <td><?php echo($customer['sale_date']); ?></td> 
-        <td><?php echo($customer['tax']); ?></td> 
-        <td><?php echo($customer['shipping']); ?></td> 
-        <td><?php echo($customer['quantity']); ?></td>
-        <td><?php echo($customer['saleprice']); ?></td>
+        <td><?php echo($sale['Sale_id']); ?></td>
+        <td><?php echo($sale['cust_id']); ?></td>
+        <td><?php echo($sale['sale_date']); ?></td> 
+        <td><?php echo($sale['tax']); ?></td> 
+        <td><?php echo($sale['shipping']); ?></td> 
+        <td><?php echo($sale['quantity']); ?></td>
+        <td><?php echo($sale['saleprice']); ?></td>
       </tr>
 <?php
     }
