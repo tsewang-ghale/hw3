@@ -17,7 +17,7 @@
     <tbody> 
 <?php
 
-while ($customer = $customers->fetch_assoc($custId)) {
+while ($customer = $customers->fetch_assoc()) {
 ?>
       <tr>
         <td><?php echo($customer['cust_id']); ?></td>
