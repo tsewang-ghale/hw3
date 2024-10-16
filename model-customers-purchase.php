@@ -16,7 +16,7 @@ function selectCustomersPurchase() {
             JOIN SaleItem si ON s.sale_id = si.sale_id
             JOIN Product p ON si.product_id = p.product_id
             WHERE c.cust_id = ?");
-        $stmt->bind_param("i", $custId);
+        $stmt->bind_param("i", $sale_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
