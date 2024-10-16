@@ -3,11 +3,8 @@ function selectCustomersPurchase() {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("
-            SELECT 
-                s.sale_id, 
-                c.cust_id, 
-                c.cust_firstname,
-                c.cust_lastname,
+            SELECT  
+                s.sale_id,
                 p.product_name, 
                 s.sale_date, 
                 s.tax, 
