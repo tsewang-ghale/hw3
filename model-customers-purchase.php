@@ -11,7 +11,7 @@ function selectCustomersPurchase($sale_id) {
             FROM Sale s
             JOIN Customer c ON s.cust_id = c.cust_id
             WHERE c.cust_id = ?");
-        $stmt->bind_param("i", $Sale_id);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
