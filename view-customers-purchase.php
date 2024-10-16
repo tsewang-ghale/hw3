@@ -23,8 +23,6 @@ while ($sale = $sales->fetch_assoc()) {
         <td><?php echo($sale['sale_date']); ?></td> 
         <td><?php echo($sale['tax']); ?></td> 
         <td><?php echo($sale['shipping']); ?></td> 
-        <td><?php echo($sale['quantity']); ?></td>
-        <td><?php echo($sale['saleprice']); ?></td>
       </tr>
 <?php
     }
