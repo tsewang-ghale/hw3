@@ -4,7 +4,7 @@ require_once("model-customers-purchase.php");
 
 $pageTitle = "Customers Purchases";
 include "view-header.php";
-$customers = selectCustomersPurchase($_GET['Id']);
+$sales = selectCustomersPurchase($_GET['Id']);
 include "view-customers-purchase.php";
 include "view-footer.php";
 ?>
