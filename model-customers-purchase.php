@@ -1,5 +1,5 @@
 <?php
-function selectCustomersPurchase($custId) {
+function selectCustomersPurchase() {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("
