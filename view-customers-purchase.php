@@ -4,8 +4,6 @@
     <thead>
       <tr>
         <th>Customer ID</th>
-        <th>Customer First Name</th>
-        <th>Customer Last Name</th>
         <th>Product Name</th>
         <th>Sale Date</th> 
         <th>Tax</th>
@@ -21,8 +19,6 @@ while ($customer = $customers->fetch_assoc()) {
 ?>
       <tr>
         <td><?php echo($customer['cust_id']); ?></td>
-        <td><?php echo($customer['cust_firstname']); ?></td>
-        <td><?php echo($customer['cust_lastname']); ?></td>
         <td><?php echo($customer['product_name']); ?></td>
         <td><?php echo($customer['sale_date']); ?></td> 
         <td><?php echo($customer['tax']); ?></td> 
