@@ -3,7 +3,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Sale ID</th>
+        <th>Customer ID</th>
         <th>Customer First Name</th>
         <th>Customer Last Name</th>
         <th>Product Name</th>
