@@ -17,18 +17,18 @@
     <tbody> 
 <?php
 
-while ($sale = $sales->fetch_assoc()) {
+while ($customer = $customers->fetch_assoc()) {
 ?>
       <tr>
-        <td><?php echo($sale['sale_id']); ?></td>
-        <td><?php echo($sale['cust_firstname']); ?></td>
-        <td><?php echo($sale['cust_lastname']); ?></td>
-        <td><?php echo($sale['product_name']); ?></td>
-        <td><?php echo($sale['sale_date']); ?></td> 
-        <td><?php echo($sale['tax']); ?></td> 
-        <td><?php echo($sale['shipping']); ?></td> 
-        <td><?php echo($sale['quantity']); ?></td>
-        <td><?php echo($sale['saleprice']); ?></td>
+        <td><?php echo($customer['cust_id']); ?></td>
+        <td><?php echo($customer['cust_firstname']); ?></td>
+        <td><?php echo($customer['cust_lastname']); ?></td>
+        <td><?php echo($customer['product_name']); ?></td>
+        <td><?php echo($customer['sale_date']); ?></td> 
+        <td><?php echo($customer['tax']); ?></td> 
+        <td><?php echo($customer['shipping']); ?></td> 
+        <td><?php echo($customer['quantity']); ?></td>
+        <td><?php echo($customer['saleprice']); ?></td>
       </tr>
 <?php
     }
