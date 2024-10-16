@@ -15,7 +15,7 @@
     <tbody> 
 <?php
 
-while ($sale = $sales->fetch_assoc()) {
+while ($sale = $sales->fetch_assoc($Sale_id)) {
 ?>
       <tr>
         <td><?php echo($sale['Sale_id']); ?></td>
