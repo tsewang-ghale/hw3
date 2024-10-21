@@ -11,7 +11,7 @@ function selectCustomersPurchase() {
                 si.quantity, 
                 si.saleprice
             FROM Sale s
-            JOIN Saleitem si c ON si.sale_id = s.sale_id
+            JOIN Saleitem si ON si.sale_id = s.sale_id
             WHERE c.sale_id = ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
