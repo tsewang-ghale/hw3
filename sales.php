@@ -8,7 +8,11 @@ include "view-header.php";
 if (isset($_POST ['actionType'])){
   switch ($_POST ['actionType']) {
     case "Add": 
-      insertSale($_POST['Cust_id'],  $_POST ['Sale_date'], $_POST ['Tax'], $_POST['Shipping']); 
+      if (insertSale($_POST['Cust_id'],  $_POST ['Sale_date'], $_POST ['Tax'], $_POST['Shipping'])) {
+        echo '<div class="alert alert-success" role="alert"> Sale added.</div>'; 
+      } else {
+        echo '<div class="alert alert-danger" role="alert"> Error.</div>';
+      }
       break; 
   }
 }
