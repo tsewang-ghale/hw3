@@ -33,6 +33,9 @@ while ($sale= $sales -> fetch_assoc()){
     <td><?php echo $sale['tax']; ?></td> 
     <td><?php echo $sale['shipping']; ?></td> 
     <td> 
+      <?php
+      include "view-sales-editform.php"; 
+      ?>  
     </td>
     <td> 
     </td>
