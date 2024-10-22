@@ -32,6 +32,7 @@
             <label for="shipping" class="form-label">Shipping</label>
             <input type="Integer" class="form-control" id="shipping" name = "Shipping">
           </div>
+          <input type = "hidden" name = "actionType" value = "Add"> 
           <button type="submit" class="btn btn-primary">Save</button>
         </form>
       </div>
