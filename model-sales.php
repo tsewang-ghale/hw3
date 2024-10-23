@@ -16,7 +16,7 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `Sale` (`cust_id`, `sale_date`, `tax`, `shipping`) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("idii",$cid, $saledate, $tax, $shipping);
+        $stmt->bind_param("isii", $cust_id,$saledate, $tax, $shipping);
         $success= $stmt->execute();
         $conn->close();
         return $success;
@@ -25,11 +25,11 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
         throw $e;
     }
 }
-function UpdateSale($sid, $cid, $saledate, $tax, $shipping) {
+function UpdateSale($sid, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("update `Sale` set `cust_id` = ?, `sale_date` =? , `tax`=? , `shipping`= ? where Sale_id = ?");
-        $stmt->bind_param("idii",$cid, $saledate, $tax, $shipping);
+        $stmt = $conn->prepare("update `Sale` set `sale_date` =? , `tax`=? , `shipping`= ? where Sale_id = ?");
+        $stmt->bind_param("sii",$cid, $saledate, $tax, $shipping);
         $success= $stmt->execute();
         $conn->close();
         return $success;
