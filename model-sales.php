@@ -28,9 +28,12 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
 function UpdateSale($sid, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("update `Sale` set `sale_date` =? , `tax`=? , `shipping`= ? where Sale_id = ?");
-        $stmt->bind_param("sii", $saledate, $tax, $shipping);
-        $success= $stmt->execute();
+        // Prepare the SQL query
+        $stmt = $conn->prepare("UPDATE `Sale` SET `sale_date` = ?, `tax` = ?, `shipping` = ? WHERE `Sale_id` = ?");
+        // Bind all four parameters: sale_date (string), tax (integer), shipping (integer), and Sale_id (integer)
+        $stmt->bind_param("siii", $saledate, $tax, $shipping, $sid); 
+        // Execute the statement
+        $success = $stmt->execute();
         $conn->close();
         return $success;
     } catch (Exception $e) {
