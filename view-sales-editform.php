@@ -32,7 +32,8 @@
             <label for="shipping <?php echo $sale['Sale_id']; ?>" class="form-label">Shipping</label>
             <input type="Integer" class="form-control" id="shipping <?php echo $sale['Sale_id']; ?>" name = "Shipping" value = "<?php echo $sale['shipping']; ?>">
           </div>
-          <input type = "hidden" name = "actionType" value = "Add"> 
+            <input type="hidden" name = "sid" value = "<?php echo $sale['Sale_id']; ?>">
+          <input type = "hidden" name = "actionType" value = "Edit"> 
           <button type="submit" class="btn btn-primary">Save</button>
         </form>
       </div>
