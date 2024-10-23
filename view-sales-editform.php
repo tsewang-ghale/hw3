@@ -21,7 +21,7 @@
             <input type="Integer" class="form-control" id="cid <?php echo $sale['sale_id']; ?>" name = "Cust_id" value = "<?php echo $sale['cust_id']; ?>">
           </div>
           <div class="mb-3">
-            <label for="Sale_Date<?php echo $sale['Sale_id']; ?>" class="form-label"> Sale Date </label>
+            <label for="Sale_Date<?php echo $sale['sale_id']; ?>" class="form-label"> Sale Date </label>
             <input type="date" class="form-control" id="saledate <?php echo $sale['sale_id']; ?>" name = "Sale_date" value= "<?php echo $sale['sale_date']; ?>">
           </div>
            <div class="mb-3">
