@@ -18,7 +18,7 @@
         <form method= "post" action = "">
           <div class="mb-3">
             <label for="Cust_ID <?php echo $sale['sale_id'];?>" class="form-label">Customer ID</label>
-            <input type="Integer" class="form-control" id="cid <?php echo $sale['sale_id']; ?>" name = "Cust_id" value = "<?php echo $sale['Cust_id']; ?>">
+            <input type="Integer" class="form-control" id="cid <?php echo $sale['sale_id']; ?>" name = "Cust_id" value = "<?php echo $sale['cust_id']; ?>">
           </div>
           <div class="mb-3">
             <label for="Sale_Date<?php echo $sale['Sale_id']; ?>" class="form-label"> Sale Date </label>
