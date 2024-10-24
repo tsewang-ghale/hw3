@@ -16,46 +16,47 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form>
+              <form method = "post" action ="">
                      <div class="mb-3">
                            <label for="cust_id" class="form-label">Cust ID</label>
-                           <input type="integer" class="form-control" id="cust_id">
+                           <input type="integer" class="form-control" id="$custId" name= "cust_id">
                      </div>
                      <div class="mb-3">
                            <label for="cust_firstname" class="form-label"> Customer First Name</label>
-                           <input type="text" class="form-control" id="'cust_firstname">
+                           <input type="text" class="form-control" id="cfirstname" name="cust_firstname">
                      </div>
                      <div class="mb-3">
                            <label for="cust_lastname" class="form-label"> Customer Last Name</label>
-                           <input type="text" class="form-control" id="'cust_lastname">
+                           <input type="text" class="form-control" id="clastname"  name="cust_lastname">
                       </div>
                       <div class="mb-3">
                            <label for="product_name" class="form-label"> Product Name</label>
-                           <input type="text" class="form-control" id="'product_name">
+                           <input type="text" class="form-control" id="pname" name="product_name">
                       </div>
                       <div class="mb-3">
                            <label for="sale_date" class="form-label"> Sale Date </label>
-                           <input type="date" class="form-control" id="'sale_date">
+                           <input type="date" class="form-control" id="saledate" name ="sale_date">
                        </div>
                        <div class="mb-3">
                            <label for="tax" class="form-label"> Tax </label>
-                           <input type="integer" class="form-control" id="'tax">
+                           <input type="integer" class="form-control" id="tax" name="tax">
                        </div>
                       <div class="mb-3">
                            <label for="shipping" class="form-label"> Shipping </label>
-                           <input type="integer" class="form-control" id="'shipping">
+                           <input type="integer" class="form-control" id="shipping" name = "shipping">
                      </div>
                      <div class="mb-3">
                            <label for="quantity" class="form-label"> Quantity </label>
-                           <input type="integer" class="form-control" id="'quantity">
+                           <input type="integer" class="form-control" id="quantity" name= "quantity">
                      </div>
                      <div class="mb-3">
                            <label for="saleprice" class="form-label"> Sale Price </label>
-                           <input type="integer" class="form-control" id="'saleprice">
+                           <input type="integer" class="form-control" id="saleprice" name = "saleprice">
                      </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
           </div>
         </div>
       </div>
+$custId, $cfirstname, $clastname,$clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice
