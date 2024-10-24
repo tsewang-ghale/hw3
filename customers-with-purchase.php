@@ -4,8 +4,6 @@ require_once("model-customers-with-purchase.php");
   
 $pageTitle = "Customers with Purchase";
 include "view-header.php";
-
-
 if (isset($_POST ['actionType'])){
   switch ($_POST ['actionType']) {
     case "Add": 
