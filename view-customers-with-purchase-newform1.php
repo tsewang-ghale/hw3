@@ -19,7 +19,7 @@
               <form method = "post" action ="">
                      <div class="mb-3">
                            <label for="cust_id" class="form-label">Cust ID</label>
-                           <input type="integer" class="form-control" id="$custId" name= "cust_id">
+                           <input type="integer" class="form-control" id="custId" name= "cust_id">
                      </div>
                      <div class="mb-3">
                            <label for="cust_firstname" class="form-label"> Customer First Name</label>
@@ -59,4 +59,4 @@
           </div>
         </div>
       </div>
-$custId, $cfirstname, $clastname,$clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice
+
