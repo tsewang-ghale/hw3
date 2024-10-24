@@ -71,12 +71,12 @@ function UpdateSale($custId,$cfirstname, $clastname, $pname, $saledate, $tax, $s
         throw $e;
     }
 }
-function insertCustomersPurchase($custId, $cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice ) {
+function deleteSale($sid) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("insert into 'Sale' ('cust_id', 'cust_firstname', 'cust_lastname', 'product_name', 'sale_date', 'tax', 'shipping', 'quantity', 'saleprice' )");
-        $stmt->bind_param("i", $custId, $cfirstname, $clastname,$clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice );
-        $success = $stmt->execute();
+        $stmt = $conn->prepare("delete from`Sale` where Sale_id=?");
+        $stmt->bind_param("i", $sid);
+        $success= $stmt->execute();
         $conn->close();
         return $success;
     } catch (Exception $e) {
