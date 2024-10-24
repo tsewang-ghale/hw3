@@ -30,7 +30,7 @@ if (isset($_POST ['actionType'])){
   }
 }
 
-$customers = selectCustomers();
+$sales = selectSales();
 include "view-customers-with-purchase.php";
 include "view-footer.php";
 ?>
