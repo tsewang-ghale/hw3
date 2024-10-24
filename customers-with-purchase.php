@@ -4,6 +4,35 @@ require_once("model-customers-with-purchase.php");
   
 $pageTitle = "Customers with Purchase";
 include "view-header.php";
+
+
+if (isset($_POST ['actionType'])){
+  switch ($_POST ['actionType']) {
+    case "Add": 
+      if (insertSale($_POST['Cust_id'],$_POST ['Sale_date'], $_POST ['Tax'], $_POST['Shipping'])) {
+        echo '<div class="alert alert-success" role="alert"> Sale added.</div>'; 
+      } else {
+        echo '<div class="alert alert-danger" role="alert"> Error.</div>';
+      }
+      break; 
+    case "Edit": 
+      if (UpdateSale($_POST['sid'], $_POST['Sale_date'], $_POST['Tax'], $_POST['Shipping'])) {
+            echo '<div class="alert alert-success" role="alert"> Sale edited.</div>';
+        } else {
+            echo '<div class="alert alert-danger" role="alert"> Error.</div>';
+        }
+
+      break; 
+    case "Delete":
+      if (deleteSale($_POST['sid'])) {
+        echo '<div class="alert alert-success" role="alert"> Sale deleted.</div>'; 
+      } else {
+        echo '<div class="alert alert-danger" role="alert"> Error.</div>';
+      }
+      break;
+  }
+}
+
 $customers = selectCustomers();
 include "view-customers-with-purchase.php";
 include "view-footer.php";
