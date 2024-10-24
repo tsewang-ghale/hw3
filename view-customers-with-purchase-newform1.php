@@ -53,6 +53,7 @@
                            <label for="saleprice" class="form-label"> Sale Price </label>
                            <input type="integer" class="form-control" id="saleprice" name = "saleprice">
                      </div>
+                     <input type = "hidden" name = "actionType" value = "Add"> 
                   <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
