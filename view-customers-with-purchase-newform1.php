@@ -17,19 +17,42 @@
             </div>
             <div class="modal-body">
               <form>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                  </div>
-                  <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
+                     <div class="mb-3">
+                           <label for="cust_id" class="form-label">Cust ID</label>
+                           <input type="integer" class="form-control" id="cust_id">
+                     </div>
+                     <div class="mb-3">
+                           <label for="cust_firstname" class="form-label"> Customer First Name</label>
+                           <input type="text" class="form-control" id="'cust_firstname">
+                     </div>
+                     <div class="mb-3">
+                           <label for="cust_lastname" class="form-label"> Customer Last Name</label>
+                           <input type="text" class="form-control" id="'cust_lastname">
+                      </div>
+                      <div class="mb-3">
+                           <label for="product_name" class="form-label"> Product Name</label>
+                           <input type="text" class="form-control" id="'product_name">
+                      </div>
+                      <div class="mb-3">
+                           <label for="sale_date" class="form-label"> Sale Date </label>
+                           <input type="date" class="form-control" id="'sale_date">
+                       </div>
+                       <div class="mb-3">
+                           <label for="tax" class="form-label"> Tax </label>
+                           <input type="integer" class="form-control" id="'tax">
+                       </div>
+                      <div class="mb-3">
+                           <label for="shipping" class="form-label"> Shipping </label>
+                           <input type="integer" class="form-control" id="'shipping">
+                     </div>
+                     <div class="mb-3">
+                           <label for="quantity" class="form-label"> Quantity </label>
+                           <input type="integer" class="form-control" id="'quantity">
+                     </div>
+                     <div class="mb-3">
+                           <label for="saleprice" class="form-label"> Sale Price </label>
+                           <input type="integer" class="form-control" id="'saleprice">
+                     </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
