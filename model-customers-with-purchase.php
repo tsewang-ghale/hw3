@@ -55,11 +55,14 @@ function insertCustomersPurchase($custId, $cfirstname, $clastname, $pname, $sale
         throw $e;
     }
 }
-function updateCustomersPurchase($Sale_id) {
+function UpdateSale($custId,$cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice, $sid) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("update into 'Sale' ('cust_id', 'cust_firstname', 'cust_lastname', 'product_name', 'sale_date', 'tax', 'shipping', 'quantity', 'saleprice' )");
-        $stmt->bind_param("i", $custId, $cfirstname, $clastname,$clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice );
+        // Prepare the SQL query
+        $stmt = $conn->prepare("UPDATE `Sale` SET $custId = ? ,$cfirstname = ?, $clastname =? , $pname =?, $saledate=?, $tax=?, $shipping=?, $quantity=?, $saleprice=? WHERE `Sale_id` = ?");
+        // Bind all four parameters: sale_date (string), tax (integer), shipping (integer), and Sale_id (integer)
+        $stmt->bind_param("issssiiiii", $custId,$cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice, $sid); 
+        // Execute the statement
         $success = $stmt->execute();
         $conn->close();
         return $success;
