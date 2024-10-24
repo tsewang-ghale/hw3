@@ -55,7 +55,7 @@ function insertCustomersPurchase($custId, $cfirstname, $clastname, $pname, $sale
         throw $e;
     }
 }
-function UpdateSale($custId,$cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice, $sid) {
+function UpdateCustomersPurchase($custId,$cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice, $sid) {
     try {
         $conn = get_db_connection();
         // Prepare the SQL query
@@ -71,7 +71,7 @@ function UpdateSale($custId,$cfirstname, $clastname, $pname, $saledate, $tax, $s
         throw $e;
     }
 }
-function deleteSale($sid) {
+function deleteCustomersPurchase($sid) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("delete from`Sale` where Sale_id=?");
