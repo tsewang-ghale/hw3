@@ -31,7 +31,7 @@ function UpdateSale($sid, $saledate, $tax, $shipping) {
         // Prepare the SQL query
         $stmt = $conn->prepare("UPDATE `Sale` SET `sale_date` = ?, `tax` = ?, `shipping` = ? WHERE `Sale_id` = ?");
         // Bind all four parameters: sale_date (string), tax (integer), shipping (integer), and Sale_id (integer)
-        $stmt->bind_param("siii", $saledate, $tax, $shipping, $sid); 
+        $stmt->bind_param("siii", $saledate, $tax, $shipping, $sale_id); 
         // Execute the statement
         $success = $stmt->execute();
         $conn->close();
