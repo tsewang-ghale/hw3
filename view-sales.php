@@ -51,7 +51,7 @@ while ($sale= $sales -> fetch_assoc()){
         </button>
       </form>
       <form method= "post" action= "saleitems-by-sale.php">
-        <input type= "hidden" name = "sale_id" value= "<?php echo $sale['sale_id']; ?>">
+        <input type= "hidden" name = "lid" value= "<?php echo $sale['sale_id']; ?>">
         <button type="submit" class="btn btn-primary">Sale Items</button>
       </form>
     </td>
