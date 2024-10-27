@@ -25,7 +25,7 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
         throw $e;
     }
 }
-function UpdateSale($sid, $saledate, $tax, $shipping) {
+function UpdateSale($sale_id, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
         // Prepare the SQL query
@@ -41,7 +41,7 @@ function UpdateSale($sid, $saledate, $tax, $shipping) {
         throw $e;
     }
 }
-function deleteSale($sid) {
+function deleteSale($sale_id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("delete from`Sale` where Sale_id=?");
