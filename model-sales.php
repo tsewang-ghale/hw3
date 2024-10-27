@@ -25,22 +25,41 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
         throw $e;
     }
 }
+
+
 function UpdateSale($sale_id, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
         // Prepare the SQL query
         $stmt = $conn->prepare("UPDATE `Sale` SET `sale_date` = ?, `tax` = ?, `shipping` = ? WHERE `Sale_id` = ?");
+        
+        // Check if the statement was prepared correctly
+        if (!$stmt) {
+            throw new Exception("Failed to prepare statement: " . $conn->error);
+        }
+
         // Bind all four parameters: sale_date (string), tax (integer), shipping (integer), and Sale_id (integer)
         $stmt->bind_param("siii", $saledate, $tax, $shipping, $sale_id); 
+        
         // Execute the statement
         $success = $stmt->execute();
+        
+        // Close the statement after execution
+        $stmt->close();
+        
+        // Close the connection
         $conn->close();
+        
         return $success;
     } catch (Exception $e) {
-        $conn->close();
-        throw $e;
+        // Ensure the connection is closed in case of an error
+        if ($conn) {
+            $conn->close();
+        }
+        throw $e; // Rethrow the exception for further handling
     }
 }
+
 
 function deleteSale($sale_id) {
     try {
