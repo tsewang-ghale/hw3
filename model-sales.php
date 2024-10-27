@@ -41,17 +41,20 @@ function UpdateSale($sale_id, $saledate, $tax, $shipping) {
         throw $e;
     }
 }
+
 function deleteSale($sale_id) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("delete from`Sale` where Sale_id=?");
-        $stmt->bind_param("i", $sid);
-        $success= $stmt->execute();
-        $conn->close();
+        $stmt = $conn->prepare("DELETE FROM `Sale` WHERE Sale_id = ?");
+        $stmt->bind_param("i", $sale_id); // Use $sale_id instead of $sid
+        $success = $stmt->execute();
+        $stmt->close(); // Close the statement after execution
+        $conn->close(); // Close the connection
         return $success;
     } catch (Exception $e) {
-        $conn->close();
-        throw $e;
+        $conn->close(); // Ensure the connection is closed in case of an error
+        throw $e; // Rethrow the exception for further handling
     }
 }
+
 ?>
