@@ -41,7 +41,7 @@ function UpdateSale($sid, $saledate, $tax, $shipping) {
         throw $e;
     }
 }
-function deleteSale($Sale_id) {
+function deleteSale($sid) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("delete from`Sale` where Sale_id=?");
