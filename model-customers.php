@@ -11,5 +11,53 @@ function selectCustomers() {
         $conn->close();
         throw $e;
     }
+    function InsertCustomer($first_name, $last_name, $address, $phone, $email) {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("INSERT INTO `Customer` (`first_name`, `last_name`, `address`, `phone`, 'email') VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $first_name, $last_name, $address, $phone, $email);
+        $success= $stmt->execute();
+        $conn->close();
+        return $success;
+    } catch (Exception $e) {
+        $conn->close();
+        throw $e;
+    }
+}
+
+
+function UpdateCustomer($cust_id, $first_name, $last_name, $address, $phone, $email) {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("UPDATE `Customer` SET `first_name` = ?, `last_name` = ?, `address` = ?, 'phone'=?, 'email'= ? WHERE `cust_id` = ?");
+        if (!$stmt) {
+            throw new Exception("Failed to prepare statement: " . $conn->error);
+        }
+        $stmt->bind_param("isssss", $cust_id, $first_name, $last_name, $address, $phone, $email); 
+        $success = $stmt->execute();
+        $stmt->close();
+        $conn->close();
+        return $success;
+    } catch (Exception $e) {
+        if ($conn) {
+            $conn->close();
+        }
+        throw $e; 
+    }
+}
+function deleteCustomer($cust_id) {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("DELETE FROM `Customer` WHERE cust_id = ?");
+        $stmt->bind_param("i", $cust_id); // Use $sale_id instead of $sid
+        $success = $stmt->execute();
+        $stmt->close(); // Close the statement after execution
+        $conn->close(); // Close the connection
+        return $success;
+    } catch (Exception $e) {
+        $conn->close(); // Ensure the connection is closed in case of an error
+        throw $e; // Rethrow the exception for further handling
+    }
+}
 }
 ?>
