@@ -7,11 +7,11 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="newSaleModal" tabindex="-1" aria-labelledby="newSaleModalLabel" aria-hidden="true">
+<div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomerModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="newSaleModalLabel"> New Sale</h1>
+        <h1 class="modal-title fs-5" id="newCustomerModalLabel"> New Customer</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -21,16 +21,24 @@
             <input type="Integer" class="form-control" id="cid" name = "Cust_id">
           </div>
           <div class="mb-3">
-            <label for="Sale_Date" class="form-label"> Sale Date </label>
-            <input type="date" class="form-control" id="saledate" name = "Sale_date">
+            <label for="first_name" class="form-label"> First Name </label>
+            <input type="text" class="form-control" id="first_name" name = "first_name">
           </div>
            <div class="mb-3">
-            <label for="tax" class="form-label">Tax</label>
-            <input type="Integer" class="form-control" id="tax" name = "Tax">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name = "last_name">
           </div>
            <div class="mb-3">
-            <label for="shipping" class="form-label">Shipping</label>
-            <input type="Integer" class="form-control" id="shipping" name = "Shipping">
+            <label for="Address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" name = "address">
+          </div>
+           <div class="mb-3">
+            <label for="Phone" class="form-label">Phone </label>
+            <input type="text" class="form-control" id="phone" name = "phone">
+          </div>
+           <div class="mb-3">
+            <label for="Email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" name = "email">
           </div>
           <input type = "hidden" name = "actionType" value = "Add"> 
           <button type="submit" class="btn btn-primary">Save</button>
