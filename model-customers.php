@@ -24,8 +24,6 @@ function selectCustomers() {
         throw $e;
     }
 }
-
-
 function UpdateCustomer($cust_id, $first_name, $last_name, $address, $phone, $email) {
     try {
         $conn = get_db_connection();
@@ -58,6 +56,6 @@ function deleteCustomer($cust_id) {
         $conn->close(); // Ensure the connection is closed in case of an error
         throw $e; // Rethrow the exception for further handling
     }
-}
+    }
 }
 ?>
