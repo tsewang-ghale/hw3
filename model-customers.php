@@ -14,7 +14,7 @@ function selectCustomers() {
     function InsertCustomer($first_name, $last_name, $address, $phone, $email) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("INSERT INTO `Customer` (`first_name`, `last_name`, `address`, `phone`, 'email') VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO `Customer` ('cust_firstname', 'cust_lastname', 'cust_address', 'cust_phone', 'cust_email') VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $first_name, $last_name, $address, $phone, $email);
         $success= $stmt->execute();
         $conn->close();
@@ -27,7 +27,7 @@ function selectCustomers() {
 function UpdateCustomer($cust_id, $first_name, $last_name, $address, $phone, $email) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("UPDATE `Customer` SET `first_name` = ?, `last_name` = ?, `address` = ?, 'phone'=?, 'email'= ? WHERE `cust_id` = ?");
+        $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `cust_address` = ?, 'cust_phone'=?, 'cust_email'= ? WHERE `cust_id` = ?");
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
