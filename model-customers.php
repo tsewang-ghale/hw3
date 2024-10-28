@@ -11,7 +11,7 @@ function selectCustomers() {
         $conn->close();
         throw $e;
     }
-    function InsertCustomer($first_name, $last_name, $address, $phone, $email) {
+    function InsertCustomer($cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `Customer` ('cust_firstname', 'cust_lastname', 'cust_address', 'cust_phone', 'cust_email') VALUES (?, ?, ?, ?, ?)");
@@ -24,14 +24,14 @@ function selectCustomers() {
         throw $e;
     }
 }
-function UpdateCustomer($cust_id, $first_name, $last_name, $address, $phone, $email) {
+function UpdateCustomer($cust_id, $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `cust_address` = ?, 'cust_phone'=?, 'cust_email'= ? WHERE `cust_id` = ?");
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("isssss", $cust_id, $first_name, $last_name, $address, $phone, $email); 
+        $stmt->bind_param("isssss", $cust_id, $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email); 
         $success = $stmt->execute();
         $stmt->close();
         $conn->close();
