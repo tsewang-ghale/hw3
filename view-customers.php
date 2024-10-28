@@ -46,7 +46,6 @@ while ($customer= $customers -> fetch_assoc()){
         <button type="submit" class="btn btn-primary">Sale Items</button>
       </form>
     </td>
-    <td> <a href = "customers-purchase.php?id=<?php echo $customer['cust_id']; ?>" > Sales</a></td>
   </tr>
 <?php
 }
