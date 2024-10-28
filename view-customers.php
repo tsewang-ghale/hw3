@@ -41,10 +41,6 @@ while ($customer= $customers -> fetch_assoc()){
           </svg>
         </button>
       </form>
-      <form method= "post" action= "saleitems-by-sale.php">
-        <input type= "hidden" name = "lid" value= "<?php echo $sale['sale_id']; ?>">
-        <button type="submit" class="btn btn-primary">Sale Items</button>
-      </form>
     </td>
   </tr>
 <?php
