@@ -17,26 +17,26 @@
       <div class="modal-body">
         <form method= "post" action = "">
           <div class="mb-3">
-            <label for="first_name <?php echo $customer['cust_id'];?>" class="form-label"> First Name </label>
-            <input type="text" class="form-control" id="first_name <?php echo $customer['cust_id']; ?>" name = "first_name" value = "<?php echo $customer['first_name']; ?>">
+            <label for="cust_firstname <?php echo $customer['cust_id'];?>" class="form-label"> First Name </label>
+            <input type="text" class="form-control" id="cust_firstname <?php echo $customer['cust_id']; ?>" name = "cust_firstname" value = "<?php echo $customer['cust_firstname']; ?>">
           </div>
           <div class="mb-3">
-            <label for="Sale_Date<?php echo $customer['cust_id']; ?>" class="form-label"> Last Name </label>
-            <input type="text" class="form-control" id="last_name <?php echo $customer['cust_id']; ?>" name = "last_name" value= "<?php echo $customer['last_name']; ?>">
+            <label for="cust_lastname<?php echo $customer['cust_id']; ?>" class="form-label"> Last Name </label>
+            <input type="text" class="form-control" id="cust_lastname <?php echo $customer['cust_id']; ?>" name = "cust_lastname" value= "<?php echo $customer['cust_lastname']; ?>">
           </div>
            <div class="mb-3">
-            <label for="tax <?php echo $customer['cust_id']; ?>" class="form-label">Address</label>
-            <input type="text" class="form-control" id="address <?php echo $customer['cust_id']; ?>" name = "address" value = "<?php echo $customer['address']; ?>">
+            <label for="cust_address <?php echo $customer['cust_id']; ?>" class="form-label"> Address</label>
+            <input type="text" class="form-control" id="cust_address <?php echo $customer['cust_id']; ?>" name = "cust_address" value = "<?php echo $customer['cust_address']; ?>">
           </div>
            <div class="mb-3">
-            <label for="shipping <?php echo $customer['cust_id']; ?>" class="form-label">Phone</label>
-            <input type="text" class="form-control" id="phone <?php echo $customer['cust_id']; ?>" name = "phone" value = "<?php echo $customer['phone']; ?>">
+            <label for="cust_phone <?php echo $customer['cust_id']; ?>" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="cust_phone <?php echo $customer['cust_id']; ?>" name = "cust_phone" value = "<?php echo $customer['cust_phone']; ?>">
           </div>
                <div class="mb-3">
-            <label for="shipping <?php echo $customer['cust_id']; ?>" class="form-label">Email</label>
-            <input type="text" class="form-control" id="email <?php echo $customer['cust_id']; ?>" name = "email" value = "<?php echo $customer['email']; ?>">
+            <label for="cust_email <?php echo $customer['cust_id']; ?>" class="form-label">Email</label>
+            <input type="text" class="form-control" id="cust_email <?php echo $customer['cust_id']; ?>" name = "cust_email" value = "<?php echo $customer['cust_email']; ?>">
           </div>
-            <input type="hidden" name = "cid" value = "<?php echo $customer['cust_id']; ?>">
+            <input type="hidden" name = "cust_id" value = "<?php echo $customer['cust_id']; ?>">
           <input type = "hidden" name = "actionType" value = "Edit"> 
           <button type="submit" class="btn btn-primary">Save</button>
         </form>
