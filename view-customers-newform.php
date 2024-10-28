@@ -17,24 +17,24 @@
       <div class="modal-body">
         <form method= "post" action = "">
           <div class="mb-3">
-            <label for="first_name" class="form-label">First Name </label>
-            <input type="text" class="form-control" id="first_name" name = "first_name">
+            <label for="cust_firstname" class="form-label">First Name </label>
+            <input type="text" class="form-control" id="cust_firstname" name = "cust_firstname">
           </div>
            <div class="mb-3">
-            <label for="last_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name = "last_name">
+            <label for="cust_lastname" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="cust_lastname" name = "cust_lastname">
           </div>
            <div class="mb-3">
-            <label for="Address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="address" name = "address">
+            <label for="cust_address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="cust_address" name = "cust_address">
           </div>
            <div class="mb-3">
-            <label for="Phone" class="form-label">Phone </label>
-            <input type="text" class="form-control" id="phone" name = "phone">
+            <label for="cust_phone" class="form-label">Phone </label>
+            <input type="text" class="form-control" id="cust_phone" name = "cust_phone">
           </div>
            <div class="mb-3">
-            <label for="Email" class="form-label">Email</label>
-            <input type="text" class="form-control" id="email" name = "email">
+            <label for="cust_email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="cust_email" name = "cust_email">
           </div>
           <input type = "hidden" name = "actionType" value = "Add"> 
           <button type="submit" class="btn btn-primary">Save</button>
