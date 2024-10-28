@@ -12,7 +12,7 @@ function selectSaleItemItems() {
         throw $e;
     }
 }
-function InsertSaleItemItem($cid, $SaleItemdate, $tax, $shipping) {
+function InsertSaleItemItem($saleitem_id, $sale_id, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `SaleItem` (`cust_id`, `SaleItem_date`, `tax`, `shipping`) VALUES (?, ?, ?, ?)");
@@ -25,8 +25,6 @@ function InsertSaleItemItem($cid, $SaleItemdate, $tax, $shipping) {
         throw $e;
     }
 }
-
-
 function UpdateSaleItemItem($SaleItem_id, $SaleItemdate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
