@@ -15,7 +15,7 @@ function selectCustomers() {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `Customer` ('cust_firstname', 'cust_lastname', 'cust_address', 'cust_phone', 'cust_email') VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $first_name, $last_name, $address, $phone, $email);
+        $stmt->bind_param("sssss", $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email);
         $success= $stmt->execute();
         $conn->close();
         return $success;
