@@ -13,7 +13,7 @@ include "view-saleitems-newform.php";
       <th> ID </th>
       <th> Product_ID </th> <!-- Corrected typo here -->
       <th> Sale_ID </th> 
-      <th> Qantity</th> 
+      <th> Quantity</th> 
       <th> Sale Price </th> 
       <th> </th>
       <th> </th>
