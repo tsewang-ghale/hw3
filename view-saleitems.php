@@ -46,6 +46,7 @@ while ($saleitem = $saleitems -> fetch_assoc()){
           </svg>
         </button>
       </form>
+
     </td>
   </tr>
 <?php
