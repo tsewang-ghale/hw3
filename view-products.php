@@ -1,4 +1,4 @@
-<h1> Sales </h1>
+<h1> Products </h1>
 <div class="table-responsive">
   <table class="table">
     <thead>
