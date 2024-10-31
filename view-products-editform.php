@@ -32,6 +32,10 @@
             <label for="color <?php echo $Product['product_id']; ?>" class="form-label">Color</label>
             <input type="text" class="form-control" id="color <?php echo $Product['product_id']; ?>" name = "color" value = "<?php echo $Product['color']; ?>">
           </div>
+            <div class="mb-3">
+            <label for="category <?php echo $Product['product_id']; ?>" class="form-label">Category</label>
+            <input type="text" class="form-control" id="category <?php echo $Product['product_id']; ?>" name = "category" value = "<?php echo $Product['category']; ?>">
+          </div>  
             <input type="hidden" name = "product_id" value = "<?php echo $Product['product_id']; ?>">
           <input type = "hidden" name = "actionType" value = "Edit"> 
           <button type="submit" class="btn btn-primary">Save</button>
