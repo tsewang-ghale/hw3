@@ -1,4 +1,11 @@
-<h1> Sale Items </h1>
+<div class = "row"> 
+  <div class = "col">
+ <h1> Sale Items </h1>
+  </div>
+  <div class = "col-auto">
+<?php
+include "view-saleitems-newform.php"; 
+?>  
 <div class="table-responsive">
   <table class="table">
     <thead>
