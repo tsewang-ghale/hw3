@@ -14,7 +14,7 @@ if (isset($_POST ['actionType'])){
       }
       break; 
     case "Edit": 
-      if (updateSaleItem($_POST['saleitem_id'], $_POST['product_id'], $_POST['sale_id'], $_POST['quantity'], $_POST['saleprice'])) {
+      if (updateSaleItem($_POST['Saleitem_id'], $_POST['product_id'], $_POST['sale_id'], $_POST['quantity'], $_POST['saleprice'])) {
             echo '<div class="alert alert-success" role="alert"> SalItem edited.</div>';
         } else {
             echo '<div class="alert alert-danger" role="alert"> Error.</div>';
@@ -22,7 +22,7 @@ if (isset($_POST ['actionType'])){
 
       break; 
     case "Delete":
-      if (deleteSaleItem($_POST['saleitem_id'])) {
+      if (deleteSaleItem($_POST['Saleitem_id'])) {
         echo '<div class="alert alert-success" role="alert"> SaleItem deleted.</div>'; 
       } else {
         echo '<div class="alert alert-danger" role="alert"> Error.</div>';
