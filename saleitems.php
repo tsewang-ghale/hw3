@@ -8,14 +8,14 @@ if (isset($_POST ['actionType'])){
   switch ($_POST ['actionType']) {
     case "Add": 
       if (insertSaleItem($_POST ['product_id'], $_POST ['sale_id'], $_POST['quantity'],$_POST['saleprice'] )) {
-        echo '<div class="alert alert-success" role="alert"> Sale added.</div>'; 
+        echo '<div class="alert alert-success" role="alert"> SaleItem added.</div>'; 
       } else {
         echo '<div class="alert alert-danger" role="alert"> Error.</div>';
       }
       break; 
     case "Edit": 
-      if (UpdateSaleItem($_POST['saleitem_id'], $_POST['sale_id'], $_POST['quantity'], $_POST['saleprice'])) {
-            echo '<div class="alert alert-success" role="alert"> Sale edited.</div>';
+      if (UpdateSaleItem($_POST['product_id'], $_POST['sale_id'], $_POST['quantity'], $_POST['saleprice'])) {
+            echo '<div class="alert alert-success" role="alert"> SalItem edited.</div>';
         } else {
             echo '<div class="alert alert-danger" role="alert"> Error.</div>';
         }
