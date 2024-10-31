@@ -1,5 +1,5 @@
 <?php
-function selectSaleItemItems() {
+function selectsaleItemitems() {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("SELECT SaleItemitem_id, product_id,sale_id, quantity, saleprice SaleItemprice FROM `SaleItemItem`");
@@ -25,7 +25,7 @@ function InsertSaleItemItem($product_id, $sale_id, $quantity, $saleprice) {
         throw $e;
     }
 }
-function UpdateSaleItemItem($product_id, $sale_id, $quantity, $saleprice) {
+function UpdateSaleItemItem($SaleItemitem_id,$product_id, $sale_id, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
         // Prepare the SQL query
@@ -35,7 +35,7 @@ function UpdateSaleItemItem($product_id, $sale_id, $quantity, $saleprice) {
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("iiii", $product_id, $sale_id, $quantity, $saleprice); 
+        $stmt->bind_param("iiiii", $product_id, $sale_id, $quantity, $saleprice,$SaleItemitem_id); 
         
         // Execute the statement
         $success = $stmt->execute();
