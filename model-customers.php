@@ -11,7 +11,8 @@ function selectCustomers() {
         $conn->close();
         throw $e;
     }
-    function InsertCustomer($cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email) {
+}
+function InsertCustomer($cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `Customer` ('cust_firstname', 'cust_lastname', 'cust_address', 'cust_phone', 'cust_email') VALUES (?, ?, ?, ?, ?)");
@@ -56,6 +57,6 @@ function deleteCustomer($cust_id) {
         $conn->close(); // Ensure the connection is closed in case of an error
         throw $e; // Rethrow the exception for further handling
     }
-    }
 }
+
 ?>
