@@ -1,4 +1,5 @@
 <?php
+// Function to retrieve all customers
 function selectCustomers() {
     try {
         $conn = get_db_connection();
@@ -8,10 +9,12 @@ function selectCustomers() {
         $conn->close();
         return $result;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) $conn->close();
         throw $e;
     }
 }
+
+// Function to retrieve all purchases for a specific customer
 function selectCustomersPurchase($custId) {
     try {
         $conn = get_db_connection();
@@ -31,57 +34,53 @@ function selectCustomersPurchase($custId) {
             JOIN Customer c ON s.cust_id = c.cust_id
             JOIN SaleItem si ON s.sale_id = si.sale_id
             JOIN Product p ON si.product_id = p.product_id
-            WHERE c.cust_id = ?");
+            WHERE c.cust_id = ?
+        ");
         $stmt->bind_param("i", $custId);
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
         return $result;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) $conn->close();
         throw $e;
     }
 }
-function insertCustomersPurchase($custId, $cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice ) {
+
+// Function to insert a new purchase record for a customer
+function insertCustomersPurchase($custId, $cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("insert into 'Sale' ('cust_id', 'cust_firstname', 'cust_lastname', 'product_name', 'sale_date', 'tax', 'shipping', 'quantity', 'saleprice' )");
-        $stmt->bind_param("i", $custId, $cfirstname, $clastname,$clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice );
+        $stmt = $conn->prepare("INSERT INTO `Sale` 
+            (cust_id, cust_firstname, cust_lastname, product_name, sale_date, tax, shipping, quantity, saleprice) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+        $stmt->bind_param("issssiiii", $custId, $cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice);
         $success = $stmt->execute();
         $conn->close();
         return $success;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) $conn->close();
         throw $e;
     }
 }
-function UpdateCustomersPurchase($custId,$cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice, $sid) {
+
+// Function to update a purchase record for a specific sale ID
+function updateCustomersPurchase($custId, $cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice, $sid) {
     try {
         $conn = get_db_connection();
-        // Prepare the SQL query
-        $stmt = $conn->prepare("UPDATE `Sale` SET $custId = ? ,$cfirstname = ?, $clastname =? , $pname =?, $saledate=?, $tax=?, $shipping=?, $quantity=?, $saleprice=? WHERE `Sale_id` = ?");
-        // Bind all four parameters: sale_date (string), tax (integer), shipping (integer), and Sale_id (integer)
-        $stmt->bind_param("issssiiiii", $custId,$cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice, $sid); 
-        // Execute the statement
+        $stmt = $conn->prepare("UPDATE `Sale` 
+            SET cust_id = ?, cust_firstname = ?, cust_lastname = ?, product_name = ?, sale_date = ?, tax = ?, shipping = ?, quantity = ?, saleprice = ? 
+            WHERE sale_id = ?
+        ");
+        $stmt->bind_param("issssiiiii", $custId, $cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice, $sid);
         $success = $stmt->execute();
         $conn->close();
         return $success;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) $conn->close();
         throw $e;
     }
 }
-function deleteCustomersPurchase($sid) {
-    try {
-        $conn = get_db_connection();
-        $stmt = $conn->prepare("delete from`Sale` where Sale_id=?");
-        $stmt->bind_param("i", $sid);
-        $success= $stmt->execute();
-        $conn->close();
-        return $success;
-    } catch (Exception $e) {
-        $conn->close();
-        throw $e;
-    }
-}
-?>
+
+// Function to delete a purch
