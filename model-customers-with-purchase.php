@@ -15,7 +15,7 @@ function selectCustomers() {
 }
 
 // Function to retrieve all purchases for a specific customer
-function selectCustomersPurchase($custId) {
+function selectCustomersPurchase($cust_id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("
@@ -36,7 +36,7 @@ function selectCustomersPurchase($custId) {
             JOIN Product p ON si.product_id = p.product_id
             WHERE c.cust_id = ?
         ");
-        $stmt->bind_param("i", $custId);
+        $stmt->bind_param("i", $cust_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
@@ -48,14 +48,14 @@ function selectCustomersPurchase($custId) {
 }
 
 // Function to insert a new purchase record for a customer
-function insertCustomersPurchase($custId, $cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice) {
+function insertCustomersPurchase($cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `Sale` 
             (cust_id, cust_firstname, cust_lastname, product_name, sale_date, tax, shipping, quantity, saleprice) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
-        $stmt->bind_param("issssiiii", $custId, $cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice);
+        $stmt->bind_param("issssiiii", $cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice);
         $success = $stmt->execute();
         $conn->close();
         return $success;
@@ -66,14 +66,14 @@ function insertCustomersPurchase($custId, $cfirstname, $clastname, $pname, $sale
 }
 
 // Function to update a purchase record for a specific sale ID
-function updateCustomersPurchase($custId, $cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice, $sid) {
+function updateCustomersPurchase($cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice, $sid) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("UPDATE `Sale` 
             SET cust_id = ?, cust_firstname = ?, cust_lastname = ?, product_name = ?, sale_date = ?, tax = ?, shipping = ?, quantity = ?, saleprice = ? 
             WHERE sale_id = ?
         ");
-        $stmt->bind_param("issssiiiii", $custId, $cfirstname, $clastname, $pname, $saledate, $tax, $shipping, $quantity, $saleprice, $sid);
+        $stmt->bind_param("issssiiiii", $cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice, $sid);
         $success = $stmt->execute();
         $conn->close();
         return $success;
