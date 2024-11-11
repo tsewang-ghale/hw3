@@ -12,7 +12,7 @@ function selectsaleItemitems() {
         throw $e;
     }
 }
-function InsertSaleItemItem($product_id, $sale_id, $quantity, $saleprice) {
+function InsertSaleItems($product_id, $sale_id, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `SaleItem` (`product_id`, `sale_id`, `quantity`, `saleprice`) VALUES (?, ?, ?, ?)");
@@ -25,7 +25,7 @@ function InsertSaleItemItem($product_id, $sale_id, $quantity, $saleprice) {
         throw $e;
     }
 }
-function UpdateSaleItemItem($SaleItemitem_id,$product_id, $sale_id, $quantity, $saleprice) {
+function UpdateSaleItems($SaleItemitem_id,$product_id, $sale_id, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
         // Prepare the SQL query
@@ -57,7 +57,7 @@ function UpdateSaleItemItem($SaleItemitem_id,$product_id, $sale_id, $quantity, $
 }
 
 
-function deleteSaleItem($SaleItem_id) {
+function deleteSaleItems($SaleItem_id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("DELETE FROM `SaleItem` WHERE SaleItem_id = ?");
