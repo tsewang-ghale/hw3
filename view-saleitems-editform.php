@@ -29,7 +29,7 @@
           </div>
            <div class="mb-3">
             <label for="saleprice <?php echo $saleitem['Saleitem_id']; ?>" class="form-label">Sale Price</label>
-            <input type="integer" class="form-control" id="saleprice <?php echo $saleitem['Saleitem_id']; ?>" name = "saleprice" value = "<?php echo $saleitem['saleprice']; ?>">
+            <input type="decimal" class="form-control" id="saleprice <?php echo $saleitem['Saleitem_id']; ?>" name = "saleprice" value = "<?php echo $saleitem['saleprice']; ?>">
           </div>
             <input type="hidden" name = "Saleitem_id" value = "<?php echo $saleitem['Saleitem_id']; ?>">
           <input type = "hidden" name = "actionType" value = "Edit"> 
