@@ -15,7 +15,7 @@ function selectProducts() {
 function InsertProduct($product_name, $product_description, $listprice, $color,$category ) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("INSERT INTO `Product` (`product_name', 'product_description', 'listprice', 'color', 'category`) VALUES (?, ?, ?, ?,?)");
+        $stmt = $conn->prepare("INSERT INTO `Product` (`product_name`, `product_description`, `listprice`, `color`, `category`) VALUES (?, ?, ?, ?,?)");
         $stmt->bind_param("ssiss", $product_name, $product_description, $listprice, $color,$category);
         $success= $stmt->execute();
         $conn->close();
