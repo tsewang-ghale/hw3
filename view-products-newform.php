@@ -15,7 +15,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" action="desired-endpoint.php">
+        <form method="post" action="products.php">
           <div class="mb-3">
             <label for="product_name" class="form-label">Product Name</label>
             <input type="text" class="form-control" id="product_name" name="product_name" required>
@@ -43,3 +43,6 @@
     </div>
   </div>
 </div>
+
+<!-- Include Bootstrap JS (ensure this is at the end of your body) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
