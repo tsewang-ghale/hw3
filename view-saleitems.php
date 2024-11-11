@@ -25,7 +25,6 @@ include "view-saleitems-newform.php";
 while ($saleitem = $saleitems -> fetch_assoc()){
 ?>
   <tr>
-
     <td><?php echo $saleitem['Saleitem_id']; ?> </td>
     <td><?php echo $saleitem['product_id']; ?></td>
     <td><?php echo $saleitem['sale_id']; ?></td> 
