@@ -4,7 +4,7 @@
   </div>
   <div class = "col-auto">
 <?php
-include "view-sales-newform.php"; 
+include "view-products-newform.php"; 
 ?>  
   </div>
 </div>
@@ -36,7 +36,7 @@ while ($product= $products -> fetch_assoc()){
     <td><?php echo $product['category']; ?></td> 
     <td> 
       <?php
-      include "view-sales-editform.php"; 
+      include "view-products-editform.php"; 
       ?>  
     </td>
     <td> 
