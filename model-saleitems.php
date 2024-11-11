@@ -15,7 +15,7 @@ function selectsaleItemitems() {
 function InsertSaleItemItem($product_id, $sale_id, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("INSERT INTO `SaleItem` (`product_id`, .`sale_id`, `quantity`, `saleprice`) VALUES (?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO `SaleItem` (`product_id`, `sale_id`, `quantity`, `saleprice`) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("iiii", $product_id, $sale_id, $quantity, $saleprice);
         $success= $stmt->execute();
         $conn->close();
