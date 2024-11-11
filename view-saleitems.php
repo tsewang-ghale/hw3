@@ -25,14 +25,12 @@ include "view-saleitems-newform.php";
 while ($saleitem = $saleitems -> fetch_assoc()){
 ?>
   <tr>
+  $columnCount = count($saleitem); // This counts the number of elements in the array
     <td><?php echo $saleitem['Saleitem_id']; ?> </td>
     <td><?php echo $saleitem['product_id']; ?></td>
     <td><?php echo $saleitem['sale_id']; ?></td> 
     <td><?php echo $saleitem['quantity']; ?></td> 
-    <?php
-$sql = "SELECT * FROM saleitems";
-$result = $conn->query($sql);
-?>
+    <td><?php echo . $columnCount . ?></td> 
 
 
     <td> 
