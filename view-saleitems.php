@@ -31,7 +31,7 @@ while ($saleitem = $saleitems -> fetch_assoc()){
     <td><?php echo $saleitem['product_id']; ?></td>
     <td><?php echo $saleitem['sale_id']; ?></td> 
     <td><?php echo $saleitem['quantity']; ?></td> 
-    <td><?php echo $saleitem['SaleItemprice'];?></td> 
+    <td><?php echo $saleitem['saleprice'];?></td> 
 
 
     <td> 
