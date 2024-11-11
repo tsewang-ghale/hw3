@@ -16,7 +16,7 @@ function InsertSaleItems($product_id, $sale_id, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `SaleItem` (`product_id`, `sale_id`, `quantity`, `saleprice`) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("iiid", $product_id, $sale_id, $quantity, $saleprice);
+        $stmt->bind_param("iiii", $product_id, $sale_id, $quantity, $saleprice);
         $success= $stmt->execute();
         $conn->close();
         return $success;
@@ -35,7 +35,7 @@ function UpdateSaleItems($Saleitem_id,$product_id, $sale_id, $quantity, $salepri
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("iiiid", $product_id, $sale_id, $quantity, $saleprice,$Saleitem_id); 
+        $stmt->bind_param("iiiii", $product_id, $sale_id, $quantity, $saleprice,$Saleitem_id); 
         
         // Execute the statement
         $success = $stmt->execute();
