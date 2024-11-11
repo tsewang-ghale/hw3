@@ -31,7 +31,7 @@ if (isset($_POST ['actionType'])){
   }
 }
 
-$saleitems = selectsaleItemitems();
+$saleitems = selectsaleItems();
 include "view-saleitems.php";
 include "view-footer.php";
 ?>
