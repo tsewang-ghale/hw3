@@ -24,17 +24,23 @@
     </thead>
     <tbody> 
       <?php
+      // Fetch the column names dynamically
+      $fields = $saleitems->fetch_fields();
+      
+      // Create an array to store column names
+      $columnNames = [];
+      foreach ($fields as $field) {
+        $columnNames[] = $field->name; // Store column names in array
+      }
+
       while ($saleitem = $saleitems->fetch_assoc()) {
-        // Count the number of columns dynamically
-        $columnCount = count($saleitem);
       ?>
         <tr>
-          <td><?php echo $saleitem['Saleitem_id']; ?></td>
-          <td><?php echo $saleitem['product_id']; ?></td>
-          <td><?php echo $saleitem['sale_id']; ?></td> 
-          <td><?php echo $saleitem['quantity']; ?></td> 
-          <td><?php echo $saleitem['saleprice']; ?></td> 
-          <td><?php echo $columnCount; ?></td> <!-- Display column count -->
+          <!-- Dynamically output each column value based on column names -->
+          <?php foreach ($columnNames as $columnName) { ?>
+            <td><?php echo $saleitem[$columnName]; ?></td>
+          <?php } ?>
+          
           <td>
             <?php 
             include "view-saleitems-editform.php"; 
