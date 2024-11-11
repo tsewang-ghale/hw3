@@ -35,7 +35,7 @@ function UpdateSaleItemItem($SaleItemitem_id,$product_id, $sale_id, $quantity, $
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("iiiii", $product_id, $sale_id, $quantity, $saleprice,$SaleItemitem_id); 
+        $stmt->bind_param("iiii", $product_id, $sale_id, $quantity, $saleprice,$SaleItemitem_id); 
         
         // Execute the statement
         $success = $stmt->execute();
