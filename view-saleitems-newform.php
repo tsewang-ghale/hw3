@@ -18,7 +18,7 @@
         <form method= "post" action = "">
           <div class="mb-3">
             <label for="product_id" class="form-label">Product ID</label>
-            <input type="Integer" class="form-control" id="cid" name = "product_id">
+            <input type="Integer" class="form-control" id="product_id" name = "product_id">
           </div>
           <div class="mb-3">
             <label for="sale_id" class="form-label"> Sale ID </label>
@@ -30,7 +30,7 @@
           </div>
            <div class="mb-3">
             <label for="saleprice" class="form-label">Sale Price</label>
-            <input type="Integer" class="form-control" id="saleprice" name = "saleprice">
+            <input type="decimal" class="form-control" id="saleprice" name = "saleprice">
           </div>
           <input type = "hidden" name = "actionType" value = "Add"> 
           <button type="submit" class="btn btn-primary">Save</button>
