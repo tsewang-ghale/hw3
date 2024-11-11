@@ -24,8 +24,12 @@
             <input type="text" class="form-control" id="cust_firstname_<?php echo $customer['cust_id']; ?>" name="cust_firstname" value="<?php echo $customer['cust_firstname']; ?>">
           </div>
           <div class="mb-3">
-            <label for="cust_lastname_<?php echo $customer['cust_id']; ?>" class="form-label">customer Last Name </label>
+            <label for="cust_lastname_<?php echo $customer['cust_id']; ?>" class="form-label"> Customer Last Name </label>
             <input type="text" class="form-control" id="cust_lastname_<?php echo $customer['cust_id']; ?>" name="cust_lastname" value="<?php echo $customer['cust_lastname']; ?>">
+          </div>
+           <div class="mb-3">
+            <label for="product_name_<?php echo $customer['cust_id']; ?>" class="form-label"> Product Name </label>
+            <input type="text" class="form-control" id="product_name_<?php echo $customer['cust_id']; ?>" name="product_name" value="<?php echo $customer['product_name']; ?>">
           </div>
           <div class="mb-3">
             <label for="sale_date_<?php echo $customer['cust_id']; ?>" class="form-label"> Sale Date </label>
@@ -33,19 +37,19 @@
           </div>
         <div class="mb-3">
             <label for="tax_<?php echo $customer['cust_id']; ?>" class="form-label"> Tax </label>
-            <input type="text" class="form-control" id="tax_<?php echo $customer['cust_id']; ?>" name="tax" value="<?php echo $customer['tax']; ?>">
+            <input type="number" class="form-control" id="tax_<?php echo $customer['cust_id']; ?>" name="tax" value="<?php echo $customer['tax']; ?>">
           </div>
             <div class="mb-3">
             <label for="shipping_<?php echo $customer['cust_id']; ?>" class="form-label"> Shipping </label>
-            <input type="text" class="form-control" id="shipping_<?php echo $customer['cust_id']; ?>" name="shipping" value="<?php echo $customer['shipping']; ?>">
+            <input type="number" class="form-control" id="shipping_<?php echo $customer['cust_id']; ?>" name="shipping" value="<?php echo $customer['shipping']; ?>">
           </div>
            <div class="mb-3">
             <label for="quantity_<?php echo $customer['cust_id']; ?>" class="form-label"> Quantity </label>
-            <input type="text" class="form-control" id="quantity_<?php echo $customer['cust_id']; ?>" name="quantity" value="<?php echo $customer['quantity']; ?>">
+            <input type="number" class="form-control" id="quantity_<?php echo $customer['cust_id']; ?>" name="quantity" value="<?php echo $customer['quantity']; ?>">
           </div>
            <div class="mb-3">
             <label for="saleprice_<?php echo $customer['cust_id']; ?>" class="form-label"> Sale Price  </label>
-            <input type="text" class="form-control" id="salepricey_<?php echo $customer['cust_id']; ?>" name="saleprice" value="<?php echo $customer['saleprice']; ?>">
+            <input type="number" class="form-control" id="salepricey_<?php echo $customer['cust_id']; ?>" name="saleprice" value="<?php echo $customer['saleprice']; ?>">
           </div>
           
           <input type="hidden" name="cust_id" value="<?php echo $customer['cust_id']; ?>">
