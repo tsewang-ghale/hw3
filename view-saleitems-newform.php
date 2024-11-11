@@ -30,7 +30,7 @@
           </div>
            <div class="mb-3">
             <label for="saleprice" class="form-label">Sale Price</label>
-            <input type="number" class="form-control" id="saleprice" name = "saleprice" step="0.01" required>
+            <input type="number" class="form-control" id="saleprice" name = "saleprice">
           </div>
           <input type = "hidden" name = "actionType" value = "Add"> 
           <button type="submit" class="btn btn-primary">Save</button>
