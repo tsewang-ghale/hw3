@@ -58,11 +58,11 @@ function UpdateProduct($product_id, $product_name, $product_description, $listpr
     }
 }
 
-function deleteProduct($product_id) {
+function deleteProduct($Product_id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("DELETE FROM `Product` WHERE product_id = ?");
-        $stmt->bind_param("i", $product_id); // Use $product_id instead of $sid
+        $stmt->bind_param("i", $Product_id); // Use $product_id instead of $sid
         $success = $stmt->execute();
         $stmt->close(); // Close the statement after execution
         $conn->close(); // Close the connection
