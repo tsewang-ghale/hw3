@@ -25,7 +25,7 @@ include "view-saleitems-newform.php";
 while ($saleitem = $saleitems -> fetch_assoc()){
 ?>
   <tr>
-    <td><?php echo $saleitem['saleitem_id']; ?> </td>
+    <td><?php echo $saleitem['Saleitem_id']; ?> </td>
     <td><?php echo $saleitem['product_id']; ?></td>
     <td><?php echo $saleitem['sale_id']; ?></td> 
     <td><?php echo $saleitem['quantity']; ?></td> 
@@ -37,7 +37,7 @@ while ($saleitem = $saleitems -> fetch_assoc()){
     </td> 
     <td>
       <form method= "post" action= "">
-        <input type= "hidden" name = "saleitem_id" value= "<?php echo $saleitem['saleitem_id']; ?>">
+        <input type= "hidden" name = "Saleitem_id" value= "<?php echo $saleitem['Saleitem_id']; ?>">
         <input type= "hidden" name= "actionType" value = "Delete">
         <button type="submit" class="btn btn-primary" onclick= "return confirm ('Are you sure?');">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
