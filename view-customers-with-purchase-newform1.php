@@ -23,19 +23,19 @@
                      </div>
                      <div class="mb-3">
                            <label for="cust_firstname" class="form-label"> Customer First Name</label>
-                           <input type="text" class="form-control" id="cfirstname" name="cust_firstname">
+                           <input type="text" class="form-control" id="cust_firstname" name="cust_firstname">
                      </div>
                      <div class="mb-3">
                            <label for="cust_lastname" class="form-label"> Customer Last Name</label>
-                           <input type="text" class="form-control" id="clastname"  name="cust_lastname">
+                           <input type="text" class="form-control" id="cust_lastname"  name="cust_lastname">
                       </div>
                       <div class="mb-3">
                            <label for="product_name" class="form-label"> Product Name</label>
-                           <input type="text" class="form-control" id="pname" name="product_name">
+                           <input type="text" class="form-control" id="product_name" name="product_name">
                       </div>
                       <div class="mb-3">
                            <label for="sale_date" class="form-label"> Sale Date </label>
-                           <input type="date" class="form-control" id="saledate" name ="sale_date">
+                           <input type="date" class="form-control" id="sale_date" name ="sale_date">
                        </div>
                        <div class="mb-3">
                            <label for="tax" class="form-label"> Tax </label>
