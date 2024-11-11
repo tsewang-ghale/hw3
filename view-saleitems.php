@@ -23,13 +23,15 @@
     <tbody>
       <?php
       while ($saleitem = $saleitems->fetch_assoc()) {
+        // Use null coalescing operator to avoid undefined index or null errors
+        $saleprice = isset($saleitem['saleprice']) ? $saleitem['saleprice'] : 'N/A'; // Provide a default if 'saleprice' is not set
       ?>
         <tr>
-          <td><?php echo htmlspecialchars($saleitem['Saleitem_id']); ?></td>
-          <td><?php echo htmlspecialchars($saleitem['product_id']); ?></td>
-          <td><?php echo htmlspecialchars($saleitem['sale_id']); ?></td>
-          <td><?php echo htmlspecialchars($saleitem['quantity']); ?></td>
-          <td><?php echo htmlspecialchars($saleitem['saleprice']); ?></td>
+          <td><?php echo htmlspecialchars($saleitem['Saleitem_id'] ?? ''); ?></td>
+          <td><?php echo htmlspecialchars($saleitem['product_id'] ?? ''); ?></td>
+          <td><?php echo htmlspecialchars($saleitem['sale_id'] ?? ''); ?></td>
+          <td><?php echo htmlspecialchars($saleitem['quantity'] ?? ''); ?></td>
+          <td><?php echo htmlspecialchars($saleprice); ?></td> <!-- Ensure saleprice is set before using -->
           <td>
             <?php include "view-saleitems-editform.php"; ?>
           </td>
