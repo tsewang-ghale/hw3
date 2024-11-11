@@ -1,8 +1,8 @@
 <?php
-function selectsaleItems() {
+function selectSaleItems() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT SaleItemitem_id, product_id,sale_id, quantity, saleprice SaleItemprice FROM `SaleItemItem`");
+        $stmt = $conn->prepare("SELECT SaleItem_id, product_id,sale_id, quantity, saleprice SaleItemprice FROM `SaleItem`");
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
@@ -25,7 +25,7 @@ function InsertSaleItems($product_id, $sale_id, $quantity, $saleprice) {
         throw $e;
     }
 }
-function UpdateSaleItems($SaleItemitem_id,$product_id, $sale_id, $quantity, $saleprice) {
+function UpdateSaleItems($SaleItem_id,$product_id, $sale_id, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
         // Prepare the SQL query
@@ -35,7 +35,7 @@ function UpdateSaleItems($SaleItemitem_id,$product_id, $sale_id, $quantity, $sal
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("iiiid", $product_id, $sale_id, $quantity, $saleprice,$SaleItemitem_id); 
+        $stmt->bind_param("iiiid", $product_id, $sale_id, $quantity, $saleprice,$SaleItem_id); 
         
         // Execute the statement
         $success = $stmt->execute();
