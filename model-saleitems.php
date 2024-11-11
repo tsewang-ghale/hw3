@@ -2,7 +2,7 @@
 function selectSaleItems() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT SaleItem_id, product_id,sale_id, quantity, saleprice SaleItemprice FROM `SaleItem`");
+        $stmt = $conn->prepare("SELECT Saleitem_id, product_id,sale_id, quantity, saleprice SaleItemprice FROM `SaleItem`");
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
@@ -25,17 +25,17 @@ function InsertSaleItems($product_id, $sale_id, $quantity, $saleprice) {
         throw $e;
     }
 }
-function UpdateSaleItems($SaleItem_id,$product_id, $sale_id, $quantity, $saleprice) {
+function UpdateSaleItems($Saleitem_id,$product_id, $sale_id, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
         // Prepare the SQL query
-        $stmt = $conn->prepare("UPDATE `SaleItem` SET `product_id` = ?, `sale_id` = ?, `quantity` = ?, `saleprice` = ? WHERE `SaleItem_id` = ?");
+        $stmt = $conn->prepare("UPDATE `SaleItem` SET `product_id` = ?, `sale_id` = ?, `quantity` = ?, `saleprice` = ? WHERE `Saleitem_id` = ?");
         
         // Check if the statement was prepared correctly
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("iiiid", $product_id, $sale_id, $quantity, $saleprice,$SaleItem_id); 
+        $stmt->bind_param("iiiid", $product_id, $sale_id, $quantity, $saleprice,$Saleitem_id); 
         
         // Execute the statement
         $success = $stmt->execute();
@@ -57,11 +57,11 @@ function UpdateSaleItems($SaleItem_id,$product_id, $sale_id, $quantity, $salepri
 }
 
 
-function deleteSaleItems($SaleItem_id) {
+function deleteSaleItems($Saleitem_id) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("DELETE FROM `SaleItem` WHERE SaleItem_id = ?");
-        $stmt->bind_param("i", $SaleItem_id); // Use $SaleItem_id instead of $sid
+        $stmt = $conn->prepare("DELETE FROM `SaleItem` WHERE Saleitem_id = ?");
+        $stmt->bind_param("i", $Saleitem_id); // Use $Saleitem_id instead of $sid
         $success = $stmt->execute();
         $stmt->close(); // Close the statement after execution
         $conn->close(); // Close the connection
