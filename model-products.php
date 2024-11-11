@@ -12,12 +12,13 @@ function selectProducts() {
         throw $e;
     }
 }
-function InsertProduct($product_name, $product_description, $listprice, $color,$category ) {
+
+function InsertProduct($product_name, $product_description, $listprice, $color, $category) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("INSERT INTO `Product` (`product_name`, `product_description`, `listprice`, `color`, `category`) VALUES (?, ?, ?, ?,?)");
-        $stmt->bind_param("ssiss", $product_name, $product_description, $listprice, $color,$category);
-        $success= $stmt->execute();
+        $stmt->bind_param("ssisd", $product_name, $product_description, $listprice, $color, $category);
+        $success = $stmt->execute();
         $conn->close();
         return $success;
     } catch (Exception $e) {
@@ -30,13 +31,13 @@ function UpdateProduct($product_id, $product_name, $product_description, $listpr
     try {
         $conn = get_db_connection();
         // Prepare the SQL query
-        $stmt = $conn->prepare("UPDATE `Product` SET `product_name` = ?, `product_description` = ? , 'listprice' =? , 'color' =?, 'category' =? WHERE `Product_id` = ?");
+        $stmt = $conn->prepare("UPDATE `Product` SET `product_name` = ?, `product_description` = ?, `listprice` = ?, `color` = ?, `category` = ? WHERE `product_id` = ?");
         
         // Check if the statement was prepared correctly
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("ississ",  $product_name, $product_description, $listprice, $color, $category,$product_id ); 
+        $stmt->bind_param("sssdss", $product_name, $product_description, $listprice, $color, $category, $product_id); 
         
         // Execute the statement
         $success = $stmt->execute();
@@ -57,12 +58,11 @@ function UpdateProduct($product_id, $product_name, $product_description, $listpr
     }
 }
 
-
 function deleteProduct($product_id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("DELETE FROM `Product` WHERE product_id = ?");
-        $stmt->bind_param("i", $product_id); // Use $Product_id instead of $sid
+        $stmt->bind_param("i", $product_id); // Use $product_id instead of $sid
         $success = $stmt->execute();
         $stmt->close(); // Close the statement after execution
         $conn->close(); // Close the connection
@@ -72,10 +72,4 @@ function deleteProduct($product_id) {
         throw $e; // Rethrow the exception for further handling
     }
 }
-
-
-
-
-
-
 ?>
