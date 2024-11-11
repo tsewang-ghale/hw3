@@ -6,8 +6,7 @@
            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
          </svg>
 </button>
-
-      <!-- Modal -->
+ <!-- Modal -->
       <div class="modal fade" id="newformCustomerWithPurchaseModal" tabindex="-1" aria-labelledby="newformCustomerWithPurchaseModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -19,7 +18,7 @@
               <form method = "post" action ="">
                      <div class="mb-3">
                            <label for="cust_id" class="form-label">Cust ID</label>
-                           <input type="integer" class="form-control" id="custId" name= "cust_id">
+                           <input type="number" class="form-control" id="custId" name= "cust_id">
                      </div>
                      <div class="mb-3">
                            <label for="cust_firstname" class="form-label"> Customer First Name</label>
@@ -39,19 +38,19 @@
                        </div>
                        <div class="mb-3">
                            <label for="tax" class="form-label"> Tax </label>
-                           <input type="integer" class="form-control" id="tax" name="tax">
+                           <input type="number" class="form-control" id="tax" name="tax">
                        </div>
                       <div class="mb-3">
                            <label for="shipping" class="form-label"> Shipping </label>
-                           <input type="integer" class="form-control" id="shipping" name = "shipping">
+                           <input type="number" class="form-control" id="shipping" name = "shipping">
                      </div>
                      <div class="mb-3">
                            <label for="quantity" class="form-label"> Quantity </label>
-                           <input type="integer" class="form-control" id="quantity" name= "quantity">
+                           <input type="number" class="form-control" id="quantity" name= "quantity">
                      </div>
                      <div class="mb-3">
                            <label for="saleprice" class="form-label"> Sale Price </label>
-                           <input type="integer" class="form-control" id="saleprice" name = "saleprice">
+                           <input type="number" class="form-control" id="saleprice" name = "saleprice">
                      </div>
                      <input type = "hidden" name = "actionType" value = "Add"> 
                   <button type="submit" class="btn btn-primary">Save</button>
