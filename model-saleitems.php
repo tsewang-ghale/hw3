@@ -1,5 +1,5 @@
 <?php
-function selectsaleItemitems() {
+function selectsaleItems() {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("SELECT SaleItemitem_id, product_id,sale_id, quantity, saleprice SaleItemprice FROM `SaleItemItem`");
