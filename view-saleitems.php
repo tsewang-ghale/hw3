@@ -36,9 +36,9 @@
       while ($saleitem = $saleitems->fetch_assoc()) {
       ?>
         <tr>
-          <!-- Dynamically output each column value based on column names -->
+          <!-- Dynamically output each column value with the column name -->
           <?php foreach ($columnNames as $columnName) { ?>
-            <td><?php echo $saleitem[$columnName]; ?></td>
+            <td><?php echo $columnName . ": " . $saleitem[$columnName]; ?></td>
           <?php } ?>
           
           <td>
