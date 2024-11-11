@@ -29,7 +29,8 @@ while ($saleitem = $saleitems -> fetch_assoc()){
     <td><?php echo $saleitem['product_id']; ?></td>
     <td><?php echo $saleitem['sale_id']; ?></td> 
     <td><?php echo $saleitem['quantity']; ?></td> 
-    <td><?php echo $saleitem['saleprice']; ?></td> 
+    <td><?php echo isset($saleitem['saleprice']) ? $saleitem['saleprice'] : 'Not Available'; ?></td>
+
     <td> 
       <?php 
       include "view-saleitems-editform.php"; 
