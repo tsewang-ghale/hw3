@@ -51,7 +51,7 @@ function selectCustomersPurchase($cust_id) {
 function insertCustomersPurchase($cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("INSERT INTO `Sale` 
+        $stmt = $conn->prepare("INSERT INTO `Customer` 
             (cust_id, cust_firstname, cust_lastname, product_name, sale_date, tax, shipping, quantity, saleprice) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
