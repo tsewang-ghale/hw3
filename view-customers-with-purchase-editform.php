@@ -10,13 +10,13 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="editCustomerWithPurchaseModalLabel<?php echo $customer['cust_id']; ?>">Edit customer</h1>
+        <h1 class="modal-title fs-5" id="editCustomerWithPurchaseModalLabel<?php echo $customer['cust_id']; ?>">Edit Customer</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form method="post" action="">
           <div class="mb-3">
-            <label for="cust_id_<?php echo $customer['cust_id']; ?>" class="form-label">customer ID</label>
+            <label for="cust_id_<?php echo $customer['cust_id']; ?>" class="form-label">Customer ID</label>
             <input type="number" class="form-control" id="cust_id_<?php echo $customer['cust_id']; ?>" name="cust_id" value="<?php echo $customer['cust_id']; ?>">
           </div>
           <div class="mb-3">
