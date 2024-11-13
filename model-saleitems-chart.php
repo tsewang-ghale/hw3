@@ -4,9 +4,7 @@ function selectSaleItems() {
         $conn = get_db_connection();  // Get the database connection
         
         // Prepare the query to select sale items data
-       $stmt = $conn->prepare("
-            SELECT 
-                si.sale_id, 
+           $stmt = $conn->prepare("SELECT si.sale_id, 
                 si.quantity, 
                 si.saleprice, 
                 COUNT(si.Saleitem_id) AS count_saleitem
