@@ -16,7 +16,7 @@
         data: [
 <?php
 while ($customer= $customers -> fetch_assoc()){
-echo $customer['numberofitemsbought'] . ", "; 
+echo $customer['count_sale'] . ", "; 
 }
 ?>
     }],
@@ -26,7 +26,7 @@ echo $customer['numberofitemsbought'] . ", ";
 <?php
 $customers = selectCustomers(); 
 while ($customer= $customers -> fetch_assoc()){
-echo $customer['cust_lastname'] . ", "; 
+echo "'" . $customer['cust_lastname'] . "', "; 
 }
 ?>
     ]
