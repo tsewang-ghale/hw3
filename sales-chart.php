@@ -15,7 +15,7 @@ $customerNames = [];
 while ($sale = $sales->fetch_assoc()) {
     // Store the customer name and the count of sales per customer
     $customerNames[] = $sale['cust_id']; // Assuming 'cust_id' represents the customer ID
-    $saleData[] = (int) $sale['Sale_id']; // Assuming 'sale_id' represents an individual sale
+    $saleData[] = (int) $sale['sale_id']; // Assuming 'sale_id' represents an individual sale
 }
 
 include "view-sales-chart.php"; // Include the chart view
