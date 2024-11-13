@@ -1,5 +1,4 @@
 <?php
-// Include the necessary files
 require_once("util-db.php");
 require_once("model-products-chart.php");
 
