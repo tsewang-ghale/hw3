@@ -8,7 +8,7 @@
   const ctx = document.getElementById('myChart');
 
   new Chart(ctx, {
-    type: 'bar',
+    type: 'line',  // Change to line chart
     data: {
       labels: [
         <?php
@@ -30,9 +30,10 @@
           }
           ?>
         ],
-        backgroundColor: 'rgba(54, 162, 235, 0.6)',  // Customize bar color
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 1
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',  // Line chart background color (slightly transparent)
+        borderColor: 'rgba(54, 162, 235, 1)',  // Line color
+        borderWidth: 2,  // Line width
+        tension: 0.2  // Smooth the line (optional)
       }]
     },
     options: {
