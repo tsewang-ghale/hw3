@@ -5,7 +5,7 @@ function selectSaleItems() {
         
         // Prepare the query to select sale items data
         $stmt = $conn->prepare("SELECT sale_id, quantity, saleprice, COUNT(Saleitem_id) AS count_saleitem 
-                                FROM saleitem si join sale s on si.saleid= s.saleid
+                                FROM `Saleitem` si join `Sale` s on si.saleid= s.saleid
                                 GROUP BY sale_id, quantity, saleprice");
         $stmt->execute();  // Execute the query
         $result = $stmt->get_result();  // Get the result
