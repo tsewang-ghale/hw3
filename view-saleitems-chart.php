@@ -1,4 +1,4 @@
-<h1>Sale Items Chart</h1>
+<h1> Sale Items Total Price Chart </h1>
 <div>
   <canvas id="myChart"></canvas>
 </div>
@@ -8,37 +8,47 @@
   const ctx = document.getElementById('myChart');
 
   new Chart(ctx, {
-    type: 'bar',  // Choose the chart type (bar, doughnut, etc.)
+    type: 'bar',
     data: {
+      labels: [
+        <?php
+        // Fetch sale items data and generate labels for each saleitem_id
+        $saleitems = selectSaleItems();
+        while ($saleitem = $saleitems->fetch_assoc()) {
+            echo "'" . $saleitem['saleitem_id'] . "', ";  // Sale item IDs as labels
+        }
+        ?>
+      ],
       datasets: [{
-        label: 'Sale Items Count',  // Label for the dataset
+        label: 'Total Price for Each Sale Item',
         data: [
           <?php
-          // Initialize the $saleitems variable to fetch the sale items data
-          $saleitems = selectSaleItems(); 
+          // Re-fetch sale items data to generate the total_price data points
+          $saleitems = selectSaleItems();
           while ($saleitem = $saleitems->fetch_assoc()) {
-            echo $saleitem['count_saleitem'] . ", ";  // Sale items count for each product
+              echo $saleitem['total_price'] . ", ";  // Total price for each sale item
           }
           ?>
         ],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',  // Customize the background color
-        borderColor: 'rgba(75, 192, 192, 1)',  // Customize the border color
-        borderWidth: 1  // Customize the border width
-      }],
-      labels: [
-        <?php
-        // Reset $saleitems and fetch the labels (product details like product_id, sale_id, etc.)
-        $saleitems = selectSaleItems(); 
-        while ($saleitem = $saleitems->fetch_assoc()) {
-          echo "'". $saleitem['sale_id'] . "', "; 
-        }
-        ?>
-      ]
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',  // Customize bar color
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
     },
     options: {
       scales: {
         y: {
-          beginAtZero: true  // Start the Y-axis at zero
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Total Price (quantity * saleprice)'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Sale Item ID'
+          }
         }
       }
     }
