@@ -30,7 +30,7 @@
         // Reset $saleitems and fetch the labels (product details like product_id, sale_id, etc.)
         $saleitems = selectSaleItems(); 
         while ($saleitem = $saleitems->fetch_assoc()) {
-          echo "'" . $saleitem['product_id'] . " - " . $saleitem['sale_id'] . "', "; 
+          echo "'". $saleitem['sale_id'] . "', "; 
         }
         ?>
       ]
