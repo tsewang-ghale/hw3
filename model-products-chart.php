@@ -8,7 +8,7 @@ function selectProducts() {
         // SQL query to fetch product sales count
         $stmt = $conn->prepare("
             SELECT product_name, COUNT(product_id) AS product_count 
-            FROM product p 
+            FROM product  
             GROUP BY product_name
         ");
         
