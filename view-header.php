@@ -47,9 +47,15 @@
         </div>
     </nav>
 
+    <!-- Page Title -->
+    <header class="bg-primary text-white text-center py-5">
+        <h1 class="display-4"><?= htmlspecialchars($pageTitle); ?></h1>
+    </header>
+
     <!-- Main Content -->
     <div class="container mt-5">
-        <h1 class="mb-4"><?= htmlspecialchars($pageTitle); ?></h1>
+        <h2 class="mb-4">Welcome to the Dashboard</h2>
+        <p>This is where you can explore data and insights. Below are some links to other pages:</p>
         <ul>
             <li><a href="post.php">Go to Post Page</a></li>
             <li><a href="get.php">Go to Get Page</a></li>
