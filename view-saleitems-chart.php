@@ -13,8 +13,9 @@
     data: {
       datasets: [{
         label: 'Sale Items Count',  // Label for the dataset
-        data: [
+        data: [ 
 <?php
+// Loop through the saleitems data and populate the count values
 while ($saleitem = $saleitems->fetch_assoc()) {
     echo $saleitem['count_saleitem'] . ", ";  // Sales count for each item
 }
@@ -26,9 +27,12 @@ while ($saleitem = $saleitems->fetch_assoc()) {
       }],
       labels: [
 <?php
+// Rewind the result set if needed (optional) or ensure you fetch the data again
 $saleitems = selectSaleItems();  // Re-fetch data for labels
+
+// Loop through saleitems to fetch item names as labels
 while ($saleitem = $saleitems->fetch_assoc()) {
-    echo "'" . $saleitem['product_id, sale_id, quantity, saleprice'] . "', ";  // Item names as labels
+    echo "'" . $saleitem['item_name'] . "', ";  // Replace 'item_name' with the correct field
 }
 ?>
       ]
