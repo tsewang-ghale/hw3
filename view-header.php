@@ -42,6 +42,9 @@
              <li class="nav-item">
               <a class="nav-link" href="saleitems-chart.php"> SaleItems Chart </a>
             </li>
+             <li class="nav-item">
+              <a class="nav-link" href="products-chart.php"> Products Chart </a>
+            </li>
             
           </ul>
         </div>
