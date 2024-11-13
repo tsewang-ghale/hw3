@@ -28,7 +28,7 @@ while ($saleitem = $saleitems->fetch_assoc()) {
 <?php
 $saleitems = selectSaleItems();  // Re-fetch data for labels
 while ($saleitem = $saleitems->fetch_assoc()) {
-    echo "'" . $saleitem['item_name'] . "', ";  // Item names as labels
+    echo "'" . $saleitem['product_id, sale_id, quantity, saleprice'] . "', ";  // Item names as labels
 }
 ?>
       ]
