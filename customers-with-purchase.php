@@ -1,16 +1,37 @@
 <?php
 require_once("util-db.php");
-require_once("model-customers-with-purchase.php"); // Updated to include the appropriate model for purchase data
-  
+require_once("model-customers-with-purchase.php");
+
 $pageTitle = "Customers with Purchase";
-include "view-header.php"; // Include the header file for consistent styling and structure
+include "view-header.php";
 
-// Fetch customers with purchase details
-$customers = selectCustomersWithPurchase(); // Ensure this function is implemented in model-customers-with-purchase.php
+if (isset($_POST['actionType'])) {
+  switch ($_POST['actionType']) {
+    case "Add":
+      if (InsertCustomerWithPurchase($_POST['cust_firstname'], $_POST['cust_lastname'], $_POST['cust_address'], $_POST['cust_phone'], $_POST['cust_email'], $_POST['purchase_details'])) {
+        echo '<div class="alert alert-success" role="alert"> Customer with purchase added.</div>';
+      } else {
+        echo '<div class="alert alert-danger" role="alert"> Error adding customer with purchase.</div>';
+      }
+      break;
+    case "Edit":
+      if (UpdateCustomerWithPurchase($_POST['cust_id'], $_POST['cust_firstname'], $_POST['cust_lastname'], $_POST['cust_address'], $_POST['cust_phone'], $_POST['cust_email'], $_POST['purchase_details'])) {
+        echo '<div class="alert alert-success" role="alert"> Customer with purchase edited.</div>';
+      } else {
+        echo '<div class="alert alert-danger" role="alert"> Error editing customer with purchase.</div>';
+      }
+      break;
+    case "Delete":
+      if (DeleteCustomerWithPurchase($_POST['cust_id'])) {
+        echo '<div class="alert alert-success" role="alert"> Customer with purchase deleted.</div>';
+      } else {
+        echo '<div class="alert alert-danger" role="alert"> Error deleting customer with purchase.</div>';
+      }
+      break;
+  }
+}
 
-// Include the view to display customers with purchase details
+$customers = selectCustomersWithPurchase();
 include "view-customers-with-purchase.php";
-
-// Include footer for consistent page structure
 include "view-footer.php";
 ?>
