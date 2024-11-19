@@ -51,8 +51,7 @@ function selectCustomersPurchase($cust_id) {
 function insertCustomersPurchase($cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("INSERT INTO `Customer` 
-            (cust_id, cust_firstname, cust_lastname, product_name, sale_date, tax, shipping, quantity, saleprice) 
+        $stmt = $conn->prepare("INSERT INTO `Customer` (`cust_id`, `cust_firstname`, `cust_lastname`, `product_name`, `sale_date`, `tax`, `shipping`, `quantity`, `saleprice`) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
         $stmt->bind_param("issssiiii", $cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice);
@@ -69,8 +68,7 @@ function insertCustomersPurchase($cust_id, $cust_firstname, $cust_lastname, $pro
 function updateCustomersPurchase($cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice, $sid) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("UPDATE `Sale` 
-            SET cust_id = ?, cust_firstname = ?, cust_lastname = ?, product_name = ?, sale_date = ?, tax = ?, shipping = ?, quantity = ?, saleprice = ? 
+        $stmt = $conn->prepare("UPDATE `Sale` SET `cust_id` = ?, `cust_firstname` = ?, `cust_lastname` = ?, `product_name` = ?, `sale_date` = ?, `tax` = ?, `shipping`= ?, `quantity` = ?, `saleprice` = ? 
             WHERE sale_id = ?
         ");
         $stmt->bind_param("issssiiiii", $cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice, $sid);
@@ -84,3 +82,20 @@ function updateCustomersPurchase($cust_id, $cust_firstname, $cust_lastname, $pro
 }
 
 // Function to delete a purch
+function deleteCustomersPurchase($cust_id) {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("DELETE FROM `Customer` WHERE cust_id = ?");
+        $stmt->bind_param("i", $cust_id); // Use $sale_id instead of $sid
+        $success = $stmt->execute();
+        $stmt->close(); // Close the statement after execution
+        $conn->close(); // Close the connection
+        return $success;
+    } catch (Exception $e) {
+        $conn->close(); // Ensure the connection is closed in case of an error
+        throw $e; // Rethrow the exception for further handling
+    }
+}
+
+?>
+
