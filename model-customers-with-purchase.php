@@ -52,7 +52,7 @@ function selectCustomersPurchase($custId) {
     }
 }
 
-function InsertCustomerWithPurchase($cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email, $purchase_details) {
+function InsertCustomerWithPurchase($cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email) {
     try {
         $conn = get_db_connection();
         $conn->begin_transaction();
@@ -67,8 +67,8 @@ function InsertCustomerWithPurchase($cust_firstname, $cust_lastname, $cust_addre
         $stmt->close();
 
         // Insert purchase details (example structure)
-        $stmt = $conn->prepare("INSERT INTO `Sale` (`cust_id`, `purchase_details`) VALUES (?, ?)");
-        $stmt->bind_param("is", $cust_id, $purchase_details);
+        $stmt = $conn->prepare("INSERT INTO `Sale` (`cust_id`) VALUES (?, ?)");
+        $stmt->bind_param("i", $cust_id);
         if (!$stmt->execute()) {
             throw new Exception("Error inserting purchase: " . $stmt->error);
         }
@@ -86,7 +86,7 @@ function InsertCustomerWithPurchase($cust_firstname, $cust_lastname, $cust_addre
     }
 }
 
-function UpdateCustomerWithPurchase($cust_id, $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email, $purchase_details) {
+function UpdateCustomerWithPurchase($cust_id, $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email) {
     try {
         $conn = get_db_connection();
         $conn->begin_transaction();
@@ -100,8 +100,8 @@ function UpdateCustomerWithPurchase($cust_id, $cust_firstname, $cust_lastname, $
         $stmt->close();
 
         // Update purchase details (example structure)
-        $stmt = $conn->prepare("UPDATE `Sale` SET `purchase_details` = ? WHERE `cust_id` = ?");
-        $stmt->bind_param("si", $purchase_details, $cust_id);
+        $stmt = $conn->prepare("UPDATE `Sale` WHERE `cust_id` = ?");
+        $stmt->bind_param("i" $cust_id);
         if (!$stmt->execute()) {
             throw new Exception("Error updating purchase: " . $stmt->error);
         }
