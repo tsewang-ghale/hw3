@@ -1,14 +1,4 @@
-<div class = "row">
-  <div class = "col">
-  <h1> Customers with Purchase</h1>
-  </div>
-  <div class = "col-auto">
-<?php 
-include "view-customers-with-purchase-newform.php"; 
-?>
-  </div>
-</div>
-
+<h1> Customers with Purchase</h1>
  <div class="card-group">
 <?php
 while ($customer= $customers -> fetch_assoc()){
