@@ -48,13 +48,12 @@ function selectCustomersPurchase($cust_id) {
 }
 
 // Function to insert a new purchase record for a customer
-function insertCustomersPurchase($cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice) {
+function insertCustomersPurchase($cust_id, $cust_firstname, $cust_lastname) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("INSERT INTO `Customer` (`cust_id`, `cust_firstname`, `cust_lastname`, `product_name`, `sale_date`, `tax`, `shipping`, `quantity`, `saleprice`) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ");
-        $stmt->bind_param("issssiiii", $cust_id, $cust_firstname, $cust_lastname, $product_name, $saledate, $tax, $shipping, $quantity, $saleprice);
+        $stmt = $conn->prepare("INSERT INTO `Customer` (`cust_id`, `cust_firstname`, `cust_lastname`) 
+            VALUES (?, ?, ?)"  );
+        $stmt->bind_param("iss", $cust_id, $cust_firstname, $cust_lastname);
         $success = $stmt->execute();
         $conn->close();
         return $success;
