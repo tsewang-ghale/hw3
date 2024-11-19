@@ -51,4 +51,104 @@ function selectCustomersPurchase($custId) {
         throw $e;
     }
 }
+
+function InsertCustomerWithPurchase($cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email, $purchase_details) {
+    try {
+        $conn = get_db_connection();
+        $conn->begin_transaction();
+
+        // Insert into Customer table
+        $stmt = $conn->prepare("INSERT INTO `Customer` (`cust_firstname`, `cust_lastname`, `cust_address`, `cust_phone`, `cust_email`) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email);
+        if (!$stmt->execute()) {
+            throw new Exception("Error inserting customer: " . $stmt->error);
+        }
+        $cust_id = $stmt->insert_id;
+        $stmt->close();
+
+        // Insert purchase details (example structure)
+        $stmt = $conn->prepare("INSERT INTO `Sale` (`cust_id`, `purchase_details`) VALUES (?, ?)");
+        $stmt->bind_param("is", $cust_id, $purchase_details);
+        if (!$stmt->execute()) {
+            throw new Exception("Error inserting purchase: " . $stmt->error);
+        }
+        $stmt->close();
+
+        $conn->commit();
+        $conn->close();
+        return true;
+    } catch (Exception $e) {
+        if ($conn) {
+            $conn->rollback();
+            $conn->close();
+        }
+        throw $e;
+    }
+}
+
+function UpdateCustomerWithPurchase($cust_id, $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email, $purchase_details) {
+    try {
+        $conn = get_db_connection();
+        $conn->begin_transaction();
+
+        // Update Customer table
+        $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `cust_address` = ?, `cust_phone` = ?, `cust_email` = ? WHERE `cust_id` = ?");
+        $stmt->bind_param("sssssi", $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email, $cust_id);
+        if (!$stmt->execute()) {
+            throw new Exception("Error updating customer: " . $stmt->error);
+        }
+        $stmt->close();
+
+        // Update purchase details (example structure)
+        $stmt = $conn->prepare("UPDATE `Sale` SET `purchase_details` = ? WHERE `cust_id` = ?");
+        $stmt->bind_param("si", $purchase_details, $cust_id);
+        if (!$stmt->execute()) {
+            throw new Exception("Error updating purchase: " . $stmt->error);
+        }
+        $stmt->close();
+
+        $conn->commit();
+        $conn->close();
+        return true;
+    } catch (Exception $e) {
+        if ($conn) {
+            $conn->rollback();
+            $conn->close();
+        }
+        throw $e;
+    }
+}
+
+function DeleteCustomerWithPurchase($cust_id) {
+    try {
+        $conn = get_db_connection();
+        $conn->begin_transaction();
+
+        // Delete purchase details (example structure)
+        $stmt = $conn->prepare("DELETE FROM `Sale` WHERE `cust_id` = ?");
+        $stmt->bind_param("i", $cust_id);
+        if (!$stmt->execute()) {
+            throw new Exception("Error deleting purchase: " . $stmt->error);
+        }
+        $stmt->close();
+
+        // Delete from Customer table
+        $stmt = $conn->prepare("DELETE FROM `Customer` WHERE `cust_id` = ?");
+        $stmt->bind_param("i", $cust_id);
+        if (!$stmt->execute()) {
+            throw new Exception("Error deleting customer: " . $stmt->error);
+        }
+        $stmt->close();
+
+        $conn->commit();
+        $conn->close();
+        return true;
+    } catch (Exception $e) {
+        if ($conn) {
+            $conn->rollback();
+            $conn->close();
+        }
+        throw $e;
+    }
+}
 ?>
