@@ -9,14 +9,14 @@ include "view-header.php";
 if (isset($_POST['actionType'])) {
     switch ($_POST['actionType']) {
         case "Add":
-            if (InsertCustomerWithPurchase($_POST['cust_firstname'], $_POST['cust_lastname'], $_POST['cust_address'], $_POST['cust_phone'], $_POST['cust_email'], $_POST['purchase_details'])) {
+            if (InsertCustomerWithPurchase($_POST['cust_firstname'], $_POST['cust_lastname'], $_POST['cust_address'], $_POST['cust_phone'], $_POST['cust_email'])) {
                 echo '<div class="alert alert-success" role="alert"> Customer with purchase added.</div>';
             } else {
                 echo '<div class="alert alert-danger" role="alert"> Error adding customer with purchase.</div>';
             }
             break;
         case "Edit":
-            if (UpdateCustomerWithPurchase($_POST['cust_id'], $_POST['cust_firstname'], $_POST['cust_lastname'], $_POST['cust_address'], $_POST['cust_phone'], $_POST['cust_email'], $_POST['purchase_details'])) {
+            if (UpdateCustomerWithPurchase($_POST['cust_id'], $_POST['cust_firstname'], $_POST['cust_lastname'], $_POST['cust_address'], $_POST['cust_phone'], $_POST['cust_email'])) {
                 echo '<div class="alert alert-success" role="alert"> Customer with purchase edited.</div>';
             } else {
                 echo '<div class="alert alert-danger" role="alert"> Error editing customer with purchase.</div>';
