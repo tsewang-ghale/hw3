@@ -8,10 +8,13 @@ function selectCustomers() {
         $conn->close();
         return $result;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) {
+            $conn->close();
+        }
         throw $e;
     }
 }
+
 function selectCustomersPurchase($custId) {
     try {
         $conn = get_db_connection();
@@ -32,13 +35,19 @@ function selectCustomersPurchase($custId) {
             JOIN SaleItem si ON s.sale_id = si.sale_id
             JOIN Product p ON si.product_id = p.product_id
             WHERE c.cust_id = ?");
+        if (!$stmt) {
+            throw new Exception("Failed to prepare statement: " . $conn->error);
+        }
         $stmt->bind_param("i", $custId);
         $stmt->execute();
         $result = $stmt->get_result();
+        $stmt->close();
         $conn->close();
         return $result;
     } catch (Exception $e) {
-        $conn->close();
+        if ($conn) {
+            $conn->close();
+        }
         throw $e;
     }
 }
