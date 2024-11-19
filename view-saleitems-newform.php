@@ -1,3 +1,9 @@
+<?php
+require_once("model-saleitems.php");
+$products = selectProducts();
+$sales = selectSales();
+?>
+
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newSaleItemModal">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -11,27 +17,49 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="newSaleItemModalLabel"> New SaleItem</h1>
+        <h1 class="modal-title fs-5" id="newSaleItemModalLabel">New Sale Item</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form method="post" action="">
+          <!-- Product Dropdown -->
           <div class="mb-3">
-            <label for="product_id" class="form-label">Product ID</label>
-            <input type="number" class="form-control" id="product_id" name="product_id">
+            <label for="product_id" class="form-label">Product:</label>
+            <select name="product_id" id="product_id" class="form-control" required>
+              <option value="">Select a Product</option>
+              <?php while ($product = $products->fetch_assoc()) { ?>
+                <option value="<?php echo $product['product_id']; ?>">
+                  <?php echo $product['product_name']; ?>
+                </option>
+              <?php } ?>
+            </select>
           </div>
+
+          <!-- Sale Dropdown -->
           <div class="mb-3">
-            <label for="sale_id" class="form-label">Sale ID</label>
-            <input type="number" class="form-control" id="sale_id" name="sale_id">
+            <label for="sale_id" class="form-label">Sale:</label>
+            <select name="sale_id" id="sale_id" class="form-control" required>
+              <option value="">Select a Sale</option>
+              <?php while ($sale = $sales->fetch_assoc()) { ?>
+                <option value="<?php echo $sale['sale_id']; ?>">
+                  <?php echo "Sale ID: " . $sale['sale_id'] . " | Date: " . $sale['sale_date']; ?>
+                </option>
+              <?php } ?>
+            </select>
           </div>
+
+          <!-- Quantity -->
           <div class="mb-3">
-            <label for="quantity" class="form-label">Quantity</label>
-            <input type="number" class="form-control" id="quantity" name="quantity">
+            <label for="quantity" class="form-label">Quantity:</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" required>
           </div>
+
+          <!-- Sale Price -->
           <div class="mb-3">
-            <label for="saleprice" class="form-label">Sale Price</label>
-            <input type="number" class="form-control" id="saleprice" name="saleprice">
+            <label for="saleprice" class="form-label">Sale Price:</label>
+            <input type="number" class="form-control" id="saleprice" name="saleprice" step="0.01" required>
           </div>
+
           <input type="hidden" name="actionType" value="Add">
           <button type="submit" class="btn btn-primary">Save</button>
         </form>
