@@ -59,7 +59,7 @@ function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantit
         $sale_id = $conn->insert_id;
         
         // Insert into Saleitem table
-        $stmt = $conn->prepare("INSERT INTO `Saleitem` (`product_id`, `sale_id`, `quantity`, `saleprice`) VALUES (?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO `SaleItem` (`product_id`, `sale_id`, `quantity`, `saleprice`) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("iiid", $product_id, $sale_id, $quantity, $saleprice);
         $stmt->execute();
         
