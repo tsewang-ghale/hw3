@@ -120,21 +120,12 @@ function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantit
         throw $e;
     }
 }
-function UpdateCustomersWithPurchase($sid, $cust_id, $sale_date, $tax, $shipping, $quantity) {
+function UpdateCustomersWithPurchase($sid, $cust_id, $sale_date, $tax, $shipping, $quantity,$product_id) {
     try {
         $conn = get_db_connection();  // Assume you have a function to get the DB connection
 
-        // First update the Customer table (if needed)
-        $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `cust_phone` = ?, `cust_email` = ? WHERE `cust_id` = ?");
-        if (!$stmt) {
-            throw new Exception("Failed to prepare statement: " . $conn->error);
-        }
-        // Bind customer parameters (assuming you have these variables)
-        $stmt->bind_param("sssss", $cust_firstname, $cust_lastname, $cust_phone, $cust_email, $cust_id);
-        $success = $stmt->execute();
-        $stmt->close();
-
-        // Now update the Sale table with the provided sale_date, tax, and shipping details
+       
+        // update the Sale table with the provided sale_date, tax, and shipping details
         $stmt = $conn->prepare("UPDATE `Sale` SET `sale_date` = ?, `tax` = ?, `shipping` = ? WHERE `sale_id` = ?");
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
