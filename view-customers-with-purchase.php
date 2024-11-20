@@ -32,7 +32,9 @@ while ($customer = $customers->fetch_assoc()) {
                 <?php echo $sale['product_name']; ?> - 
                 <?php echo $sale['sale_date']; ?> - 
                 $<?php echo number_format($sale['saleprice'], 2); ?>
-
+                <?php
+                  include "view-customers-with-purchase-editform.php"; 
+                ?> 
                 <form method= "post" action= "">
                 <input type= "hidden" name = "sale_id" id ="sale_id" value= "<?php echo $sale['sale_id']; ?>">
                 <input type= "hidden" name= "actionType" value = "Delete">
@@ -61,9 +63,7 @@ while ($customer = $customers->fetch_assoc()) {
           
         </small>
       </p>
-      <?php
-        include "view-customers-with-purchase-editform.php"; 
-      ?> 
+      
       
       
 
