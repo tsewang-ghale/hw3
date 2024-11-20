@@ -22,18 +22,7 @@ $customers = selectCustomers(); // This fetches customers data
       </div>
       <div class="modal-body">
         <form method="post" action="">
-          <!-- Customer Dropdown -->
-          <div class="mb-3">
-            <label for="cust_id" class="form-label">Customer:</label>
-            <select name="cust_id" id="cust_id" class="form-control" required>
-              <option value="">Select a Customer</option>
-              <?php while ($customer = $customers->fetch_assoc()) { ?>
-                <option value="<?php echo $customer['cust_id']; ?>">
-                  <?php echo $customer['cust_firstname'] . " " . $customer['cust_lastname']; ?>
-                </option>
-              <?php } ?>
-            </select>
-          </div>
+          
 
           <!-- Customer Details (Optional) -->
           <div class="mb-3">
