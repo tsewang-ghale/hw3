@@ -37,7 +37,7 @@
             <label for="quantity_<?php echo $saleitems['sale_id']; ?>" class="form-label">Quantity</label>
             <input type="Integer" class="form-control" id="quantity_<?php echo $saleitems['sale_id'];  ?>" name="quantity" value="<?php echo $saleitems['quantity'];  ?>">
           </div>
-
+          <input type="hidden" name="product_id" value="<?php echo $saleitems['product_id']; ?>">
           <input type="hidden" name="sid" value="<?php echo $sale['sale_id']; ?>">
           <input type="hidden" name="actionType" value="Edit"> 
           <button type="submit" class="btn btn-primary">Save</button>
