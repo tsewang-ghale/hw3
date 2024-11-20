@@ -42,7 +42,7 @@ function selectCustomersWithPurchase($custId) {
         throw $e;
     }
 }
-function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantity, $product_price, $tax, $shipping) {
+function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantity, $tax, $shipping) {
     try {
         $quantity = (float)$quantity;
         $product_price = (float)$product_price;
@@ -50,7 +50,18 @@ function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantit
         $shipping = (float)$shipping;
         // Establish DB connection
         $conn = get_db_connection();
-        
+        $stmt = $conn->prepare("SELECT listprice FROM Product WHERE product_id = ?");
+        $stmt->bind_param("i", $product_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+            
+        if ($row = $result->fetch_assoc()) {
+            $product_price = (float)$row['listprice'];
+        } else {
+            throw new Exception("Product not found with ID: $product_id");
+        }
+            
+        $stmt->close();
         // Start transaction to ensure data consistency
         $conn->begin_transaction();
         
