@@ -44,6 +44,10 @@ function selectCustomersWithPurchase($custId) {
 }
 function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantity, $product_price, $tax, $shipping) {
     try {
+        $quantity = (float)$quantity;
+        $product_price = (float)$product_price;
+        $tax = (float)$tax;
+        $shipping = (float)$shipping;
         // Establish DB connection
         $conn = get_db_connection();
         
