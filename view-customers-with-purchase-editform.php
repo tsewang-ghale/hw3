@@ -34,14 +34,10 @@
             <input type="Integer" class="form-control" id="shipping<?php echo $sale['sale_id']; ?>" name="Shipping" value="<?php echo $sale['shipping']; ?>">
           </div>
           <div class="mb-3">
-              <label for="quantity_<?php echo $saleitems['Saleitem_id']; ?>" class="form-label">Quantity</label>
-              <input type="number" class="form-control" id="quantity_<?php echo $saleitems['Saleitem_id']; ?>" name="quantity_<?php echo $saleitems['Saleitem_id']; ?>" value="<?php echo $saleitems['quantity']; ?>">
-            </div>
+            <label for="quantity<?php echo $saleitems['Saleitem_id']; ?>" class="form-label">Quantity</label>
+            <input type="Integer" class="form-control" id="quantity<?php echo $saleitems['Saleitem_id'];  ?>" name="quantity" value="<?php echo $saleitems['quantity'];  ?>">
+          </div>
 
-          
-          
-          
-          
           <input type="hidden" name="sid" value="<?php echo $sale['sale_id']; ?>">
           <input type="hidden" name="actionType" value="Edit"> 
           <button type="submit" class="btn btn-primary">Save</button>
