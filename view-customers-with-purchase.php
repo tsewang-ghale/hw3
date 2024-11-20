@@ -39,7 +39,7 @@ while ($customer = $customers->fetch_assoc()) {
                 while ($saleitems = $saleitem->fetch_assoc()) {
                   ?>
                     <?php echo $saleitems['quantity']; ?> 
-                    <?phpinclude "view-customers-with-purchase-editform.php"; ?>
+                    <?php include "view-customers-with-purchase-editform.php"; ?>
                  <?php
                 }
                 ?>
