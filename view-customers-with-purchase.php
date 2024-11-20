@@ -23,15 +23,15 @@
     </thead>
     <tbody>
       <?php
-      while ($sale = $sales->fetch_assoc()) {
+      while ($sales = $sale->fetch_assoc()) {
       ?>
         <tr>
-          <td><?php echo $sale['cust_firstname']; ?></td>
-          <td><?php echo $sale['cust_lastname']; ?></td>
-          <td><?php echo $sale['product_name']; ?></td>
-          <td><?php echo $sale['sale_date']; ?></td>
-          <td><?php echo $sale['cust_phone']; ?></td>
-          <td><?php echo $sale['cust_email']; ?></td>
+          <td><?php echo $sales['cust_firstname']; ?></td>
+          <td><?php echo $sales['cust_lastname']; ?></td>
+          <td><?php echo $sales['product_name']; ?></td>
+          <td><?php echo $sales['sale_date']; ?></td>
+          <td><?php echo $sales['cust_phone']; ?></td>
+          <td><?php echo $sales['cust_email']; ?></td>
           <td> 
            <?php
              include "view-customers-with-purchase-editform.php"; 
