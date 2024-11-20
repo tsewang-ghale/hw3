@@ -10,7 +10,7 @@ while ($customer = $customers->fetch_assoc()) {
         <ul class="list-group">
           <?php
           // Fetch sales for this customer
-          $sales = selectCustomersPurchase($customer['cust_id']);
+          $sales = selectCustomersWithPurchase($customer['cust_id']);
           if ($sales->num_rows > 0) {
             while ($sale = $sales->fetch_assoc()) {
           ?>
