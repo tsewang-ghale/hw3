@@ -1,4 +1,3 @@
-<?php
 function selectCustomers() {
     try {
         $conn = get_db_connection();
@@ -35,9 +34,6 @@ function selectCustomersPurchase($custId) {
             JOIN SaleItem si ON s.sale_id = si.sale_id
             JOIN Product p ON si.product_id = p.product_id
             WHERE c.cust_id = ?");
-        if (!$stmt) {
-            throw new Exception("Failed to prepare statement: " . $conn->error);
-        }
         $stmt->bind_param("i", $custId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -57,7 +53,6 @@ function InsertCustomerWithPurchase($cust_firstname, $cust_lastname, $cust_addre
         $conn = get_db_connection();
         $conn->begin_transaction();
 
-        // Insert into Customer table
         $stmt = $conn->prepare("INSERT INTO `Customer` (`cust_firstname`, `cust_lastname`, `cust_address`, `cust_phone`, `cust_email`) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email);
         if (!$stmt->execute()) {
@@ -66,8 +61,7 @@ function InsertCustomerWithPurchase($cust_firstname, $cust_lastname, $cust_addre
         $cust_id = $stmt->insert_id;
         $stmt->close();
 
-        // Insert purchase details (example structure)
-        $stmt = $conn->prepare("INSERT INTO `Sale` (`cust_id`) VALUES (?, ?)");
+        $stmt = $conn->prepare("INSERT INTO `Sale` (`cust_id`) VALUES (?)");
         $stmt->bind_param("i", $cust_id);
         if (!$stmt->execute()) {
             throw new Exception("Error inserting purchase: " . $stmt->error);
@@ -91,7 +85,6 @@ function UpdateCustomerWithPurchase($cust_id, $cust_firstname, $cust_lastname, $
         $conn = get_db_connection();
         $conn->begin_transaction();
 
-        // Update Customer table
         $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `cust_address` = ?, `cust_phone` = ?, `cust_email` = ? WHERE `cust_id` = ?");
         $stmt->bind_param("sssssi", $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email, $cust_id);
         if (!$stmt->execute()) {
@@ -99,9 +92,8 @@ function UpdateCustomerWithPurchase($cust_id, $cust_firstname, $cust_lastname, $
         }
         $stmt->close();
 
-        // Update purchase details (example structure)
-        $stmt = $conn->prepare("UPDATE `Sale` WHERE `cust_id` = ?");
-        $stmt->bind_param("i" $cust_id);
+        $stmt = $conn->prepare("UPDATE `Sale` SET `cust_id` = ? WHERE `cust_id` = ?");
+        $stmt->bind_param("ii", $cust_id, $cust_id);
         if (!$stmt->execute()) {
             throw new Exception("Error updating purchase: " . $stmt->error);
         }
@@ -124,7 +116,6 @@ function DeleteCustomerWithPurchase($cust_id) {
         $conn = get_db_connection();
         $conn->begin_transaction();
 
-        // Delete purchase details (example structure)
         $stmt = $conn->prepare("DELETE FROM `Sale` WHERE `cust_id` = ?");
         $stmt->bind_param("i", $cust_id);
         if (!$stmt->execute()) {
@@ -132,7 +123,6 @@ function DeleteCustomerWithPurchase($cust_id) {
         }
         $stmt->close();
 
-        // Delete from Customer table
         $stmt = $conn->prepare("DELETE FROM `Customer` WHERE `cust_id` = ?");
         $stmt->bind_param("i", $cust_id);
         if (!$stmt->execute()) {
@@ -151,4 +141,3 @@ function DeleteCustomerWithPurchase($cust_id) {
         throw $e;
     }
 }
-?>
