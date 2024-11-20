@@ -49,7 +49,7 @@ $customer = selectCustomers(); // This fetches customers data
                 <?php } ?>
             </select>
         </div>
-        <input type="hidden" name="product_price" id="product_price" value="">
+      
 
 
           <div class="mb-3">
