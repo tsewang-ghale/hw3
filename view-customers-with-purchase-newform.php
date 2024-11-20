@@ -59,6 +59,15 @@ $customer = selectCustomers(); // This fetches customers data
             <label for="quantity" class="form-label">Quantity</label>
             <input type="number" class="form-control" id="quantity" name="quantity" required>
           </div>
+          <div class="mb-3">
+            <label for="tax" class="form-label">Tax</label>
+            <input type="number" class="form-control" id="tax" name="tax" required>
+          </div>
+          <div class="mb-3">
+            <label for="shipping" class="form-label">shipping</label>
+            <input type="number" class="form-control" id="shipping" name="shipping" required>
+          </div>
+
 
           <input type="hidden" name="actionType" value="AddPurchase">
           <button type="submit" class="btn btn-primary">Save</button>
