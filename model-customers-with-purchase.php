@@ -133,10 +133,10 @@ function UpdateCustomersWithPurchase($cust_id, $cust_firstname, $cust_lastname, 
 function deleteCustomersWithPurchase($sale_id) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("DELETE FROM `SaleItem` WHERE Sale_id = ?");
-        $stmt->bind_param("i", $sale_id);
-        $success = $stmt->execute();
-        $stmt->close();
+        // $stmt = $conn->prepare("DELETE FROM `SaleItem` WHERE Sale_id = ?");
+        // $stmt->bind_param("i", $sale_id);
+        // $success = $stmt->execute();
+        // $stmt->close();
 
         $stmt = $conn->prepare("DELETE FROM `Sale` WHERE Sale_id = ?");
         $stmt->bind_param("i", $sale_id); // Use $sale_id instead of $sid
