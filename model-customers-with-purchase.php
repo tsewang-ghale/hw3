@@ -134,7 +134,7 @@ function deleteCustomersWithPurchase($sale_id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("DELETE FROM `SaleItem` WHERE Sale_id = ?");
-        $stmt->bind_param("i", $Sale_id);
+        $stmt->bind_param("i", $sale_id);
         $success = $stmt->execute();
         $stmt->close();
 
