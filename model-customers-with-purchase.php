@@ -120,44 +120,50 @@ function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantit
         throw $e;
     }
 }
-
-function UpdateCustomersWithPurchase($cust_id, $cust_firstname, $cust_lastname, $cust_phone, $cust_email) {
+function UpdateCustomersWithPurchase($sid, $cust_id, $sale_date, $tax, $shipping, $quantity) {
     try {
-        $conn = get_db_connection();
-        $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?,'cust_phone'=?, 'cust_email'= ? WHERE `cust_id` = ?");
+        $conn = get_db_connection();  // Assume you have a function to get the DB connection
+
+        // First update the Customer table (if needed)
+        $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `cust_phone` = ?, `cust_email` = ? WHERE `cust_id` = ?");
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("issss", $cust_id, $cust_firstname, $cust_lastname, $cust_phone, $cust_email); 
+        // Bind customer parameters (assuming you have these variables)
+        $stmt->bind_param("sssss", $cust_firstname, $cust_lastname, $cust_phone, $cust_email, $cust_id);
         $success = $stmt->execute();
         $stmt->close();
 
-        
-        $stmt = $conn->prepare("UPDATE `Sale` SET `sale_date` = ? WHERE `cust_id` = ?");
-        
-        // Check if the statement was prepared correctly
+        // Now update the Sale table with the provided sale_date, tax, and shipping details
+        $stmt = $conn->prepare("UPDATE `Sale` SET `sale_date` = ?, `tax` = ?, `shipping` = ? WHERE `sale_id` = ?");
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        
-        // Bind the parameters: sale_date (string), and cust_id (integer)
-        $stmt->bind_param("si", $saledate, $cust_id);
-        
-        // Execute the statement
+        // Bind sale parameters
+        $stmt->bind_param("sssi", $sale_date, $tax, $shipping, $sid);
         $success = $stmt->execute();
-        
-        // Close the statement after execution
+        $stmt->close();
+
+        // Update SaleItem table (if needed) for specific item(s) in the sale
+        $stmt = $conn->prepare("UPDATE `SaleItem` SET `quantity` = ? WHERE `sale_id` = ? AND `product_id` = ?");
+        if (!$stmt) {
+            throw new Exception("Failed to prepare statement: " . $conn->error);
+        }
+        // Assuming $product_id is available (you need to provide this)
+        $stmt->bind_param("iii", $quantity, $sid, $product_id);
+        $success = $stmt->execute();
         $stmt->close();
 
         $conn->close();
-        return $success;
+        return $success;  // return whether everything executed successfully
     } catch (Exception $e) {
         if ($conn) {
             $conn->close();
         }
-        throw $e; 
+        throw $e;  // Re-throw the exception to handle it elsewhere
     }
 }
+
 function deleteCustomersWithPurchase($sale_id) {
     try {
         $conn = get_db_connection();
