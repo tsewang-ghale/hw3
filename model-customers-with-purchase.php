@@ -60,14 +60,14 @@ function selectSaleItemsBySaleId($saleId) {
         $stmt->execute();  // Execute the query
         $result = $stmt->get_result();  // Get the result set
         $conn->close();  // Close the connection
-        
-        // Return the single row (or null if no rows found)
-        return $row;
+        return $result;  // Return the result
     } catch (Exception $e) {
         $conn->close();  // Ensure the connection is closed on error
         throw $e;  // Re-throw the exception
     }
 }
+
+
 
 
 function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantity, $tax, $shipping) {
