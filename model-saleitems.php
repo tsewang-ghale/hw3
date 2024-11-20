@@ -80,18 +80,49 @@ function UpdateSaleItems($Saleitem_id, $product_id, $sale_id, $new_quantity) {
 
 function deleteSaleItems($Saleitem_id) {
     try {
-        $conn = get_db_connection();
-        $stmt = $conn->prepare("DELETE FROM `SaleItem` WHERE Saleitem_id = ?");
+        $conn = get_db_connection();  // Get the database connection
+        
+        // Step 1: Get the Sale_id from the SaleItem table using Saleitem_id
+        $stmt = $conn->prepare("SELECT sale_id FROM SaleItem WHERE Saleitem_id = ?");
+        $stmt->bind_param("i", $Saleitem_id);
+        $stmt->execute();
+        $stmt->bind_result($sale_id);  // Bind the result to $sale_id
+        $stmt->fetch();  // Fetch the result
+        $stmt->close();
+
+        
+        // Step 2: Delete the SaleItem record
+        $stmt = $conn->prepare("DELETE FROM SaleItem WHERE Saleitem_id = ?");
         $stmt->bind_param("i", $Saleitem_id);
         $success = $stmt->execute();
         $stmt->close();
+        
+
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM SaleItem WHERE sale_id = ?");
+        $stmt->bind_param("i", $sale_id);
+        $stmt->execute();
+        $stmt->bind_result($item_count);
+        $stmt->fetch();
+        $stmt->close();
+
+        // If no other SaleItems are associated with the Sale, delete the Sale
+        if ($item_count == 0) {
+            $stmt = $conn->prepare("DELETE FROM Sale WHERE Sale_id = ?");
+            $stmt->bind_param("i", $sale_id);
+            $stmt->execute();
+            $stmt->close();
+        }
+
         $conn->close();
-        return $success;
+        return $success;  // Return success if everything went well
     } catch (Exception $e) {
-        $conn->close();
-        throw $e;
+        if ($conn) {
+            $conn->close();
+        }
+        throw $e;  // Re-throw the exception to handle it elsewhere
     }
 }
+
 
 function selectProducts() {
     try {
