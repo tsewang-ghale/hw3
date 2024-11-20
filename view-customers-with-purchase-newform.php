@@ -1,7 +1,6 @@
 <?php
 require_once("model-customers-with-purchase.php");
-$customer = selectCustomers();
-
+$customers = selectCustomers(); // This fetches customers data
 ?>
 
 <!-- Button trigger modal -->
@@ -23,51 +22,56 @@ $customer = selectCustomers();
       </div>
       <div class="modal-body">
         <form method="post" action="">
-          <!-- Sale Dropdown -->
+          <!-- Customer Dropdown -->
           <div class="mb-3">
             <label for="cust_id" class="form-label">Customer:</label>
             <select name="cust_id" id="cust_id" class="form-control" required>
               <option value="">Select a Customer</option>
               <?php while ($customer = $customers->fetch_assoc()) { ?>
                 <option value="<?php echo $customer['cust_id']; ?>">
-                  <?php echo $customer['cust_firstname']; ?>
+                  <?php echo $customer['cust_firstname'] . " " . $customer['cust_lastname']; ?>
                 </option>
               <?php } ?>
             </select>
           </div>
+
+          <!-- Customer Details (Optional) -->
           <div class="mb-3">
             <label for="cust_firstname" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="cust_firstname" name="cust_firstname">
+            <input type="text" class="form-control" id="cust_firstname" name="cust_firstname" placeholder="Enter first name">
           </div>
           <div class="mb-3">
             <label for="cust_lastname" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="cust_lastname" name="cust_lastname">
+            <input type="text" class="form-control" id="cust_lastname" name="cust_lastname" placeholder="Enter last name">
           </div>
           <div class="mb-3">
             <label for="cust_address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="cust_address" name="cust_address">
+            <input type="text" class="form-control" id="cust_address" name="cust_address" placeholder="Enter address">
           </div>
           <div class="mb-3">
             <label for="cust_phone" class="form-label">Phone</label>
-            <input type="text" class="form-control" id="cust_phone" name="cust_phone">
+            <input type="text" class="form-control" id="cust_phone" name="cust_phone" placeholder="Enter phone number">
           </div>
           <div class="mb-3">
             <label for="cust_email" class="form-label">Email</label>
-            <input type="text" class="form-control" id="cust_email" name="cust_email">
+            <input type="email" class="form-control" id="cust_email" name="cust_email" placeholder="Enter email">
           </div>
           <hr>
+
+          <!-- Purchased Item Details -->
           <div class="mb-3">
             <label for="purchase_item" class="form-label">Purchased Item</label>
-            <input type="text" class="form-control" id="purchase_item" name="purchase_item">
+            <input type="text" class="form-control" id="purchase_item" name="purchase_item" placeholder="Enter purchased item">
           </div>
           <div class="mb-3">
             <label for="purchase_date" class="form-label">Purchase Date</label>
-            <input type="date" class="form-control" id="purchase_date" name="purchase_date">
+            <input type="date" class="form-control" id="purchase_date" name="purchase_date" required>
           </div>
           <div class="mb-3">
             <label for="purchase_amount" class="form-label">Amount</label>
-            <input type="number" step="0.01" class="form-control" id="purchase_amount" name="purchase_amount">
+            <input type="number" step="0.01" class="form-control" id="purchase_amount" name="purchase_amount" required>
           </div>
+
           <input type="hidden" name="actionType" value="AddPurchase">
           <button type="submit" class="btn btn-primary">Save</button>
         </form>
@@ -75,3 +79,6 @@ $customer = selectCustomers();
     </div>
   </div>
 </div>
+
+<!-- Bootstrap JS (Bundle) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
