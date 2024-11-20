@@ -30,35 +30,57 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
 function UpdateSale($sale_id, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
-        // Prepare the SQL query
+        
+        // Begin transaction
+        $conn->begin_transaction();
+
+        // Step 1: Update the Sale table
         $stmt = $conn->prepare("UPDATE `Sale` SET `sale_date` = ?, `tax` = ?, `shipping` = ? WHERE `Sale_id` = ?");
         
-        // Check if the statement was prepared correctly
         if (!$stmt) {
-            throw new Exception("Failed to prepare statement: " . $conn->error);
+            throw new Exception("Failed to prepare statement for Sale update: " . $conn->error);
         }
 
-        // Bind all four parameters: sale_date (string), tax (integer), shipping (integer), and Sale_id (integer)
         $stmt->bind_param("siii", $saledate, $tax, $shipping, $sale_id); 
-        
-        // Execute the statement
-        $success = $stmt->execute();
-        
-        // Close the statement after execution
+        $stmt->execute();
         $stmt->close();
-        
+
+        // Step 2: Update SaleItems' sale_price based on new tax and shipping values
+        // The formula assumes that the sale_price depends on tax and shipping.
+        $stmt = $conn->prepare("SELECT sale_price FROM SaleItem WHERE sale_id = ?");
+        $stmt->bind_param("i", $sale_id);
+        $stmt->execute();
+        $stmt->bind_result($current_sale_price);
+
+        // Loop through all sale items and update the sale_price
+        while ($stmt->fetch()) {
+            // Assuming the tax and shipping affect the sale_price directly
+            $new_sale_price = $current_sale_price + $tax + $shipping;
+
+            // Update the sale_price in SaleItem
+            $updateStmt = $conn->prepare("UPDATE SaleItem SET sale_price = ? WHERE sale_id = ?");
+            $updateStmt->bind_param("di", $new_sale_price, $sale_id);
+            $updateStmt->execute();
+            $updateStmt->close();
+        }
+
+        // Commit the transaction
+        $conn->commit();
+
         // Close the connection
         $conn->close();
         
-        return $success;
+        return true; // Return true if successful
     } catch (Exception $e) {
-        // Ensure the connection is closed in case of an error
+        // Rollback the transaction if any error occurs
         if ($conn) {
+            $conn->rollback();
             $conn->close();
         }
         throw $e; // Rethrow the exception for further handling
     }
 }
+
 
 
 function deleteSale($sale_id) {
