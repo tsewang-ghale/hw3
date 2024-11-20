@@ -32,14 +32,16 @@ while ($customer = $customers->fetch_assoc()) {
       </p>
       <p class="card-text">
         <small class="text-body-secondary">
-          Phone: <?php echo $customer['cust_phone']; ?> <br>
+          Customer Id: <?php echo $customer['cust_id']; ?> <br>
+          Phone: <?php echo $customer['cust_phone']; ?> 
           Email: <?php echo $customer['cust_email']; ?>
+          
         </small>
       </p>
       <?php
-             include "view-customers-with-purchase-editform.php"; 
-            ?> 
-      <
+        include "view-customers-with-purchase-editform.php"; 
+      ?> 
+      
       <form method= "post" action= "">
         <input type= "hidden" name = "Cust_id" value= "<?php echo $customer['cust_id']; ?>">
         <input type= "hidden" name= "actionType" value = "Delete">
