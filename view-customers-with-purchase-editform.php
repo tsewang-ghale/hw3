@@ -16,25 +16,17 @@
       </div>
       <div class="modal-body">
         <form method="post" action="">
+          <!-- Sale Dropdown -->
           <div class="mb-3">
-            <label for="cust_firstname<?php echo $customer['cust_id']; ?>" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="cust_firstname<?php echo $customer['cust_id']; ?>" name="cust_firstname" value="<?php echo $customer['cust_firstname']; ?>">
-          </div>
-          <div class="mb-3">
-            <label for="cust_lastname<?php echo $customer['cust_id']; ?>" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="cust_lastname<?php echo $customer['cust_id']; ?>" name="cust_lastname" value="<?php echo $customer['cust_lastname']; ?>">
-          </div>
-          <div class="mb-3">
-            <label for="cust_address<?php echo $customer['cust_id']; ?>" class="form-label">Address</label>
-            <input type="text" class="form-control" id="cust_address<?php echo $customer['cust_id']; ?>" name="cust_address" value="<?php echo $customer['cust_address']; ?>">
-          </div>
-          <div class="mb-3">
-            <label for="cust_phone<?php echo $customer['cust_id']; ?>" class="form-label">Phone</label>
-            <input type="text" class="form-control" id="cust_phone<?php echo $customer['cust_id']; ?>" name="cust_phone" value="<?php echo $customer['cust_phone']; ?>">
-          </div>
-          <div class="mb-3">
-            <label for="cust_email<?php echo $customer['cust_id']; ?>" class="form-label">Email</label>
-            <input type="text" class="form-control" id="cust_email<?php echo $customer['cust_id']; ?>" name="cust_email" value="<?php echo $customer['cust_email']; ?>">
+            <label for="cust_id" class="form-label">Customer:</label>
+            <select name="cust_id" id="cust_id" class="form-control" required>
+              <option value="">Select a Customer</option>
+              <?php while (customers = customer->fetch_assoc()) { ?>
+                <option value="<?php echo customers['sale_id']; ?>">
+                  <?php echo "Cust ID: " . customers['cust_id'] . ?>
+                </option>
+              <?php } ?>
+            </select>
           </div>
           <div class="mb-3">
             <label for="product_name<?php echo $customer['cust_id']; ?>" class="form-label">Product Purchased</label>
