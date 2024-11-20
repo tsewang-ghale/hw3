@@ -28,7 +28,6 @@ while ($customer = $customers->fetch_assoc()) {
             while ($sale = $sales->fetch_assoc()) {
           ?>
               <li class="list-group-item">
-                <?php echo $sale['sale_id']; ?> - 
                 <?php echo $sale['product_name']; ?> - 
                 <?php echo $sale['sale_date']; ?> | 
                 <?php echo number_format($sale['saleprice'], 2); ?> |
