@@ -9,7 +9,7 @@ include "view-customers-with-purchase-newform.php";
   </div>
   </div>
 
-<div class="card-group">
+<div class="table-responsive">
 <?php
 while ($customer = $customers->fetch_assoc()) {
 ?>
