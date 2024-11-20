@@ -1,5 +1,7 @@
 <?php
-require_once("model-customers-with-purchase.php");\
+require_once("model-customers-with-purchase.php");
+require_once("model-products.php");
+
 $products = selectProducts(); 
 $customer = selectCustomers(); // This fetches customers data
 ?>
