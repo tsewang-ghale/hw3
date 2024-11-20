@@ -34,7 +34,7 @@
             <input type="Integer" class="form-control" id="shipping<?php echo $sale['sale_id']; ?>" name="Shipping" value="<?php echo $sale['shipping']; ?>">
           </div>
           <div class="mb-3">
-            <label for="quantity<?php echo $saleitems['Saleitem_id']; ?>" class="form-label">Quantity</label>
+            <label for="quantity_<?php echo $saleitems['Saleitem_id']; ?>" class="form-label">Quantity</label>
             <input type="Integer" class="form-control" id="quantity<?php echo $saleitems['Saleitem_id'];  ?>" name="quantity" value="<?php echo $saleitems['quantity'];  ?>">
           </div>
           
