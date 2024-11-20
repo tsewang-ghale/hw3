@@ -30,56 +30,38 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
 function UpdateSale($sale_id, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
-        
-        // Begin transaction
-        $conn->begin_transaction();
+        $conn->begin_transaction(); // Start transaction
 
-        // Step 1: Update the Sale table
+        // Step 1: Update Sale Table
         $stmt = $conn->prepare("UPDATE `Sale` SET `sale_date` = ?, `tax` = ?, `shipping` = ? WHERE `Sale_id` = ?");
-        
         if (!$stmt) {
-            throw new Exception("Failed to prepare statement for Sale update: " . $conn->error);
+            throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-
-        $stmt->bind_param("siii", $saledate, $tax, $shipping, $sale_id); 
-        $stmt->execute();
-        $stmt->close();
-
-        // Step 2: Update SaleItems' saleprice based on new tax and shipping values
-        // The formula assumes that the saleprice depends on tax and shipping.
-        $stmt = $conn->prepare("SELECT saleprice FROM SaleItem WHERE sale_id = ?");
-        $stmt->bind_param("i", $sale_id);
-        $stmt->execute();
-        $stmt->bind_result($current_saleprice);
-
-        // Loop through all sale items and update the saleprice
-        while ($stmt->fetch()) {
-            // Assuming the tax and shipping affect the saleprice directly
-            $new_saleprice = $current_saleprice + $tax + $shipping;
-
-            // Update the saleprice in SaleItem
-            $updateStmt = $conn->prepare("UPDATE SaleItem SET saleprice = ? WHERE sale_id = ?");
-            $updateStmt->bind_param("di", $new_saleprice, $sale_id);
-            $updateStmt->execute();
-            $updateStmt->close();
+        $stmt->bind_param("siii", $saledate, $tax, $shipping, $sale_id);
+        $stmt->execute(); // Execute update
+        $stmt->close(); // Close after execution
+        
+        // Step 2: Calculate and update SaleItem price (assuming you calculated new price)
+        $newSalePrice = $tax + $shipping; // Calculate based on your logic
+        $stmt = $conn->prepare("UPDATE SaleItem SET sale_price = ? WHERE sale_id = ?");
+        if (!$stmt) {
+            throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-
-        // Commit the transaction
-        $conn->commit();
-
-        // Close the connection
+        $stmt->bind_param("di", $newSalePrice, $sale_id); // Bind the new price and sale_id
+        $stmt->execute(); // Execute update
+        $stmt->close(); // Close after execution
+        
+        $conn->commit(); // Commit transaction if both updates succeed
         $conn->close();
         
-        return true; // Return true if successful
+        return true; // Return success
     } catch (Exception $e) {
-        // Rollback the transaction if any error occurs
-        if ($conn) {
-            $conn->rollback();
-            $conn->close();
-        }
-        throw $e; // Rethrow the exception for further handling
+        $conn->rollback(); // Rollback transaction if any error occurs
+        $conn->close();
+        throw $e; // Re-throw the exception
     }
 }
+
 
 
 
