@@ -68,6 +68,11 @@ function deleteSale($sale_id) {
         $stmt->bind_param("i", $sale_id); // Use $sale_id instead of $sid
         $success = $stmt->execute();
         $stmt->close(); // Close the statement after execution
+        $stmt = $conn->prepare("DELETE FROM `SaleItem` WHERE Sale_id = ?");
+        $stmt->bind_param("i", $sale_id);
+        $success = $stmt->execute();
+        $stmt->close();
+        
         $conn->close(); // Close the connection
         return $success;
     } catch (Exception $e) {
