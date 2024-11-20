@@ -42,19 +42,42 @@ function selectCustomersWithPurchase($custId) {
         throw $e;
     }
 }
-function InsertCustomersWithPurchase($cust_firstname, $cust_lastname, $product_name, $sale_date, $cust_phone, $cust_email) {
+function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantity, $saleprice=0, $tax = 0, $shipping = 0) {
     try {
+        // Establish DB connection
         $conn = get_db_connection();
-        $stmt = $conn->prepare("INSERT INTO `Customer` (`cust_firstname`, `cust_lastname`, `product_name`, `sale_date`,`cust_phone`, `cust_email`) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $cust_firstname, $cust_lastname, $product_name, $sale_date, $cust_phone, $cust_email);
-        $success= $stmt->execute();
+        
+        // Start transaction to ensure data consistency
+        $conn->begin_transaction();
+        
+        // Insert into Sale table
+        $stmt = $conn->prepare("INSERT INTO `Sale` (`cust_id`, `sale_date`, `tax`, `shipping`) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("isdd", $cust_id, $sale_date, $tax, $shipping);
+        $stmt->execute();
+        
+        // Get the last inserted sale_id
+        $sale_id = $conn->insert_id;
+        
+        // Insert into Saleitem table
+        $stmt = $conn->prepare("INSERT INTO `Saleitem` (`product_id`, `sale_id`, `quantity`, `saleprice`) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("iiid", $product_id, $sale_id, $quantity, $saleprice);
+        $stmt->execute();
+        
+        // Commit transaction
+        $conn->commit();
+        
+        // Close connection
         $conn->close();
-        return $success;
+        
+        return true; // Success
     } catch (Exception $e) {
+        // Rollback in case of an error
+        $conn->rollback();
         $conn->close();
         throw $e;
     }
 }
+
 function UpdateCustomersWithPurchase($cust_id, $cust_firstname, $cust_lastname, $cust_phone, $cust_email) {
     try {
         $conn = get_db_connection();
