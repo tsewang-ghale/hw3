@@ -34,6 +34,7 @@ $customer = selectCustomers();
                 </option>
               <?php } ?>
             </select>
+          </div>
           <div class="mb-3">
             <label for="cust_firstname" class="form-label">First Name</label>
             <input type="text" class="form-control" id="cust_firstname" name="cust_firstname">
