@@ -10,6 +10,18 @@ include "view-customers-with-purchase-newform.php";
   </div>
 
 <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+      <th> ID </th>
+      <th> Product_ID </th> <!-- Corrected typo here -->
+      <th> Sale_ID </th> 
+      <th> Quantity</th> 
+      <th> Sale Price </th> 
+      <th> </th>
+      <th> </th>
+      <th> </th>
+      </tr> 
 <?php
 while ($customer = $customers->fetch_assoc()) {
 ?>
