@@ -106,6 +106,18 @@ function selectProducts() {
         throw $e;
     }
 }
-
+function selectSales() {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("SELECT sale_id, sale_date FROM `Sale`");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $conn->close();
+        return $result;
+    } catch (Exception $e) {
+        $conn->close();
+        throw $e;
+    }
+}
 
 ?>
