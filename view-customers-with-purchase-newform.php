@@ -13,16 +13,16 @@ $customers = selectCustomers(); // This fetches customers data
 </button>
 
 <!-- Modal -->
+
 <div class="modal fade" id="customerPurchaseModal" tabindex="-1" aria-labelledby="customerPurchaseModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="customerPurchaseModalLabel">Customer with Purchase</h1>
+        <h1 class="modal-title fs-5" id="newSaleItemModalLabel">New Sale Item</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" action="">
-          
+        <form method="post" action="">        
 
           <!-- Customer Details (Optional) -->
           <div class="mb-3">
