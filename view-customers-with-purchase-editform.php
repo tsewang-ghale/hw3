@@ -15,25 +15,54 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method= "post" action = "">
+        <form method="post" action="">
+          <!-- Sale Information -->
           <div class="mb-3">
-            <label for="Cust_ID <?php echo $sale['sale_id'];?>" class="form-label">Customer ID</label>
-            <input type="Integer" class="form-control" id="cid <?php echo $sale['sale_id']; ?>" name = "Cust_id" value = "<?php echo $sale['cust_id']; ?>">
+            <label for="Cust_ID<?php echo $sale['sale_id'];?>" class="form-label">Customer ID</label>
+            <input type="Integer" class="form-control" id="cid<?php echo $sale['sale_id']; ?>" name="Cust_id" value="<?php echo $sale['cust_id']; ?>">
           </div>
           <div class="mb-3">
-            <label for="Sale_Date<?php echo $sale['sale_id']; ?>" class="form-label"> Sale Date </label>
-            <input type="date" class="form-control" id="saledate <?php echo $sale['sale_id']; ?>" name = "Sale_date" value= "<?php echo $sale['sale_date']; ?>">
+            <label for="Sale_Date<?php echo $sale['sale_id']; ?>" class="form-label">Sale Date</label>
+            <input type="date" class="form-control" id="saledate<?php echo $sale['sale_id']; ?>" name="Sale_date" value="<?php echo $sale['sale_date']; ?>">
           </div>
-           <div class="mb-3">
-            <label for="tax <?php echo $sale['sale_id']; ?>" class="form-label">Tax</label>
-            <input type="Integer" class="form-control" id="tax <?php echo $sale['sale_id']; ?>" name = "Tax" value = "<?php echo $sale['tax']; ?>">
+          <div class="mb-3">
+            <label for="tax<?php echo $sale['sale_id']; ?>" class="form-label">Tax</label>
+            <input type="Integer" class="form-control" id="tax<?php echo $sale['sale_id']; ?>" name="Tax" value="<?php echo $sale['tax']; ?>">
           </div>
-           <div class="mb-3">
-            <label for="shipping <?php echo $sale['sale_id']; ?>" class="form-label">Shipping</label>
-            <input type="Integer" class="form-control" id="shipping <?php echo $sale['sale_id']; ?>" name = "Shipping" value = "<?php echo $sale['shipping']; ?>">
+          <div class="mb-3">
+            <label for="shipping<?php echo $sale['sale_id']; ?>" class="form-label">Shipping</label>
+            <input type="Integer" class="form-control" id="shipping<?php echo $sale['sale_id']; ?>" name="Shipping" value="<?php echo $sale['shipping']; ?>">
           </div>
-            <input type="hidden" name = "sid" value = "<?php echo $sale['sale_id']; ?>">
-          <input type = "hidden" name = "actionType" value = "Edit"> 
+
+          <!-- Sale Items -->
+          <h5>Sale Items</h5>
+          <?php 
+            // Fetch SaleItem details for this sale
+            $query = "SELECT `SaleItem`.`SaleItem_id`, `SaleItem`.`quantity`, `SaleItem`.`saleprice`, `Product`.`listprice` FROM `SaleItem` 
+                      JOIN `Product` ON `SaleItem`.`product_id` = `Product`.`product_id`
+                      WHERE `SaleItem`.`sale_id` = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("i", $sale['sale_id']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($saleItem = $result->fetch_assoc()) {
+                $SaleItem_id = $saleItem['SaleItem_id'];
+                $quantity = $saleItem['quantity'];
+                $saleprice = $saleItem['saleprice'];
+                $listprice = $saleItem['listprice'];
+          ?>
+          <div class="mb-3">
+            <label for="quantity<?php echo $SaleItem_id; ?>" class="form-label">Quantity for Product <?php echo $SaleItem_id; ?></label>
+            <input type="number" class="form-control" id="quantity<?php echo $SaleItem_id; ?>" name="quantity[<?php echo $SaleItem_id; ?>]" value="<?php echo $quantity; ?>">
+          </div>
+          <div class="mb-3">
+            <label for="saleprice<?php echo $SaleItem_id; ?>" class="form-label">Sale Price for Product <?php echo $SaleItem_id; ?></label>
+            <input type="number" class="form-control" id="saleprice<?php echo $SaleItem_id; ?>" name="saleprice[<?php echo $SaleItem_id; ?>]" value="<?php echo $saleprice; ?>" readonly>
+          </div>
+          <?php } ?>
+          
+          <input type="hidden" name="sid" value="<?php echo $sale['sale_id']; ?>">
+          <input type="hidden" name="actionType" value="Edit"> 
           <button type="submit" class="btn btn-primary">Save</button>
         </form>
       </div>
