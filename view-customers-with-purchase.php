@@ -1,4 +1,5 @@
 <h1> Customers with Purchases </h1>
+include "view-customers-with-purchase-newform.php";
 <div class="card-group">
 <?php
 while ($customer = $customers->fetch_assoc()) {
@@ -33,6 +34,9 @@ while ($customer = $customers->fetch_assoc()) {
           Email: <?php echo $customer['cust_email']; ?>
         </small>
       </p>
+      <?php
+             include "view-customers-with-purchase-editform.php"; 
+            ?> 
     </div>
   </div>
 <?php
