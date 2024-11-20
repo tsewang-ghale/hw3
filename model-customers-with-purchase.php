@@ -4,10 +4,11 @@ function selectCustomers() {
         $stmt = $conn->prepare("SELECT cust_id, cust_firstname, cust_lastname, cust_address, cust_phone, cust_email FROM `Customer`");
         $stmt->execute();
         $result = $stmt->get_result();
-        $conn->close();
+        $stmt->close();  // Close statement here
+        $conn->close();  // Close connection
         return $result;
     } catch (Exception $e) {
-        if ($conn) {
+        if (isset($conn)) {
             $conn->close();
         }
         throw $e;
@@ -22,7 +23,7 @@ function selectCustomersPurchase($custId) {
                 s.sale_id, 
                 c.cust_id, 
                 c.cust_firstname,
-                c.cust_lastname,
+                c.cust_lastname, 
                 p.product_name, 
                 s.sale_date, 
                 s.tax, 
@@ -41,7 +42,7 @@ function selectCustomersPurchase($custId) {
         $conn->close();
         return $result;
     } catch (Exception $e) {
-        if ($conn) {
+        if (isset($conn)) {
             $conn->close();
         }
         throw $e;
@@ -53,6 +54,7 @@ function InsertCustomerWithPurchase($cust_firstname, $cust_lastname, $cust_addre
         $conn = get_db_connection();
         $conn->begin_transaction();
 
+        // Insert into Customer table
         $stmt = $conn->prepare("INSERT INTO `Customer` (`cust_firstname`, `cust_lastname`, `cust_address`, `cust_phone`, `cust_email`) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email);
         if (!$stmt->execute()) {
@@ -61,6 +63,7 @@ function InsertCustomerWithPurchase($cust_firstname, $cust_lastname, $cust_addre
         $cust_id = $stmt->insert_id;
         $stmt->close();
 
+        // Insert into Sale table
         $stmt = $conn->prepare("INSERT INTO `Sale` (`cust_id`) VALUES (?)");
         $stmt->bind_param("i", $cust_id);
         if (!$stmt->execute()) {
@@ -72,7 +75,7 @@ function InsertCustomerWithPurchase($cust_firstname, $cust_lastname, $cust_addre
         $conn->close();
         return true;
     } catch (Exception $e) {
-        if ($conn) {
+        if (isset($conn)) {
             $conn->rollback();
             $conn->close();
         }
@@ -85,6 +88,7 @@ function UpdateCustomerWithPurchase($cust_id, $cust_firstname, $cust_lastname, $
         $conn = get_db_connection();
         $conn->begin_transaction();
 
+        // Update Customer table
         $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `cust_address` = ?, `cust_phone` = ?, `cust_email` = ? WHERE `cust_id` = ?");
         $stmt->bind_param("sssssi", $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email, $cust_id);
         if (!$stmt->execute()) {
@@ -92,6 +96,7 @@ function UpdateCustomerWithPurchase($cust_id, $cust_firstname, $cust_lastname, $
         }
         $stmt->close();
 
+        // Assuming you need to update the 'Sale' table, here’s an example:
         $stmt = $conn->prepare("UPDATE `Sale` SET `cust_id` = ? WHERE `cust_id` = ?");
         $stmt->bind_param("ii", $cust_id, $cust_id);
         if (!$stmt->execute()) {
@@ -103,7 +108,7 @@ function UpdateCustomerWithPurchase($cust_id, $cust_firstname, $cust_lastname, $
         $conn->close();
         return true;
     } catch (Exception $e) {
-        if ($conn) {
+        if (isset($conn)) {
             $conn->rollback();
             $conn->close();
         }
@@ -116,6 +121,7 @@ function DeleteCustomerWithPurchase($cust_id) {
         $conn = get_db_connection();
         $conn->begin_transaction();
 
+        // Delete purchase details
         $stmt = $conn->prepare("DELETE FROM `Sale` WHERE `cust_id` = ?");
         $stmt->bind_param("i", $cust_id);
         if (!$stmt->execute()) {
@@ -123,6 +129,7 @@ function DeleteCustomerWithPurchase($cust_id) {
         }
         $stmt->close();
 
+        // Delete from Customer table
         $stmt = $conn->prepare("DELETE FROM `Customer` WHERE `cust_id` = ?");
         $stmt->bind_param("i", $cust_id);
         if (!$stmt->execute()) {
@@ -134,7 +141,7 @@ function DeleteCustomerWithPurchase($cust_id) {
         $conn->close();
         return true;
     } catch (Exception $e) {
-        if ($conn) {
+        if (isset($conn)) {
             $conn->rollback();
             $conn->close();
         }
