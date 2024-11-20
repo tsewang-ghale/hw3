@@ -1,6 +1,6 @@
 <?php
 require_once("model-customers-with-purchase.php");
-$customers = selectCustomers(); // This fetches customers data
+$customer = selectCustomers(); // This fetches customers data
 ?>
 
 <!-- Button trigger modal -->
@@ -28,33 +28,12 @@ $customers = selectCustomers(); // This fetches customers data
             <label for="cust_id" class="form-label">Customer:</label>
             <select name="cust_id" id="cust_id" class="form-control" required>
               <option value="">Select a Customer</option>
-              <?php while ($customer = $customers->fetch_assoc()) { ?>
-                <option value="<?php echo $customer['cust_id']; ?>">
-                  <?php echo $customer['cust_firstname'] . " " . $customer['cust_lastname']; ?>
+              <?php while ($customers = $customer->fetch_assoc()) { ?>
+                <option value="<?php echo $customers['cust_id']; ?>">
+                  <?php echo $customers['cust_firstname'] . " " . $customers['cust_lastname']; ?>
                 </option>
               <?php } ?>
             </select>
-          </div>
-          <!-- Customer Details (Optional) -->
-          <div class="mb-3">
-            <label for="cust_firstname" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="cust_firstname" name="cust_firstname" placeholder="Enter first name">
-          </div>
-          <div class="mb-3">
-            <label for="cust_lastname" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="cust_lastname" name="cust_lastname" placeholder="Enter last name">
-          </div>
-          <div class="mb-3">
-            <label for="cust_address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="cust_address" name="cust_address" placeholder="Enter address">
-          </div>
-          <div class="mb-3">
-            <label for="cust_phone" class="form-label">Phone</label>
-            <input type="text" class="form-control" id="cust_phone" name="cust_phone" placeholder="Enter phone number">
-          </div>
-          <div class="mb-3">
-            <label for="cust_email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="cust_email" name="cust_email" placeholder="Enter email">
           </div>
          
 
