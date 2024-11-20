@@ -42,6 +42,31 @@ function selectCustomersWithPurchase($custId) {
         throw $e;
     }
 }
+function selectSaleItemsBySaleId($saleId) {
+    try {
+        $conn = get_db_connection();  // Assume you have a function to get DB connection
+        $stmt = $conn->prepare("
+            SELECT 
+                si.saleitem_id, 
+                si.sale_id, 
+                si.product_id, 
+                p.product_name, 
+                si.quantity, 
+                si.saleprice
+            FROM SaleItem si
+            JOIN Product p ON si.product_id = p.product_id
+            WHERE si.sale_id = ?");
+        $stmt->bind_param("i", $saleId);  // Bind the sale_id as an integer
+        $stmt->execute();  // Execute the query
+        $result = $stmt->get_result();  // Get the result set
+        $conn->close();  // Close the connection
+        return $result;  // Return the result
+    } catch (Exception $e) {
+        $conn->close();  // Ensure the connection is closed on error
+        throw $e;  // Re-throw the exception
+    }
+}
+
 function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantity, $tax, $shipping) {
     try {
         $quantity = (float)$quantity;
