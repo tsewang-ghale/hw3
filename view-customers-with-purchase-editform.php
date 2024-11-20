@@ -41,7 +41,7 @@
             <input type="Integer" class="form-control" id="quantity<?php echo $saleitems['SaleItem_id']; ?>" name="Shipping" value="<?php echo $saleitems['quantity']; ?>">
           </div>
           
-          <?php } ?>
+          
           
           <input type="hidden" name="sid" value="<?php echo $sale['sale_id']; ?>">
           <input type="hidden" name="actionType" value="Edit"> 
