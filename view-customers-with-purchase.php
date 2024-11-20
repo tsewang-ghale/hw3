@@ -30,8 +30,8 @@ while ($customer = $customers->fetch_assoc()) {
               <li class="list-group-item">
                 <?php echo $sale['sale_id']; ?> - 
                 <?php echo $sale['product_name']; ?> - 
-                <?php echo $sale['sale_date']; ?> - 
-                <?php echo number_format($sale['saleprice'], 2); ?> -
+                <?php echo $sale['sale_date']; ?> | 
+                <?php echo number_format($sale['saleprice'], 2); ?> |
                 
                 
                 <?php
@@ -39,6 +39,7 @@ while ($customer = $customers->fetch_assoc()) {
                 while ($saleitems = $saleitem->fetch_assoc()) {
                   ?>
                     <?php echo $saleitems['quantity']; ?> 
+                    <br>
                     <?php include "view-customers-with-purchase-editform.php"; ?>
                  <?php
                 }
