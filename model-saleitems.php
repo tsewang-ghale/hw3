@@ -30,8 +30,8 @@ function UpdateSaleItems($Saleitem_id, $product_id, $sale_id, $new_quantity) {
     try {
         $conn = get_db_connection();
 
-        // Fetch the original quantity and product price
-        $query = "SELECT `quantity`, `product_price`, `saleprice` FROM `SaleItem` 
+        // Fetch the original quantity and product price (now using 'listprice')
+        $query = "SELECT `quantity`, `listprice`, `saleprice` FROM `SaleItem` 
                   JOIN `Product` ON `SaleItem`.`product_id` = `Product`.`product_id`
                   WHERE `Saleitem_id` = ?";
         $stmt = $conn->prepare($query);
@@ -46,7 +46,7 @@ function UpdateSaleItems($Saleitem_id, $product_id, $sale_id, $new_quantity) {
         }
         $row = $result->fetch_assoc();
         $original_quantity = $row['quantity'];
-        $product_price = $row['product_price'];
+        $listprice = $row['listprice'];  // Using 'listprice' now
         $current_saleprice = $row['saleprice'];
         $stmt->close();
 
@@ -54,7 +54,7 @@ function UpdateSaleItems($Saleitem_id, $product_id, $sale_id, $new_quantity) {
         $quantity_difference = $new_quantity - $original_quantity;
 
         // Calculate the new sale price
-        $new_saleprice = $current_saleprice + ($quantity_difference * $product_price);
+        $new_saleprice = $current_saleprice + ($quantity_difference * $listprice);
 
         // Update the SaleItem record
         $update_query = "UPDATE `SaleItem` SET `product_id` = ?, `sale_id` = ?, `quantity` = ?, `saleprice` = ? WHERE `Saleitem_id` = ?";
@@ -75,6 +75,7 @@ function UpdateSaleItems($Saleitem_id, $product_id, $sale_id, $new_quantity) {
         throw $e;
     }
 }
+
 
 
 function deleteSaleItems($Saleitem_id) {
