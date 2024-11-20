@@ -55,6 +55,10 @@ $customer = selectCustomers(); // This fetches customers data
             <label for="purchase_date" class="form-label">Purchase Date</label>
             <input type="date" class="form-control" id="purchase_date" name="purchase_date" required>
           </div>
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" required>
+          </div>
 
           <input type="hidden" name="actionType" value="AddPurchase">
           <button type="submit" class="btn btn-primary">Save</button>
