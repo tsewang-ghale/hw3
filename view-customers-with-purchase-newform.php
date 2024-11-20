@@ -1,5 +1,6 @@
 <?php
-require_once("model-customers-with-purchase.php");
+require_once("model-customers-with-purchase.php");\
+$products = selectProducts(); 
 $customer = selectCustomers(); // This fetches customers data
 ?>
 
@@ -35,20 +36,22 @@ $customer = selectCustomers(); // This fetches customers data
               <?php } ?>
             </select>
           </div>
-         
-
-          <!-- Purchased Item Details -->
+         <!-- Product Dropdown -->
           <div class="mb-3">
-            <label for="purchase_item" class="form-label">Purchased Item</label>
-            <input type="text" class="form-control" id="purchase_item" name="purchase_item" placeholder="Enter purchased item">
+            <label for="product_id" class="form-label">Product:</label>
+            <select name="product_id" id="product_id" class="form-control" required>
+              <option value="">Select a Product</option>
+              <?php while ($product = $products->fetch_assoc()) { ?>
+                <option value="<?php echo $product['product_id']; ?>">
+                  <?php echo $product['product_name']; ?>
+                </option>
+              <?php } ?>
+            </select>
           </div>
+
           <div class="mb-3">
             <label for="purchase_date" class="form-label">Purchase Date</label>
             <input type="date" class="form-control" id="purchase_date" name="purchase_date" required>
-          </div>
-          <div class="mb-3">
-            <label for="purchase_amount" class="form-label">Amount</label>
-            <input type="number" step="0.01" class="form-control" id="purchase_amount" name="purchase_amount" required>
           </div>
 
           <input type="hidden" name="actionType" value="AddPurchase">
