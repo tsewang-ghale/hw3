@@ -31,8 +31,8 @@ while ($customer = $customers->fetch_assoc()) {
                 <?php echo $sale['product_name']; ?> - 
                 <?php echo $sale['sale_date']; ?> - 
                 $<?php echo number_format($sale['saleprice'], 2); ?>
-              </li>
-              <form method= "post" action= "">
+
+                <form method= "post" action= "">
                 <input type= "hidden" name = "sale_id" value= "<?php echo sale['sale_id']; ?>">
                 <input type= "hidden" name= "actionType" value = "Delete">
                 <button type="submit" class="btn btn-primary" onclick= "return confirm ('Are you sure?');">
@@ -42,6 +42,8 @@ while ($customer = $customers->fetch_assoc()) {
                   </svg>
                 </button>
               </form>
+              </li>
+              
           <?php
             }
           } else {
