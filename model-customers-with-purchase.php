@@ -87,5 +87,5 @@ function deleteCustomersWithPurchase($cust_id) {
         throw $e; // Rethrow the exception for further handling
     }
 }
-
+}
 ?>
