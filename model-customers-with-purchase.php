@@ -42,7 +42,7 @@ function selectCustomersWithPurchase($custId) {
         throw $e;
     }
 }
-function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantity, $saleprice=0, $tax = 0, $shipping = 0) {
+function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantity, $product_price=0, $tax, $shipping) {
     try {
         // Establish DB connection
         $conn = get_db_connection();
@@ -59,6 +59,7 @@ function InsertCustomersWithPurchase($product_id, $cust_id, $sale_date, $quantit
         $sale_id = $conn->insert_id;
         
         // Insert into Saleitem table
+        $saleprice = $quantity * ($product_price) + $tax + $shipping;
         $stmt = $conn->prepare("INSERT INTO `SaleItem` (`product_id`, `sale_id`, `quantity`, `saleprice`) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("iiid", $product_id, $sale_id, $quantity, $saleprice);
         $stmt->execute();
