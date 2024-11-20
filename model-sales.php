@@ -80,7 +80,7 @@ function UpdateSale($sale_id, $saledate, $tax, $shipping) {
         $calculated_price = ($product_price * $quantity) + $tax + $shipping;
 
         // Step 5: Update SaleItem with the new sale price
-        $stmt = $conn->prepare("UPDATE SaleItem SET sale_price = ? WHERE sale_id = ?");
+        $stmt = $conn->prepare("UPDATE SaleItem SET saleprice = ? WHERE sale_id = ?");
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
