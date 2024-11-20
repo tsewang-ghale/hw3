@@ -39,7 +39,7 @@ while ($customer = $customers->fetch_assoc()) {
       <?php
              include "view-customers-with-purchase-editform.php"; 
             ?> 
-      <td>
+      <
       <form method= "post" action= "">
         <input type= "hidden" name = "Cust_id" value= "<?php echo $customer['cust_id']; ?>">
         <input type= "hidden" name= "actionType" value = "Delete">
@@ -51,7 +51,7 @@ while ($customer = $customers->fetch_assoc()) {
         </button>
       </form>
 
-    </td>
+    
     </div>
   </div>
 <?php
