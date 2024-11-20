@@ -10,7 +10,7 @@ include "view-header.php";
 if (isset($_POST ['actionType'])){
   switch ($_POST ['actionType']) {
     case "AddPurchase": 
-      if (InsertCustomersWithPurchase($_POST['cust_firstname'],$_POST ['cust_lastname'],$_POST['cust_phone'],$_POST['cust_email'])) {
+      if (InsertCustomersWithPurchase($_POST['product_id'],$_POST ['cust_id'],$_POST['sale_date'])) {
         echo '<div class="alert alert-success" role="alert"> Customer added.</div>'; 
       } else {
         echo '<div class="alert alert-danger" role="alert"> Error.</div>';
