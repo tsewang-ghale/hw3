@@ -27,10 +27,8 @@
             <label for="quantity_<?php echo $saleitem['Saleitem_id']; ?>" class="form-label">Quantity</label>
             <input type="number" class="form-control" id="quantity_<?php echo $saleitem['Saleitem_id']; ?>" name="quantity" value="<?php echo $saleitem['quantity']; ?>">
           </div>
-          <div class="mb-3">
-            <label for="saleprice_<?php echo $saleitem['Saleitem_id']; ?>" class="form-label">Sale Price</label>
-            <input type="number" class="form-control" id="saleprice_<?php echo $saleitem['Saleitem_id']; ?>" name="saleprice" step="0.01" value="<?php echo $saleitem['saleprice']; ?>">
-          </div>
+          
+        
           <input type="hidden" name="Saleitem_id" value="<?php echo $saleitem['Saleitem_id']; ?>">
           <input type="hidden" name="actionType" value="Edit"> 
           <button type="submit" class="btn btn-primary">Save</button>
