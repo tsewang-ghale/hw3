@@ -3,6 +3,7 @@ require_once("util-db.php");
 require_once("model-customers-with-purchase.php");
 
 require_once("model-sales.php");
+require_once("model-saleitems.php");
 
   
 $pageTitle = "Customers with Purchase";
@@ -35,6 +36,7 @@ if (isset($_POST ['actionType'])){
 }
 $customers = selectCustomers();
 $sales = selectSales();
+$saleitems = selectSaleItems();
 include "view-customers-with-purchase.php";
 include "view-footer.php";
 ?>
