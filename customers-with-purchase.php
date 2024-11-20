@@ -9,7 +9,7 @@ $pageTitle = "Customers with Purchase";
 include "view-header.php";
 if (isset($_POST ['actionType'])){
   switch ($_POST ['actionType']) {
-    case "Add": 
+    case "AddPurchase": 
       if (InsertCustomersWithPurchase($_POST['cust_firstname'],$_POST ['cust_lastname'],$_POST['cust_phone'],$_POST['cust_email'])) {
         echo '<div class="alert alert-success" role="alert"> Customer added.</div>'; 
       } else {
