@@ -56,7 +56,7 @@ $customer = selectCustomers(); // This fetches customers data
             <label for="cust_email" class="form-label">Email</label>
             <input type="email" class="form-control" id="cust_email" name="cust_email" placeholder="Enter email">
           </div>
-          <hr>
+         
 
           <!-- Purchased Item Details -->
           <div class="mb-3">
