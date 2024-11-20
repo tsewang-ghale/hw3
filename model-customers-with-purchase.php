@@ -55,14 +55,14 @@ function InsertCustomersWithPurchase($cust_firstname, $cust_lastname, $product_n
         throw $e;
     }
 }
-function UpdateCustomersWithPurchase($cust_id, $cust_firstname, $cust_lastname, $product_name, $sale_date, $cust_phone, $cust_email) {
+function UpdateCustomersWithPurchase($cust_id, $cust_firstname, $cust_lastname, $cust_phone, $cust_email) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `product_name` = ?, `sale_date`= ?, 'cust_phone'=?, 'cust_email'= ? WHERE `cust_id` = ?");
+        $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?,'cust_phone'=?, 'cust_email'= ? WHERE `cust_id` = ?");
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("issssss", $cust_id, $cust_firstname, $cust_lastname, $product_name, $sale_date, $cust_phone, $cust_email); 
+        $stmt->bind_param("issss", $cust_id, $cust_firstname, $cust_lastname, $cust_phone, $cust_email); 
         $success = $stmt->execute();
         $stmt->close();
 
