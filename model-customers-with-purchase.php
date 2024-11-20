@@ -130,11 +130,16 @@ function UpdateCustomersWithPurchase($cust_id, $cust_firstname, $cust_lastname, 
         throw $e; 
     }
 }
-function deleteCustomersWithPurchase($cust_id) {
+function deleteCustomersWithPurchase($sale_id) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("DELETE FROM `Customer` WHERE cust_id = ?");
-        $stmt->bind_param("i", $cust_id); // Use $sale_id instead of $sid
+        $stmt = $conn->prepare("DELETE FROM `SaleItem` WHERE Sale_id = ?");
+        $stmt->bind_param("i", $Sale_id);
+        $success = $stmt->execute();
+        $stmt->close();
+
+        $stmt = $conn->prepare("DELETE FROM `Sale` WHERE Sale_id = ?");
+        $stmt->bind_param("i", $sale_id); // Use $sale_id instead of $sid
         $success = $stmt->execute();
         $stmt->close(); // Close the statement after execution
         $conn->close(); // Close the connection
