@@ -1,3 +1,9 @@
+<?php
+require_once("model-customers-with-purchase.php");
+$customer = selectCustomers();
+
+?>
+
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customerPurchaseModal">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
