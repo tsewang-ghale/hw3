@@ -17,6 +17,18 @@
       </div>
       <div class="modal-body">
         <form method="post" action="">
+          <!-- Sale Dropdown -->
+          <div class="mb-3">
+            <label for="cust_id" class="form-label">Customer ID:</label>
+            <select name="cust_id" id="cust_id" class="form-control" required>
+              <option value="">Select a Customer</option>
+              <?php while ($customer = $customers->fetch_assoc()) { ?>
+                <option value="<?php echo $customer['cust_id']; ?>">
+                  <?php echo "Customer ID: " . $customer['cust_id']  ?>
+                </option>
+              <?php } ?>
+            </select>
+          </div>
           <div class="mb-3">
             <label for="cust_firstname" class="form-label">First Name</label>
             <input type="text" class="form-control" id="cust_firstname" name="cust_firstname">
