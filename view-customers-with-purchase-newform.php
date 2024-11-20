@@ -1,6 +1,6 @@
 <?php
 require_once("model-customers-with-purchase.php");
-$customer = selectCustomers(); // This fetches customers data
+$customers = selectCustomers(); // This fetches customers data
 ?>
 
 <!-- Button trigger modal -->
