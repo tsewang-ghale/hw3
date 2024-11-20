@@ -24,7 +24,7 @@ include "view-customers-with-purchase-newform.php";
       </tr> 
 
 <?php
-customers= selectCustomers();
+
 while ($customer = $customers->fetch_assoc()) {
 ?>
   <div class="card">
