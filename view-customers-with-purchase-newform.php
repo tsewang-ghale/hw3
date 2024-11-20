@@ -52,8 +52,8 @@ $customer = selectCustomers(); // This fetches customers data
           </div>
 
           <div class="mb-3">
-            <label for="purchase_date" class="form-label">Purchase Date</label>
-            <input type="date" class="form-control" id="purchase_date" name="purchase_date" required>
+            <label for="sale_date" class="form-label">Purchase Date</label>
+            <input type="date" class="form-control" id="sale_date" name="sale_date" required>
           </div>
           <div class="mb-3">
             <label for="quantity" class="form-label">Quantity</label>
