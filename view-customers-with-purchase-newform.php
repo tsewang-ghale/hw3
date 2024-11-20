@@ -38,18 +38,19 @@ $customer = selectCustomers(); // This fetches customers data
               <?php } ?>
             </select>
           </div>
-         <!-- Product Dropdown -->
-          <div class="mb-3">
+         <div class="mb-3">
             <label for="product_id" class="form-label">Product:</label>
             <select name="product_id" id="product_id" class="form-control" required>
-              <option value="">Select a Product</option>
-              <?php while ($product = $products->fetch_assoc()) { ?>
-                <option value="<?php echo $product['product_id']; ?>">
-                  <?php echo $product['product_name']; ?>
-                </option>
-              <?php } ?>
+                <option value="">Select a Product</option>
+                <?php while ($product = $products->fetch_assoc()) { ?>
+                    <option value="<?php echo $product['product_id']; ?>" data-price="<?php echo $product['listprice']; ?>">
+                        <?php echo $product['product_name']; ?>
+                    </option>
+                <?php } ?>
             </select>
-          </div>
+        </div>
+        <input type="hidden" name="product_price" id="product_price" value="">
+
 
           <div class="mb-3">
             <label for="sale_date" class="form-label">Purchase Date</label>
