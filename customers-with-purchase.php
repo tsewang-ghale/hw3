@@ -25,7 +25,7 @@ if (isset($_POST ['actionType'])){
 
       break; 
     case "Delete":
-      if (deleteCustomersWithPurchase($_POST['$cust_id'])) {
+      if (deleteCustomersWithPurchase($_POST['$sale_id'])) {
         echo '<div class="alert alert-success" role="alert"> Customer deleted.</div>'; 
       } else {
         echo '<div class="alert alert-danger" role="alert"> Error.</div>';
