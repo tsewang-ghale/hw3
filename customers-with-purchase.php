@@ -4,6 +4,32 @@ require_once("model-customers-with-purchase.php");
   
 $pageTitle = "Customers with Purchase";
 include "view-header.php";
+if (isset($_POST ['actionType'])){
+  switch ($_POST ['actionType']) {
+    case "Add": 
+      if (InsertCustomerWithPurchase($_POST['cust_firstname'],$_POST ['cust_lastname'], $_POST['product_name'], $_POST['sale_date'],$_POST['cust_phone'],$_POST['cust_email'])) {
+        echo '<div class="alert alert-success" role="alert"> Customer added.</div>'; 
+      } else {
+        echo '<div class="alert alert-danger" role="alert"> Error.</div>';
+      }
+      break; 
+    case "Edit": 
+      if (UpdateCustomerWithPurchase($_POST['$cust_id'], $_POST['cust_firstname'], $_POST ['cust_lastname'],$_POST['product_name'], $_POST['sale_date'], $_POST['cust_phone'],$_POST['cust_email'])) {
+            echo '<div class="alert alert-success" role="alert"> Customer edited.</div>';
+        } else {
+            echo '<div class="alert alert-danger" role="alert"> Error.</div>';
+        }
+
+      break; 
+    case "Delete":
+      if (deleteCustomerWithPurchase($_POST['$cust_id'])) {
+        echo '<div class="alert alert-success" role="alert"> Customer deleted.</div>'; 
+      } else {
+        echo '<div class="alert alert-danger" role="alert"> Error.</div>';
+      }
+      break;
+  }
+}
 $customers = selectCustomers();
 include "view-customers-with-purchase.php";
 include "view-footer.php";
