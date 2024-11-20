@@ -1,7 +1,5 @@
 <h1> Customers with Purchases </h1>
-<?php
-include "view-customers-with-purchase-newform.php";
-?> 
+
 <div class="card-group">
 <?php
 while ($customer = $customers->fetch_assoc()) {
