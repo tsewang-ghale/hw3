@@ -31,7 +31,11 @@ while ($customer = $customers->fetch_assoc()) {
                 <?php echo $sale['sale_id']; ?> - 
                 <?php echo $sale['product_name']; ?> - 
                 <?php echo $sale['sale_date']; ?> - 
-                $<?php echo number_format($sale['saleprice'], 2); ?>
+                <?php echo number_format($sale['saleprice'], 2); ?>
+                <?php $saleitems=selectSaleItemsBySaleId($sale['sale_id'])?> 
+                <?php echo $saleitems['quantity']; ?> - 
+
+               
                 <?php
                   include "view-customers-with-purchase-editform.php"; 
                 ?> 
