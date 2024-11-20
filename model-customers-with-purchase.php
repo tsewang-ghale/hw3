@@ -59,14 +59,10 @@ function selectSaleItemsBySaleId($saleId) {
         $stmt->bind_param("i", $saleId);  // Bind the sale_id as an integer
         $stmt->execute();  // Execute the query
         $result = $stmt->get_result();  // Get the result set
-        
-        // Fetch the single row
-        $row = $result->fetch_assoc();  // This will return a single row as an associative array
-
         $conn->close();  // Close the connection
         
         // Return the single row (or null if no rows found)
-        return $row ? $row : null;
+        return $row;
     } catch (Exception $e) {
         $conn->close();  // Ensure the connection is closed on error
         throw $e;  // Re-throw the exception
