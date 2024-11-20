@@ -22,8 +22,9 @@ include "view-customers-with-purchase-newform.php";
       <th> </th>
       <th> </th>
       </tr> 
-customers= selectCustomers();
+
 <?php
+customers= selectCustomers();
 while ($customer = $customers->fetch_assoc()) {
 ?>
   <div class="card">
