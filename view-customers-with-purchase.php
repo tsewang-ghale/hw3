@@ -67,7 +67,7 @@ while ($customer = $customers->fetch_assoc()) {
       <p class="card-text">
         <small class="text-body-secondary">
           Customer Id: <?php echo $customer['cust_id']; ?> <br>
-          Phone: <?php echo $customer['cust_phone']; ?> 
+          Phone: <?php echo $customer['cust_phone']; ?> <br>
           Email: <?php echo $customer['cust_email']; ?>
           
         </small>
