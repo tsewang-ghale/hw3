@@ -65,6 +65,24 @@ function UpdateCustomersWithPurchase($cust_id, $cust_firstname, $cust_lastname, 
         $stmt->bind_param("issssss", $cust_id, $cust_firstname, $cust_lastname, $product_name, $sale_date, $cust_phone, $cust_email); 
         $success = $stmt->execute();
         $stmt->close();
+
+        
+        $stmt = $conn->prepare("UPDATE `Sale` SET `sale_date` = ? WHERE `cust_id` = ?");
+        
+        // Check if the statement was prepared correctly
+        if (!$stmt) {
+            throw new Exception("Failed to prepare statement: " . $conn->error);
+        }
+        
+        // Bind the parameters: sale_date (string), and cust_id (integer)
+        $stmt->bind_param("si", $saledate, $cust_id);
+        
+        // Execute the statement
+        $success = $stmt->execute();
+        
+        // Close the statement after execution
+        $stmt->close();
+
         $conn->close();
         return $success;
     } catch (Exception $e) {
