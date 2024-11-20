@@ -45,21 +45,21 @@ function UpdateSale($sale_id, $saledate, $tax, $shipping) {
         $stmt->execute();
         $stmt->close();
 
-        // Step 2: Update SaleItems' sale_price based on new tax and shipping values
-        // The formula assumes that the sale_price depends on tax and shipping.
-        $stmt = $conn->prepare("SELECT sale_price FROM SaleItem WHERE sale_id = ?");
+        // Step 2: Update SaleItems' saleprice based on new tax and shipping values
+        // The formula assumes that the saleprice depends on tax and shipping.
+        $stmt = $conn->prepare("SELECT saleprice FROM SaleItem WHERE sale_id = ?");
         $stmt->bind_param("i", $sale_id);
         $stmt->execute();
-        $stmt->bind_result($current_sale_price);
+        $stmt->bind_result($current_saleprice);
 
-        // Loop through all sale items and update the sale_price
+        // Loop through all sale items and update the saleprice
         while ($stmt->fetch()) {
-            // Assuming the tax and shipping affect the sale_price directly
-            $new_sale_price = $current_sale_price + $tax + $shipping;
+            // Assuming the tax and shipping affect the saleprice directly
+            $new_saleprice = $current_saleprice + $tax + $shipping;
 
-            // Update the sale_price in SaleItem
-            $updateStmt = $conn->prepare("UPDATE SaleItem SET sale_price = ? WHERE sale_id = ?");
-            $updateStmt->bind_param("di", $new_sale_price, $sale_id);
+            // Update the saleprice in SaleItem
+            $updateStmt = $conn->prepare("UPDATE SaleItem SET saleprice = ? WHERE sale_id = ?");
+            $updateStmt->bind_param("di", $new_saleprice, $sale_id);
             $updateStmt->execute();
             $updateStmt->close();
         }
