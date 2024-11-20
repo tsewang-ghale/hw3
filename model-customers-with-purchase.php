@@ -54,7 +54,8 @@ function InsertCustomersWithPurchase($cust_firstname, $cust_lastname, $product_n
         $conn->close();
         throw $e;
     }
-    function UpdateCustomersWithPurchase($cust_id, $cust_firstname, $cust_lastname, $product_name, $sale_date, $cust_phone, $cust_email) {
+}
+function UpdateCustomersWithPurchase($cust_id, $cust_firstname, $cust_lastname, $product_name, $sale_date, $cust_phone, $cust_email) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `product_name` = ?, `sale_date`= ?, 'cust_phone'=?, 'cust_email'= ? WHERE `cust_id` = ?");
@@ -87,5 +88,5 @@ function deleteCustomersWithPurchase($cust_id) {
         throw $e; // Rethrow the exception for further handling
     }
 }
-}
+
 ?>
