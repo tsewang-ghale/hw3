@@ -40,14 +40,41 @@ function UpdateSale($sale_id, $saledate, $tax, $shipping) {
         $stmt->bind_param("siii", $saledate, $tax, $shipping, $sale_id);
         $stmt->execute(); // Execute update
         $stmt->close(); // Close after execution
-        
-        // Step 2: Calculate and update SaleItem price (assuming you calculated new price)
-        $newSalePrice = $tax + $shipping; // Calculate based on your logic
+
+        // Step 2: Retrieve current sale price and tax, shipping from SaleItem
+        $stmt = $conn->prepare("SELECT saleprice, tax, shipping FROM SaleItem WHERE sale_id = ?");
+        if (!$stmt) {
+            throw new Exception("Failed to prepare statement: " . $conn->error);
+        }
+        $stmt->bind_param("i", $sale_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $old_saleprice = 0;
+        $old_tax = 0;
+        $old_shipping = 0;
+
+        if ($result->num_rows > 0) {
+            // Assuming only one item in SaleItem for this Sale
+            $row = $result->fetch_assoc();
+            $old_saleprice = $row['saleprice']; // Get the current sale price
+            $old_tax = $row['tax']; // Get the old tax
+            $old_shipping = $row['shipping']; // Get the old shipping
+        }
+        $stmt->close(); // Close after execution
+
+        // Step 3: Calculate the change in sale price due to the change in tax and shipping
+        $tax_difference = $tax - $old_tax;
+        $shipping_difference = $shipping - $old_shipping;
+
+        // Step 4: Calculate the new sale price based on the old sale price and the differences
+        $new_saleprice = $old_saleprice + $tax_difference + $shipping_difference;
+
+        // Step 5: Update SaleItem with the new sale price
         $stmt = $conn->prepare("UPDATE SaleItem SET saleprice = ? WHERE sale_id = ?");
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("di", $newSalePrice, $sale_id); // Bind the new price and sale_id
+        $stmt->bind_param("di", $new_saleprice, $sale_id); // Bind the new sale price and sale_id
         $stmt->execute(); // Execute update
         $stmt->close(); // Close after execution
         
@@ -61,6 +88,7 @@ function UpdateSale($sale_id, $saledate, $tax, $shipping) {
         throw $e; // Re-throw the exception
     }
 }
+
 
 
 
