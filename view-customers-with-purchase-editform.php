@@ -36,10 +36,7 @@
             <label for="cust_email_<?php echo $customer['cust_id']; ?>" class="form-label">Email</label>
             <input type="text" class="form-control" id="cust_email_<?php echo $customer['cust_id']; ?>" name="cust_email" value="<?php echo $customer['cust_email']; ?>">
           </div>
-          <div class="mb-3">
-            <label for="sale_date_<?php echo $sales['cust_id']; ?>" class="form-label">Sale date</label>
-            <input type="text" class="form-control" id="sale_date_<?php echo $sales['cust_id']; ?>" name="sale_date" value="<?php echo $sales['sale_date']; ?>">
-          </div>
+        
             
           <input type="hidden" name="cust_id" value="<?php echo $customer['cust_id']; ?>">
           <input type="hidden" name="actionType" value="Edit">
