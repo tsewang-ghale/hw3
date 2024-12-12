@@ -28,7 +28,7 @@ function InsertCustomer($cust_firstname, $cust_lastname, $cust_address, $cust_ph
 function UpdateCustomer($cust_id, $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email) {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `cust_address` = ?, 'cust_phone'=?, 'cust_email'= ? WHERE `cust_id` = ?");
+        $stmt = $conn->prepare("UPDATE `Customer` SET `cust_firstname` = ?, `cust_lastname` = ?, `cust_address` = ?, `cust_phone`=?, `cust_email`= ? WHERE `cust_id` = ?");
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
