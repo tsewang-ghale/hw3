@@ -2,7 +2,7 @@
 function selectSales() {
     try {
         $conn = get_db_connection();
-        $stmt = $conn->prepare("SELECT sale_id, cust_id, sale_date, tax, shipping FROM Sale");
+        $stmt = $conn->prepare("SELECT Sale_id, cust_id, sale_date, tax, shipping FROM Sale");
         $stmt->execute();
         $result = $stmt->get_result();
         $conn->close();
@@ -27,7 +27,7 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
     }
 }
 
-function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
+function UpdateSale($Sale_id, $cust_id, $saledate, $tax, $shipping) {
     try {
         // Establish database connection
         $conn = get_db_connection();
@@ -38,18 +38,18 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         // Start transaction
         $conn->begin_transaction();
 
-        // Step 1: Verify that the Sale exists with the given sale_id
-        $stmt = $conn->prepare("SELECT sale_id, cust_id, sale_date, tax, shipping FROM Sale WHERE Sale_id = ?");
-        $stmt->bind_param("i", $sale_id);
+        // Step 1: Verify that the Sale exists with the given Sale_id
+        $stmt = $conn->prepare("SELECT Sale_id, cust_id, sale_date, tax, shipping FROM Sale WHERE Sale_id = ?");
+        $stmt->bind_param("i", $Sale_id);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows === 0) {
-            throw new Exception("Sale ID $sale_id does not exist.");
+            throw new Exception("Sale ID $Sale_id does not exist.");
         }
 
         // Fetch current data for comparison
-        $stmt->bind_result($current_sale_id, $current_cust_id, $current_sale_date, $current_tax, $current_shipping);
+        $stmt->bind_result($current_Saleid, $current_cust_id, $current_sale_date, $current_tax, $current_shipping);
         $stmt->fetch();
         $stmt->close();
 
@@ -60,18 +60,18 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
 
         // Step 3: Update Sale Table with new values (including cust_id)
         $stmt = $conn->prepare("UPDATE Sale SET cust_id = ?, sale_date = ?, tax = ?, shipping = ? WHERE Sale_id = ?");
-        $stmt->bind_param("isiii", $cust_id, $saledate, $tax, $shipping, $sale_id);
+        $stmt->bind_param("isiii", $cust_id, $saledate, $tax, $shipping, $Sale_id);
         $stmt->execute();
 
         if ($stmt->affected_rows === 0) {
             $conn->rollback();
-            throw new Exception("No rows were updated in Sale table for sale_id: $sale_id.");
+            throw new Exception("No rows were updated in Sale table for Sale_id: $Sale_id.");
         }
         $stmt->close();
 
         // Step 4: Retrieve product_id and quantity from SaleItem table
-        $stmt = $conn->prepare("SELECT product_id, quantity FROM SaleItem WHERE sale_id = ?");
-        $stmt->bind_param("i", $sale_id);
+        $stmt = $conn->prepare("SELECT product_id, quantity FROM SaleItem WHERE Sale_id = ?");
+        $stmt->bind_param("i", $Sale_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -81,7 +81,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
             $quantity = $row['quantity'];
         } else {
             $conn->rollback();
-            throw new Exception("No SaleItem records found for sale_id: $sale_id.");
+            throw new Exception("No SaleItem records found for Sale_id: $Sale_id.");
         }
         $stmt->close();
 
@@ -104,13 +104,13 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         $calculated_price = ($product_price * $quantity) + $tax + $shipping;
 
         // Step 7: Update SaleItem with the new sale price
-        $stmt = $conn->prepare("UPDATE SaleItem SET saleprice = ? WHERE sale_id = ?");
-        $stmt->bind_param("di", $calculated_price, $sale_id);
+        $stmt = $conn->prepare("UPDATE SaleItem SET saleprice = ? WHERE Sale_id = ?");
+        $stmt->bind_param("di", $calculated_price, $Sale_id);
         $stmt->execute();
 
         if ($stmt->affected_rows === 0) {
             $conn->rollback();
-            throw new Exception("No rows were updated in SaleItem table for sale_id: $sale_id.");
+            throw new Exception("No rows were updated in SaleItem table for Sale_id: $Sale_id.");
         }
         $stmt->close();
 
@@ -132,16 +132,16 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
 
 
 
-function deleteSale($sale_id) {
+function deleteSale($Sale_id) {
     try {
         $conn = get_db_connection();
         $stmt = $conn->prepare("DELETE FROM Sale WHERE Sale_id = ?");
-        $stmt->bind_param("i", $sale_id);
+        $stmt->bind_param("i", $Sale_id);
         $success = $stmt->execute();
         $stmt->close();
 
         $stmt = $conn->prepare("DELETE FROM SaleItem WHERE Sale_id = ?");
-        $stmt->bind_param("i", $sale_id);
+        $stmt->bind_param("i", $Sale_id);
         $success = $stmt->execute();
         $stmt->close();
 
