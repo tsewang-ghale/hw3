@@ -133,6 +133,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
     }
 }
 
+
 function deleteSale($sale_id) {
     try {
         $conn = get_db_connection();
