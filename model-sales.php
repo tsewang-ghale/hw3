@@ -27,7 +27,7 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
     }
 }
 
-function UpdateSale($sale_id, $saledate, $tax, $shipping) {
+function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
         if (!$conn) {
@@ -35,7 +35,7 @@ function UpdateSale($sale_id, $saledate, $tax, $shipping) {
         }
 
         // Step 1: Verify that the Sale exists with the given sale_id
-        $stmt = $conn->prepare("SELECT sale_id, sale_date, tax, shipping FROM Sale WHERE Sale_id = ?");
+        $stmt = $conn->prepare("SELECT sale_id, cust_id, sale_date, tax, shipping FROM Sale WHERE Sale_id = ?");
         $stmt->bind_param("i", $sale_id);
         $stmt->execute();
         $stmt->store_result();
@@ -45,12 +45,12 @@ function UpdateSale($sale_id, $saledate, $tax, $shipping) {
         }
 
         // Fetch the current data to compare with the new data
-        $stmt->bind_result($current_sale_id, $current_sale_date, $current_tax, $current_shipping);
+        $stmt->bind_result($current_sale_id, $current_cust_id, $current_sale_date, $current_tax, $current_shipping);
         $stmt->fetch();
         $stmt->close();
 
         // Step 2: If values haven't changed, do nothing and return true
-        if ($current_sale_date === $saledate && $current_tax == $tax && $current_shipping == $shipping) {
+        if ($current_cust_id == $cust_id && $current_sale_date == $saledate && $current_tax == $tax && $current_shipping == $shipping) {
             // No changes to be made
             return true;
         }
@@ -58,9 +58,9 @@ function UpdateSale($sale_id, $saledate, $tax, $shipping) {
         // Step 3: Begin transaction
         $conn->begin_transaction();
 
-        // Step 4: Update Sale Table with new values
-        $stmt = $conn->prepare("UPDATE Sale SET sale_date = ?, tax = ?, shipping = ? WHERE Sale_id = ?");
-        $stmt->bind_param("siii", $saledate, $tax, $shipping, $sale_id);
+        // Step 4: Update Sale Table with new values (including cust_id)
+        $stmt = $conn->prepare("UPDATE Sale SET cust_id = ?, sale_date = ?, tax = ?, shipping = ? WHERE Sale_id = ?");
+        $stmt->bind_param("isiii", $cust_id, $saledate, $tax, $shipping, $sale_id);
         $stmt->execute();
         if ($stmt->affected_rows === 0) {
             $conn->rollback();
