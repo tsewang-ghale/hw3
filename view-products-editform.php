@@ -15,10 +15,7 @@
       </div>
       <div class="modal-body">
         <form method="post" action="">
-          <div class="mb-3">
-            <label for="product_id_<?php echo $product['product_id']; ?>" class="form-label">Product ID</label>
-            <input type="number" class="form-control" id="product_id_<?php echo $product['product_id']; ?>" name="product_id" value="<?php echo $product['product_id']; ?>">
-          </div>
+          
           <div class="mb-3">
             <label for="product_name_<?php echo $product['product_id']; ?>" class="form-label">Product Name</label>
             <input type="text" class="form-control" id="product_name_<?php echo $product['product_id']; ?>" name="product_name" value="<?php echo $product['product_name']; ?>">
