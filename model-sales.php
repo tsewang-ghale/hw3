@@ -27,7 +27,7 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
     }
 }
 
-function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
+function UpdateSale($cust_id, $saledate, $tax, $shipping) {
     try {
         // Establish database connection
         $conn = get_db_connection();
