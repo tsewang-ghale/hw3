@@ -30,12 +30,13 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
 function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
+        
         if (!$conn) {
             throw new Exception("Database connection failed.");
         }
 
         // Step 1: Verify that the Sale exists with the given sale_id
-        $stmt = $conn->prepare("SELECT sale_id, cust_id, sale_date, tax, shipping FROM Sale WHERE Sale_id = ?");
+        $stmt = $conn->prepare("SELECT sale_id, cust_id, sale_date, tax, shipping FROM Sale WHERE sale_id = ?");
         $stmt->bind_param("i", $sale_id);
         $stmt->execute();
         $stmt->store_result();
@@ -59,9 +60,12 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         $conn->begin_transaction();
 
         // Step 4: Update Sale Table with new values (including cust_id)
-        $stmt = $conn->prepare("UPDATE Sale SET cust_id = ?, sale_date = ?, tax = ?, shipping = ? WHERE Sale_id = ?");
-        $stmt->bind_param("isiii", $cust_id, $saledate, $tax, $shipping, $sale_id);
+        $stmt = $conn->prepare("UPDATE Sale SET cust_id = ?, sale_date = ?, tax = ?, shipping = ? WHERE sale_id = ?");
+        // Bind parameters for cust_id (int), sale_date (string), tax (double), shipping (double), and sale_id (int)
+        $stmt->bind_param("isddi", $cust_id, $saledate, $tax, $shipping, $sale_id);
         $stmt->execute();
+        
+        // Check if any rows were affected
         if ($stmt->affected_rows === 0) {
             $conn->rollback();
             throw new Exception("No rows were updated in Sale table.");
@@ -73,6 +77,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         $stmt->bind_param("i", $sale_id);
         $stmt->execute();
         $result = $stmt->get_result();
+        
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $product_id = $row['product_id'];
@@ -88,6 +93,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         $stmt->bind_param("i", $product_id);
         $stmt->execute();
         $result = $stmt->get_result();
+        
         if ($result->num_rows > 0) {
             $product_row = $result->fetch_assoc();
             $product_price = $product_row['listprice'];
@@ -104,6 +110,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         $stmt = $conn->prepare("UPDATE SaleItem SET saleprice = ? WHERE sale_id = ?");
         $stmt->bind_param("di", $calculated_price, $sale_id);
         $stmt->execute();
+        
         if ($stmt->affected_rows === 0) {
             $conn->rollback();
             throw new Exception("No rows were updated in SaleItem table.");
@@ -115,6 +122,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         $conn->close();
         
         return true;
+
     } catch (Exception $e) {
         if ($conn) {
             $conn->rollback(); // Rollback in case of error
