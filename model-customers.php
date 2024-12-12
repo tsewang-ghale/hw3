@@ -32,7 +32,7 @@ function UpdateCustomer($cust_id, $cust_firstname, $cust_lastname, $cust_address
         if (!$stmt) {
             throw new Exception("Failed to prepare statement: " . $conn->error);
         }
-        $stmt->bind_param("isssss", $cust_id, $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email); 
+        $stmt->bind_param("sssssi", $cust_firstname, $cust_lastname, $cust_address, $cust_phone, $cust_email,$cust_id; 
         $success = $stmt->execute();
         $stmt->close();
         $conn->close();
