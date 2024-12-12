@@ -1,3 +1,32 @@
+<?php
+function selectSales() {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("SELECT sale_id, cust_id, sale_date, tax, shipping FROM Sale");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $conn->close();
+        return $result;
+    } catch (Exception $e) {
+        if ($conn) $conn->close();
+        throw $e;
+    }
+}
+
+function InsertSale($cid, $saledate, $tax, $shipping) {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("INSERT INTO Sale (cust_id, sale_date, tax, shipping) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("isii", $cid, $saledate, $tax, $shipping);
+        $success = $stmt->execute();
+        $conn->close();
+        return $success;
+    } catch (Exception $e) {
+        if ($conn) $conn->close();
+        throw $e;
+    }
+}
+
 function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
@@ -95,3 +124,26 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         throw $e; // Rethrow exception for handling by caller
     }
 }
+
+function deleteSale($sale_id) {
+    try {
+        $conn = get_db_connection();
+        $stmt = $conn->prepare("DELETE FROM Sale WHERE Sale_id = ?");
+        $stmt->bind_param("i", $sale_id);
+        $success = $stmt->execute();
+        $stmt->close();
+
+        $stmt = $conn->prepare("DELETE FROM SaleItem WHERE Sale_id = ?");
+        $stmt->bind_param("i", $sale_id);
+        $success = $stmt->execute();
+        $stmt->close();
+
+        $conn->close();
+        return $success;
+    } catch (Exception $e) {
+        if ($conn) $conn->close();
+        error_log($e->getMessage());
+        throw $e;
+    }
+}
+?>
