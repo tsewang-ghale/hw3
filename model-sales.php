@@ -30,6 +30,9 @@ function InsertSale($cid, $saledate, $tax, $shipping) {
 function UpdateSale($sale_id, $saledate, $tax, $shipping) {
     try {
         $conn = get_db_connection();
+        if (!$conn) {
+            throw new Exception("Database connection failed.");
+        }
         $conn->begin_transaction(); // Start transaction
 
         // Step 1: Update Sale Table
@@ -39,55 +42,52 @@ function UpdateSale($sale_id, $saledate, $tax, $shipping) {
         }
         $stmt->bind_param("siii", $saledate, $tax, $shipping, $sale_id);
         $stmt->execute(); // Execute update
+        if ($stmt->affected_rows === 0) {
+            throw new Exception("No rows were updated in Sale table.");
+        }
         $stmt->close(); // Close after execution
 
         // Step 2: Retrieve product_id, quantity from SaleItem
         $stmt = $conn->prepare("SELECT product_id, quantity FROM SaleItem WHERE sale_id = ?");
-        if (!$stmt) {
-            throw new Exception("Failed to prepare statement: " . $conn->error);
-        }
         $stmt->bind_param("i", $sale_id);
         $stmt->execute();
         $result = $stmt->get_result();
         
         if ($result->num_rows > 0) {
-            // Assuming only one item in SaleItem for this Sale
             $row = $result->fetch_assoc();
-            $product_id = $row['product_id']; // Get the product_id
-            $quantity = $row['quantity']; // Get the quantity
+            $product_id = $row['product_id']; 
+            $quantity = $row['quantity'];
+        } else {
+            throw new Exception("No SaleItem found for sale_id: " . $sale_id);
         }
         $stmt->close(); // Close after execution
 
         // Step 3: Retrieve product listprice from Product table
         $stmt = $conn->prepare("SELECT listprice FROM Product WHERE product_id = ?");
-        if (!$stmt) {
-            throw new Exception("Failed to prepare statement: " . $conn->error);
-        }
-        $stmt->bind_param("i", $product_id); // Use the product_id to fetch price
+        $stmt->bind_param("i", $product_id);
         $stmt->execute();
         $result = $stmt->get_result();
         
         if ($result->num_rows > 0) {
-            // Assuming we get a valid product
             $product_row = $result->fetch_assoc();
-            $product_price = $product_row['listprice']; // Get the product listprice
+            $product_price = $product_row['listprice'];
         } else {
             throw new Exception("Product not found for product_id: " . $product_id);
         }
-        $stmt->close(); // Close after execution
+        $stmt->close();
 
-        // Step 4: Calculate the total price (product price * quantity) and add the tax and shipping
+        // Step 4: Calculate the total price and add tax and shipping
         $calculated_price = ($product_price * $quantity) + $tax + $shipping;
 
         // Step 5: Update SaleItem with the new sale price
         $stmt = $conn->prepare("UPDATE SaleItem SET saleprice = ? WHERE sale_id = ?");
-        if (!$stmt) {
-            throw new Exception("Failed to prepare statement: " . $conn->error);
+        $stmt->bind_param("di", $calculated_price, $sale_id);
+        $stmt->execute();
+        if ($stmt->affected_rows === 0) {
+            throw new Exception("No rows were updated in SaleItem table.");
         }
-        $stmt->bind_param("di", $calculated_price, $sale_id); // Bind the calculated price and sale_id
-        $stmt->execute(); // Execute update
-        $stmt->close(); // Close after execution
-        
+        $stmt->close();
+
         $conn->commit(); // Commit transaction if both updates succeed
         $conn->close();
         
@@ -95,7 +95,8 @@ function UpdateSale($sale_id, $saledate, $tax, $shipping) {
     } catch (Exception $e) {
         $conn->rollback(); // Rollback transaction if any error occurs
         $conn->close();
-        throw $e; // Re-throw the exception
+        error_log($e->getMessage()); // Log the error
+        throw $e; // Rethrow the exception for further handling
     }
 }
 
