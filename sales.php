@@ -27,7 +27,7 @@ if (isset($_POST['actionType'])) {
         $shipping = $_POST['Shipping'];
 
         // Call the UpdateSale function with all parameters
-        if (UpdateSale($sale_id, $cust_id, $sale_date, $tax, $shipping)) {
+        if (UpdateSale($cust_id, $sale_date, $tax, $shipping)) {
             echo '<div class="alert alert-success" role="alert"> Sale edited.</div>';
         } else {
             echo '<div class="alert alert-danger" role="alert"> Error.</div>';
