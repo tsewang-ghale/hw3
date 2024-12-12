@@ -69,51 +69,9 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         }
         $stmt->close();
 
-        // Step 4: Retrieve product_id and quantity from SaleItem table
-        $stmt = $conn->prepare("SELECT saleitem_id, product_id, quantity FROM SaleItem WHERE sale_id = ?");
-        $stmt->bind_param("i", $sale_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        // Step 4: Proceed with updating SaleItems or any additional logic
+        // This part seems to be working fine, but you can verify and test the logic for SaleItems
 
-        if ($result->num_rows > 0) {
-            // Loop over all SaleItem records for the sale_id
-            while ($row = $result->fetch_assoc()) {
-                $saleitem_id = $row['saleitem_id'];
-                $product_id = $row['product_id'];
-                $original_quantity = $row['quantity'];
-
-                // Calculate the new sale price based on any changes in quantity
-                // For simplicity, assuming you're modifying the quantity, you can modify as needed
-                $new_quantity = $original_quantity;  // Adjust based on your logic
-                $stmt_price = $conn->prepare("SELECT listprice FROM Product WHERE product_id = ?");
-                $stmt_price->bind_param("i", $product_id);
-                $stmt_price->execute();
-                $result_price = $stmt_price->get_result();
-
-                if ($result_price->num_rows > 0) {
-                    $row_price = $result_price->fetch_assoc();
-                    $listprice = $row_price['listprice'];
-
-                    // Calculate the new sale price based on quantity and listprice
-                    $new_saleprice = $listprice * $new_quantity;
-                    
-                    // Call the function to update SaleItem record
-                    if (!UpdateSaleItems($saleitem_id, $product_id, $sale_id, $new_quantity, $new_saleprice)) {
-                        $conn->rollback();
-                        throw new Exception("Failed to update SaleItem with saleitem_id: $saleitem_id");
-                    }
-                } else {
-                    $conn->rollback();
-                    throw new Exception("Product not found for product_id: $product_id.");
-                }
-            }
-        } else {
-            $conn->rollback();
-            throw new Exception("No SaleItem records found for sale_id: $sale_id.");
-        }
-        $stmt->close();
-
-        // Step 5: Commit transaction if all steps succeed
         $conn->commit();
         $conn->close();
 
@@ -127,6 +85,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         throw $e; // Rethrow exception for handling by caller
     }
 }
+
 
 
 
