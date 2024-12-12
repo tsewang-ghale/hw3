@@ -65,7 +65,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
 
         if ($stmt->affected_rows === 0) {
             $conn->rollback();
-            throw new Exception("No rows were updated in Sale table.");
+            throw new Exception("No rows were updated in Sale table for sale_id: $sale_id.");
         }
         $stmt->close();
 
@@ -81,7 +81,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
             $quantity = $row['quantity'];
         } else {
             $conn->rollback();
-            throw new Exception("No SaleItem found for sale_id: " . $sale_id);
+            throw new Exception("No SaleItem records found for sale_id: $sale_id.");
         }
         $stmt->close();
 
@@ -96,7 +96,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
             $product_price = $product_row['listprice'];
         } else {
             $conn->rollback();
-            throw new Exception("Product not found for product_id: " . $product_id);
+            throw new Exception("Product not found for product_id: $product_id.");
         }
         $stmt->close();
 
@@ -110,7 +110,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
 
         if ($stmt->affected_rows === 0) {
             $conn->rollback();
-            throw new Exception("No rows were updated in SaleItem table.");
+            throw new Exception("No rows were updated in SaleItem table for sale_id: $sale_id.");
         }
         $stmt->close();
 
@@ -128,6 +128,7 @@ function UpdateSale($sale_id, $cust_id, $saledate, $tax, $shipping) {
         throw $e; // Rethrow exception for handling by caller
     }
 }
+
 
 
 
