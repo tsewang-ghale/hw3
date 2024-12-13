@@ -14,7 +14,7 @@
     </thead>
     <tbody> 
 <?php
-// Loop through the customer purchases (previously '$sales' was undefined)
+// Loop through the customer purchases (now $customers is properly defined)
 while ($sale = $customers->fetch_assoc()) {
 ?>
       <tr>
