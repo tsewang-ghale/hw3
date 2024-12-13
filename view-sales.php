@@ -8,6 +8,7 @@
       <th> Sale Date </th> 
       <th> Tax </th>
       <th> Shipping </th>
+      <th> </th>
       </tr> 
     </thead>
     <tbody> 
@@ -20,6 +21,7 @@ while ($sale= $sales -> fetch_assoc()){
     <td><?php echo $sale['sale_date']; ?></td> 
     <td><?php echo $sale['tax']; ?></td> 
     <td><?php echo $sale['shipping']; ?></td> 
+    <td> <a href= "customers-with-purchase.php?id=<?php echo $sale['sale_id']; ?> "> Customers </a></td>
   
     <td>
       <form method= "post" action= "saleitems-by-sale.php">
