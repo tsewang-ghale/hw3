@@ -24,7 +24,13 @@ while ($customer= $customers -> fetch_assoc()){
     <td><?php echo $customer['cust_phone']; ?></td> 
     <td><?php echo $customer['cust_email']; ?></td> 
     <td> <a href = "customers-purchase.php?id=<?php echo $customer['cust_id']; ?>" > Sales</a></td>
-  </tr>
+ 
+      <td>
+      <form method= "post" action= "saleitems-by-sale.php">
+        <input type= "hidden" name = "cid" value= "<?php echo $sale['sale_id']; ?>">
+        <button type="submit" class="btn btn-primary">Sale Items</button>
+      </form>
+    </tr>
 <?php
 }
 ?>
