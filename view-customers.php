@@ -27,7 +27,7 @@ while ($customer= $customers -> fetch_assoc()){
  
       <td>
       <form method= "post" action= "customers-with-purchase.php">
-        <input type= "hidden" name = "cid" value= "<?php echo $customer['cust_id']; ?>">
+        <input type= "hidden" name = "custId" value= "<?php echo $customer['cust_id']; ?>">
         <button type="submit" class="btn btn-primary">Customers Purchases </button>
       </form>
     </tr>
