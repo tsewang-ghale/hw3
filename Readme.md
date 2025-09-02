@@ -1,12 +1,29 @@
-Developed a web application to display data dynamically from a relational database.
+Website with Database Display
 
-Implemented multiple database tables to meet project requirements.
+- Project Highlights
 
-Established two levels of related records, ensuring each parent record displays associated child records on the same page.
+Dynamic Data Display: Built a web application that retrieves and displays data from a relational database.
 
-Enabled data filtering through hyperlinks for quick navigation.
+Relational Structure: Implemented multiple database tables with relationships to provide structured and meaningful insights.
 
-Integrated POST variable filtering using form submissions for customized search and display.
+Two-Level Record Display: Designed functionality to show related child records for each parent record on the same page.
 
-Deployed project with a GitHub repository and subdomain for accessibility.
-The webiste link :https://hw3.tsewangghale.oucreate.com/customers.php
+Data Filtering via Hyperlinks: Enabled quick navigation and filtering of records using hyperlinks.
+
+Data Filtering via POST Variables: Integrated form submissions to allow users to filter and display customized data.
+
+Deployment: Hosted the project using GitHub and a subdomain for public access.
+
+🔗 Live Website: https://hw3.tsewangghale.oucreate.com/customers.php
+
+- Tech Stack
+
+Frontend: HTML, CSS
+
+Backend: PHP
+
+Database: MySQL
+
+Version Control: Git & GitHub
+
+Hosting: OU Create (subdomain deployment)
